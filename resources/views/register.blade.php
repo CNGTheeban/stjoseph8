@@ -10,9 +10,16 @@
 
         <div class="card" style="background-color:transparent;border: 1px solid #FFFFFF;border-radius:0;">
             <div class="card-body register-card-body">
-                <p class="login-box-msg">Register a new membership</p>
+                <p class="login-box-msg">Register A New Member</p>
 
-                <form action="index.html" method="post">
+                <form action="" method="POST">
+                    @csrf
+                    <div class="input-group mb-3">
+                        <select class="form-control" name="inputUsertype" id="inputUsertype" placeholder="User type">
+                            <option>Parent</option>
+                            <option>Doner</option>
+                        </select>
+                    </div>
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" name="inputUsername" id="inputUsername" placeholder="username">
                         <div class="input-group-append">
@@ -39,6 +46,14 @@
                     </div>
                     <div class="input-group mb-3">
                         <input type="password" class="form-control" name="inputRePassword" id="inputRePassword" placeholder="Retype password">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="password" class="form-control" name="inputReference" id="inputReference" placeholder="Retype password">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
