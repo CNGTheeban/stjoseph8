@@ -33,6 +33,7 @@ class RegisterController extends Controller
             'email' => $data['inputEmail'],
             'password' => bcrypt($data['inputPassword']),
             'reference' => $data['inputReference'],
+            'status' => '0',
         ];
         //'password' => Hash::make($data['inputPassword']),
         //dd($insertData);

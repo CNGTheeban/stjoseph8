@@ -19,7 +19,7 @@ class AuthCheck
     public function handle(Request $request, Closure $next)
     {
         if (!auth()->check()) {
-            return redirect()->route('login'); // Redirect to login page
+            return redirect()->route('login'); // Redirect to login page ->with('error', 'Your account is not active. Please contact support.')
         }
         return $next($request);
     }

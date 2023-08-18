@@ -7,6 +7,11 @@
         <div class="alert alert-success">
             {{ session('success') }}
         </div>
+    @endif   
+    @if(session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
     @endif
     <div class="login-box">
         <div class="login-logo">
@@ -47,6 +52,7 @@
                         </div>
                     </div>
                 </form>
+                <a href="/register" class="text-center">I don't have a membership account</a>
             </div>
         </div>
     </div>

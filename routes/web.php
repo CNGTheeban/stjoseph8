@@ -7,6 +7,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ParentController;
 use App\Http\Controllers\ChildController;
 use App\Http\Controllers\PayController;
+use App\Http\Controllers\userController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,26 +21,30 @@ use App\Http\Controllers\PayController;
 */
 Route::group(['middleware' => 'auth.check'], function () {
     //Your protected routes here
+    Route::group(['middleware' => 'isActive'], function () {
     
-    Route::get('/', function () {
-        return view('index');   
-    });
-    
-    Route::group(['middleware' => 'parent'], function () {
-        Route::get('/profile', [ParentController::class, 'profile']);
-        Route::get('/addParent', [ParentController::class, 'addParent']);
-        Route::post('parent/create', [ParentController::class, 'createParent'])->name('parent.create');
-        Route::get('/addchild', [ChildController::class, 'addChild']);
-        Route::get('/editchild', [ChildController::class, 'editChild']);
-        Route::get('/addFee', [PayController::class, 'addFee']);
-    });
-
-    Route::group(['middleware' => 'doner'], function () {
-        Route::get('/addDonation', [PayController::class, 'addDonation']);
-    });
-
-    Route::group(['middleware' => 'admin'], function () {
+        Route::get('/', function () {
+            return view('index');   
+        });
         
+        Route::group(['middleware' => 'parent'], function () {
+            Route::get('/profile', [ParentController::class, 'profile']);
+            Route::get('/addParent', [ParentController::class, 'addParent']);
+            Route::post('parent/create', [ParentController::class, 'createParent'])->name('parent.create');
+            Route::get('/addchild', [ChildController::class, 'addChild']);
+            Route::get('/editchild', [ChildController::class, 'editChild']);
+            Route::get('/addFee', [PayController::class, 'addFee']);
+        });
+
+        Route::group(['middleware' => 'doner'], function () {
+            Route::get('/addDonation', [PayController::class, 'addDonation']);
+        });
+
+        Route::group(['middleware' => 'admin'], function () {
+            Route::get('/parents', [ParentController::class, 'index']);
+            Route::get('/authUsers', [userController::class, 'index']);
+            Route::get('/unauthUsers', [userController::class, 'unauthorizedUsers']);
+        });
     });
 });
 

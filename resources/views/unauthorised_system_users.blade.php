@@ -33,12 +33,12 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Parents/Doners</h1>
+                            <h1>Unauthorized System Users</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="/index">Dashboard</a></li>
-                                <li class="breadcrumb-item active">Parents/Doners</li>
+                                <li class="breadcrumb-item active">Unauthorized System Users</li>
                             </ol>
                         </div>
                     </div>
@@ -60,8 +60,9 @@
                                     <table id="example1" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
-                                                <th>Parents/Doners ID</th>
-                                                <th>Parents/Doners Name</th>
+                                                <th>User ID</th>
+                                                <th>User Name</th>
+                                                <th>Reference</th>
                                                 <th>Email</th>
                                                 <th>Status</th>
                                                 <th>Actions</th>
@@ -70,18 +71,16 @@
                                         <tbody>
                                             <tr>
                                                 <td>Trident</td>
-                                                <td>Internet
-                                                Explorer 4.0
-                                                </td>
+                                                <td>Internet Explorer 4.0</td>
+                                                <td>Internet Explorer 4.0</td>
                                                 <td>Win 95+</td>
                                                 <td> 4</td>
                                                 <td>X</td>
                                             </tr>
                                             <tr>
                                                 <td>Trident</td>
-                                                <td>Internet
-                                                Explorer 5.0
-                                                </td>
+                                                <td>Internet Explorer 4.0</td>
+                                                <td>Internet Explorer 4.0</td>
                                                 <td>Win 95+</td>
                                                 <td>5</td>
                                                 <td>C</td>

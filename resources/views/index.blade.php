@@ -12,7 +12,17 @@
         <!-- /.navbar -->
 
         <!-- Main Sidebar Container -->
-        @include('partials.sidebar')        
+        @auth
+            @if(auth()->user()->usertype == 'Admin')
+                @include('partials.admin_sidebar')
+            @endif
+            @if(auth()->user()->usertype == 'Parent')
+                @include('partials.parent_sidebar')
+            @endif
+            @if(auth()->user()->usertype == 'Doner')
+                @include('partials.admin_sidebar')
+            @endif
+        @endauth
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
@@ -26,10 +36,16 @@
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->
             </div>
-            <!-- /.content-header -->
+                <!-- /.content-header -->
             @if(session('success'))
                 <div class="alert alert-success">
                     {{ session('success') }}
+                </div>
+            @endif
+            
+            @if(session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
                 </div>
             @endif
             <!-- Main content -->

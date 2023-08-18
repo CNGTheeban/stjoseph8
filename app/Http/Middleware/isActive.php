@@ -7,7 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class isParent
+class isActive
 {
     /**
      * Handle an incoming request.
@@ -18,10 +18,10 @@ class isParent
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::user() && Auth::user()->hasRole('Parent')) {
-            return $next($request);
+        if (Auth::check() && Auth::user()->status != '1') {
+            //Auth::logout();
+            return redirect('/login')->with('error','Your account is not active. Please contact support.');
         }
-
-        return redirect('/')->with('error','You have not Parent access');
+        return $next($request);
     }
 }

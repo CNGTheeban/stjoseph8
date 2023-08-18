@@ -26,42 +26,30 @@
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>Dashboard</p>
                     </a>
-                </li>
-                    <li class="nav-item">
-                        <a href="/profile" class="nav-link">
-                            <i class="nav-icon fas fa-users"></i>
-                            <p>Profile</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/" class="nav-link">
-                            <i class="nav-icon fas fa-users"></i>
-                            <p>Profile</p>
-                        </a>
-                    </li>        
-                    <li class="nav-item">
-                        <a href="/" class="nav-link">
-                            <i class="nav-icon fas fa-users"></i>
-                            <p>Users List <i class="right fas fa-angle-left"></i></p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="/" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Authorised</p>
-                                </a>
-                            </li>
-                        </ul>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="/" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Unauthorised</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+                </li>                            
                 <li class="nav-item">
+                    <a href="/" class="nav-link">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>System Users <i class="right fas fa-angle-left"></i></p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="/authUsers" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Authorised</p>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="/unauthUsers" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Unauthorised</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                {{-- <li class="nav-item">
                     <a href="/parents" class="nav-link">
                         <i class="nav-icon fas fa-users"></i>
                         <p>Parents/Doners</p>
@@ -72,7 +60,7 @@
                         <i class="nav-icon fas fa-user-cog"></i>
                         <p>System Users</p>
                     </a>
-                </li>
+                </li> --}}
                 <li class="nav-item">
                     <a href="/reports" class="nav-link">
                         <i class="nav-icon fas fa-paste"></i>

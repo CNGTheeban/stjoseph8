@@ -49,4 +49,9 @@ class User extends Authenticatable
     {
         return $this->getAttribute('usertype') == $usertype;
     }
+
+    public function hasStatus($status)
+    {
+        return $this->getAttribute('status') == $status;
+    }
 }

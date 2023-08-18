@@ -67,5 +67,6 @@ class Kernel extends HttpKernel
         'parent' => \App\Http\Middleware\isParent::class,
         'doner' => \App\Http\Middleware\isDoner::class,
         'admin' => \App\Http\Middleware\isAdmin::class,
+        'isActive' => \App\Http\Middleware\isActive::class,
     ];
 }
