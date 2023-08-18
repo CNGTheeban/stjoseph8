@@ -2,8 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomAuthController;
-// use App\Http\Controllers\RegisterController;
-// use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\LoginController;
 // use App\Http\Controllers\ParentController;
 // use App\Http\Controllers\ChildController;
 // use App\Http\Controllers\PayController;
@@ -18,14 +18,17 @@ use App\Http\Controllers\CustomAuthController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('index');   
+Route::group(['middleware' => 'auth.check'], function () {
+    // Your protected routes here
+    Route::get('/', function () {
+        return view('index');   
+    });
 });
-Route::get('login', [CustomAuthController::class, 'index'])->name('login');
-Route::post('custom-login', [CustomAuthController::class, 'customLogin'])->name('login.custom'); 
-Route::get('register', [CustomAuthController::class, 'registration'])->name('register-user');
-Route::post('custom-registration', [CustomAuthController::class, 'customRegistration'])->name('register.custom'); 
+
+Route::get('login', [LoginController::class, 'index'])->name('login');
+Route::post('custom-login', [LoginController::class, 'customLogin'])->name('login.custom'); 
+Route::get('register', [RegisterController::class, 'index'])->name('register-user');
+Route::post('custom-registration', [RegisterController::class, 'customRegistration'])->name('register.custom'); 
 
 // Route::get('/register', [RegisterController::class, 'index']);
 // Route::get('/login', [LoginController::class, 'index']);
