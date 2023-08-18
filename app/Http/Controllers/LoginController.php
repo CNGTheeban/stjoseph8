@@ -22,7 +22,7 @@ class LoginController extends Controller
         $credentials = $request->request;
         if (Auth::attempt(['email' => $request['inputEmail'], 'password' => $request['inputPassword']])) {
             //return redirect()->intended('index')->withSuccess('Logged in');
-            auth()->login($user);
+            //auth()->login($user);
             
             return redirect("/")->withSuccess('You have LoggedIn.');
         }

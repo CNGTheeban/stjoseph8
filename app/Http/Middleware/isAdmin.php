@@ -7,7 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class AuthCheck
+class isAdmin
 {
     /**
      * Handle an incoming request.
@@ -18,9 +18,10 @@ class AuthCheck
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!auth()->check()) {
-            return redirect()->route('login'); // Redirect to login page
+        if (Auth::user() &&  Auth::user()->hasRole('Admin')) {
+            return $next($request);
         }
-        return $next($request);
+
+        return redirect('/')->with('error','You have not admin access');
     }
 }
