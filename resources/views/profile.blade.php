@@ -150,13 +150,13 @@
                         <div class="col-md-9">
                             <div class="card">
                                 <div class="card-header p-2">
-                                    <h3 class="card-title p-2">Childrens</h3>
-                                    <a href="addchild" type="button" class="btn btn-primary float-right"><i class="fas fa-user-plus"></i> New Children</a>
+                                    <h3 class="card-title p-2">Children</h3>
+                                    <a href="{{ url('addchild/'.'0') }}" type="button" class="btn btn-primary float-right"><i class="fas fa-user-plus"></i> New Children</a>
                                 </div><!-- /.card-header -->
                                 <div class="card-body">
                                     <table id="example1" class="table table-bordered table-striped">
                                         <thead>
-                                            <tr>
+                                            <tr style="text-align:center">
                                                 <th>Admission No</th>
                                                 <th>Name</th>
                                                 <th>Grade</th>
@@ -165,28 +165,32 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>Trident</td>
-                                                <td>Internet Explorer 4.0</td>
-                                                <td>Win 95+</td>
-                                                <td> 4</td>
-                                                <td>
-                                                    <button type="button" class="btn btn-warning" id="editChildren" name="editChildren"><i class="fas fa-edit"></i></button> | 
+                                            
+                                        @foreach($childdata as $ud)
+                                        <tr>
+                                            <td> {{ $ud->childsAdmissionNo }}</td>
+                                            <td> {{ $ud->fullName }}</td>
+                                            <td> {{ $ud->childsGrade }}</td>
+                                            @if( $ud->status == 1)
+                                            <td><label class="ribbon bg-success">Active</label></td>
+                                            @else
+                                            <td><label class="ribbon bg-danger">Disabled</label></td>
+                                            @endif
+                                          
+                                            <td>
+                                            @if( $ud->status !== 1)
+                                            <button class="btn btn-success" onclick="return confirm('{{ __('Are you sure you want to Enable?') }}')"><a href="{{ url('enablechild/'.$ud->id) }}"><i class="fas fa-toggle-on"></i></a></button>
+                                            @endif
+                                                    <button type="button" class="btn btn-warning" id="editChildren" name="editChildren"><a href="{{ url('addchild/'.$ud->id) }}"><i class="fas fa-edit"></i></a></button> | 
                                                     <button type="button" class="btn btn-success" id="payfee" name="payfee"><i class="fas fa-donate"></i></button> | 
-                                                    <button type="button" class="btn btn-danger" id="deleteChildren" name="deleteChildren"><i class="fas fa-trash"></i></button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Trident</td>
-                                                <td>Internet Explorer 5.0</td>
-                                                <td>Win 95+</td>
-                                                <td>5</td>
-                                                <td>
-                                                    <button type="button" class="btn btn-warning" id="editChildren" name="editChildren"><i class="fas fa-edit"></i></button> | 
-                                                    <button type="button" class="btn btn-success" id="payfee" name="payfee"><i class="fas fa-donate"></i></button> | 
-                                                    <button type="button" class="btn btn-danger" id="deleteChildren" name="deleteChildren"><i class="fas fa-trash"></i></button>
-                                                </td>
-                                            </tr>
+                                                    <button type="button" class="btn btn-danger" id="deleteChildren" name="deleteChildren" onclick="return confirm('{{ __('Are you sure you want to delete?') }}')"><a href="{{ url('deletechild/'.$ud->id) }}"><i class="fas fa-trash"></i></a></button>
+                                               
+                                                </td> 
+                                                </tr>
+                                              
+                                        @endforeach
+                                              
+                                           
                                         </tbody>             
                                     </table>
                                 </div><!-- /.card-body -->

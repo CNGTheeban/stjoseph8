@@ -22,8 +22,12 @@ class userDetailController extends Controller
     public function index()
     {
         $u = Auth::user();
-        $userDetail = $this->userDetail->join('users', 'users.id', '=', 'user_details.userid')->where('user_details.userid',  $u->id)->get();
-        return view('profile')->with('userdata', $userDetail);
+        $userDetail = $this->userDetail->join('users', 'users.id', '=', 'user_details.userid')
+                                       ->where('user_details.userid',  $u->id)->get();
+       $childDetail = $this->userDetail->join('users', 'users.id', '=', 'user_details.userid')
+                                       ->join('child','child.userid','=','user_details.userid')
+                                       ->where('user_details.userid',  $u->id)->get();
+        return view('profile')->with('userdata', $userDetail)->with('childdata',$childDetail);
     }
 
     //add parent render
