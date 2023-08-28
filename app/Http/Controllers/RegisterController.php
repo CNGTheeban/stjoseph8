@@ -25,18 +25,22 @@ class RegisterController extends Controller
         return redirect("login")->withSuccess('You have Registerd. Please wait till admin authenticate your account.');
     }
 
-    public function create(array $data)
-    {
-        $insertData = [
-            'usertype' => $data['inputUsertype'],
-            'username' => $data['inputUsername'],
-            'email' => $data['inputEmail'],
-            'password' => bcrypt($data['inputPassword']),
-            'reference' => $data['inputReference'],
-            'status' => '0',
-        ];
-        //'password' => Hash::make($data['inputPassword']),
-        //dd($insertData);
-        return User::create($insertData);
-    }
+    // public function create(array $data)
+    // {
+    //     $validatedData = $request->validate([
+    //         'username' => 'required|unique:users',
+    //         'email' => 'required|email|unique:users',
+    //         'password' => 'required'
+    //     ]);
+
+    //     $insertData = [
+    //         'usertype' => $data['inputUsertype'],
+    //         'username' => $data['inputUsername'],
+    //         'email' => $data['inputEmail'],
+    //         'password' => bcrypt($data['inputPassword']),
+    //         'reference' => $data['inputReference'],
+    //         'status' => '0',
+    //     ];
+    //     return User::create($insertData);
+    // }
 }

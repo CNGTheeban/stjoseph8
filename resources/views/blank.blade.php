@@ -22,7 +22,7 @@
                 @include('partials.parent_sidebar')
             @endif
             @if(auth()->user()->usertype == 'Doner')
-                @include('partials.admin_sidebar')
+                @include('partials.doner_sidebar')
             @endif
         @endauth        
 

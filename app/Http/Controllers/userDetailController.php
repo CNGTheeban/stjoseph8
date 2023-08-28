@@ -2,41 +2,46 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\userDetail;
 use App\Models\User;
-use App\Models\Child;
 use Illuminate\Http\Request;
-use App\Http\Requests\ChildDataRequest;
+use App\Http\Requests\UserDetailDataRequest;
 use Auth;
 
-class ChildController extends Controller
+class userDetailController extends Controller
 {
-    protected $child;
+    protected $userDetail;
+    protected $user;
 
-    public function __construct(Child $child)
+    public function __construct(userDetail $userDetail, user $user)
     {
-        $this->child = $child;
+        $this->userDetail = $userDetail;
+        $this->user = $user;
     }
 
-    //add children render
-    public function addChild()
+    public function index()
     {
-        $user = Auth::user();
-        $child = $this->child->join('users', 'users.id', '=', 'child.userid')->where('child.userid',  $user->id)->get();//
-        return view('addchild')->with('childdata', $child);
-    }
-    
-    //edit children render
-    public function editChild()
-    {
-        return view('editchild');
+        $u = Auth::user();
+        $userDetail = $this->userDetail->join('users', 'users.id', '=', 'user_details.userid')->where('user_details.userid',  $u->id)->get();
+        return view('profile')->with('userdata', $userDetail);
     }
 
-    public function insertChild(ChildDataRequest $request)
+    //add parent render
+    public function addParent()
     {
-        $checkUserID = $request->input('inputUserId');
+        $u = Auth::user();        
+        $userDetail = $this->userDetail->join('users', 'users.id', '=', 'user_details.userid')->where('user_details.userid',  $u->id)->get();
+        return view('addParent')->with('data', $userDetail);
+    }
+
+    //add user details
+    // public function createParent(CreateParentDataRequest $request)
+    public function createParent(UserDetailDataRequest $request)
+    {
+        $checkUserDetailID = $request->input('inputUserDetailID');
+        $userID = $request->input('inputUserID');
         $message = '';
-
-        if($checkUserID == "0"){
+        if($checkUserDetailID == "0"){
             $data = [
                 'userid' => $request->input('inputUserID'),
                 'username' => $request->input('inputUserName'),

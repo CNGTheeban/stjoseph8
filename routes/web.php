@@ -8,6 +8,7 @@ use App\Http\Controllers\ParentController;
 use App\Http\Controllers\ChildController;
 use App\Http\Controllers\PayController;
 use App\Http\Controllers\userController;
+use App\Http\Controllers\userDetailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,14 +24,13 @@ Route::group(['middleware' => 'auth.check'], function () {
     //Your protected routes here
     Route::group(['middleware' => 'isActive'], function () {
     
-        Route::get('/', function () {
-            return view('index');   
-        });
+        Route::get('/', function () {return view('index');});
+        Route::get('/index', function () {return view('index');});
         
         Route::group(['middleware' => 'parent'], function () {
-            Route::get('/profile', [ParentController::class, 'profile']);
-            Route::get('/addParent', [ParentController::class, 'addParent']);
-            Route::post('parent/create', [ParentController::class, 'createParent'])->name('parent.create');
+            Route::get('/profile', [userDetailController::class, 'index']);
+            Route::get('/addParent', [userDetailController::class, 'addParent'])->name('parent.form');
+            Route::post('parent/create', [userDetailController::class, 'createParent'])->name('parent.create');
             Route::get('/addchild', [ChildController::class, 'addChild']);
             Route::get('/editchild', [ChildController::class, 'editChild']);
             Route::get('/addFee', [PayController::class, 'addFee']);
@@ -53,7 +53,7 @@ Route::get('login', [LoginController::class, 'index'])->name('login');
 Route::post('custom-login', [LoginController::class, 'customLogin'])->name('login.custom'); 
 Route::get('register', [RegisterController::class, 'index'])->name('register-user');
 Route::post('custom-registration', [RegisterController::class, 'customRegistration'])->name('register.custom'); 
-
+Route::get('logout', [LoginController:: class, 'logout']);
 
 // Route::get('/addParent', [ParentController::class, 'addParent'])->name('parent.index');
 // Route::get('/register', [RegisterController::class, 'index']);

@@ -23,10 +23,18 @@ class LoginController extends Controller
         if (Auth::attempt(['email' => $request['inputEmail'], 'password' => $request['inputPassword']])) {
             //return redirect()->intended('index')->withSuccess('Logged in');
             //auth()->login($user);
-            
             return redirect("/")->withSuccess('You have LoggedIn.');
         }
   
         return redirect("login")->withSuccess('Login details are not valid');
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+
+        // Perform any additional actions if needed
+
+        return redirect('/'); // Redirect to the desired page after logout
     }
 }

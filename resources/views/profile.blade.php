@@ -8,6 +8,8 @@
     <div class="wrapper">
         <?php
             $user = Auth::user();
+            $user_name = $user->username;
+            $user_type = $user->usertype;
         ?>
         <!-- Preloader -->
         @include('partials.preloader')
@@ -20,12 +22,13 @@
         @auth
             @if(auth()->user()->usertype == 'Admin')
                 @include('partials.admin_sidebar')
+
             @endif
             @if(auth()->user()->usertype == 'Parent')
                 @include('partials.parent_sidebar')
             @endif
             @if(auth()->user()->usertype == 'Doner')
-                @include('partials.admin_sidebar')
+                @include('partials.doner_sidebar')
             @endif
         @endauth
 
@@ -36,20 +39,26 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Welcome, <?php echo $user->username ?></h1>
+                            <h1>Welcome,
+                                @foreach($data as $ud)
+                                    {{ $ud->firstname }} {{ $ud->lastname }}
+                                @endforeach
+                            </h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Welcome, <?php echo $user->username ?></li>
+                                <li class="breadcrumb-item active">Welcome, 
+                                    @foreach($data as $ud)
+                                        {{ $ud->firstname }} {{ $ud->lastname }}
+                                    @endforeach
+                                </li>
                             </ol>
                         </div>
                     </div>
                 </div><!-- /.container-fluid -->
-            </section>           
-
-            
-
+            </section>
+            {{-- {{ $userdata }} --}}
             <!-- Main content -->
             <section class="content">
                 <div class="container-fluid">
@@ -61,8 +70,12 @@
                                     <!-- <div class="text-center">
                                         <img class="profile-user-img img-fluid img-circle" src="img/user4-128x128.jpg" alt="User profile picture">
                                     </div> -->
-                                    <h3 class="profile-username text-center">Nina Mcintire</h3>
-                                    <p class="text-muted text-center">[User Type]</p>
+                                    <h3 class="profile-username text-center">
+                                        @foreach($userdata as $ud)
+                                            {{ $ud->firstname }} {{ $ud->lastname }}
+                                        @endforeach
+                                    </h3>
+                                    <p class="text-muted text-center"><?php echo $user_type; ?></p>
                                     <!-- <ul class="list-group list-group-unbordered mb-3">
                                         <li class="list-group-item text-center">[User Type]
                                             <a class="float-right">[User Type]</a>
@@ -70,7 +83,7 @@
                                         <li class="list-group-item text-center">[Address]</li>
                                         <li class="list-group-item text-center">[NIC]</li>
                                     </ul> -->
-                                    <a href="/addParents" class="btn btn-primary btn-block"><i class="fas fa-edit"></i> Edit</a>
+                                    <a href="/addParent" class="btn btn-primary btn-block"><i class="fas fa-edit"></i> Edit</a>
                                 </div>
                                 <!-- /.card-body -->
                             </div>
@@ -84,19 +97,50 @@
                                 <!-- /.card-header -->
                                 <div class="card-body">
                                     <strong><i class="fas fa-map-marker-alt mr-1"></i> Location</strong>
-                                    <p class="text-muted">[Address]</p>
+                                    <p class="text-muted">
+                                        @foreach($userdata as $ud)
+                                            @if($ud->addressline1 != '')
+                                                {{ $ud->addressline1 }},
+                                            @endif 
+                                            @if($ud->addressline2 != '')
+                                                {{ $ud->addressline2 }},
+                                            @endif 
+                                            @if($ud->city != '')
+                                            {{ $ud->city }}, @endif @if($ud->province != ''){{ $ud->province }},
+                                            @endif 
+                                            @if($ud->country != '')
+                                            {{ $ud->country }}.
+                                            @endif 
+                                        @endforeach
+                                    </p>
                                     <hr>
                                     <strong><i class="fas fa-book mr-1"></i> NIC</strong>
-                                    <p class="text-muted">[NIC No]</p>
+                                    <p class="text-muted">
+                                        @foreach($userdata as $ud)
+                                            {{ $ud->nic }}
+                                        @endforeach
+                                    </p>
                                     <hr>
                                     <strong><i class="fas fa-phone"></i> Contact No</strong>
-                                    <a href="#" class="text-muted">[Contact No]</a>
+                                    <a href="#" class="text-muted">
+                                        @foreach($userdata as $ud)
+                                            {{ $ud->contactno }}
+                                        @endforeach
+                                    </a>
                                     <hr>
                                     <strong><i class="fas fa-phone"></i> Mobile No</strong>
-                                    <a href="#" class="text-muted">[Mobile No]</a>
+                                    <a href="#" class="text-muted">
+                                        @foreach($userdata as $ud)
+                                            {{ $ud->mobileno }}
+                                        @endforeach
+                                    </a>
                                     <hr>
                                     <strong><i class="far fa-envelope"></i> Email</strong>
-                                    <a href="#" class="text-muted">[email address]</a>
+                                    <a href="#" class="text-muted">
+                                        @foreach($userdata as $ud)
+                                            {{ $ud->email }}
+                                        @endforeach
+                                    </a>
                                 </div>
                                 <!-- /.card-body -->
                             </div>
@@ -107,7 +151,7 @@
                             <div class="card">
                                 <div class="card-header p-2">
                                     <h3 class="card-title p-2">Childrens</h3>
-                                    <a href="add_childs.php" type="button" class="btn btn-primary float-right"><i class="fas fa-user-plus"></i> New Children</a>
+                                    <a href="addchild" type="button" class="btn btn-primary float-right"><i class="fas fa-user-plus"></i> New Children</a>
                                 </div><!-- /.card-header -->
                                 <div class="card-body">
                                     <table id="example1" class="table table-bordered table-striped">
@@ -123,9 +167,7 @@
                                         <tbody>
                                             <tr>
                                                 <td>Trident</td>
-                                                <td>Internet
-                                                Explorer 4.0
-                                                </td>
+                                                <td>Internet Explorer 4.0</td>
                                                 <td>Win 95+</td>
                                                 <td> 4</td>
                                                 <td>
@@ -136,9 +178,7 @@
                                             </tr>
                                             <tr>
                                                 <td>Trident</td>
-                                                <td>Internet
-                                                Explorer 5.0
-                                                </td>
+                                                <td>Internet Explorer 5.0</td>
                                                 <td>Win 95+</td>
                                                 <td>5</td>
                                                 <td>
