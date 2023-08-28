@@ -48,7 +48,6 @@ Route::group(['middleware' => 'auth.check'], function () {
     });
 });
 
-
 Route::get('login', [LoginController::class, 'index'])->name('login');
 Route::post('custom-login', [LoginController::class, 'customLogin'])->name('login.custom'); 
 Route::get('register', [RegisterController::class, 'index'])->name('register-user');

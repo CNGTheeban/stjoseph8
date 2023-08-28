@@ -69,22 +69,22 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>Trident</td>
-                                                <td>Internet Explorer 4.0</td>
-                                                <td>Internet Explorer 4.0</td>
-                                                <td>Win 95+</td>
-                                                <td> 4</td>
-                                                <td>X</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Trident</td>
-                                                <td>Internet Explorer 4.0</td>
-                                                <td>Internet Explorer 4.0</td>
-                                                <td>Win 95+</td>
-                                                <td>5</td>
-                                                <td>C</td>
-                                            </tr>
+                                            @if(count($users) != '0')
+                                                @foreach($users as $user)                                               
+                                                    <tr>
+                                                        <td>{{$user->id}}</td>
+                                                        <td>{{$user->username}} - {{$user->usertype}}</td>
+                                                        <td>{{$user->reference}}</td>
+                                                        <td>{{$user->email}}</td>
+                                                        <td><label class="ribbon bg-danger">Disabled</label></td>
+                                                        <td><button class="btn btn-success"><i class="fas fa-power-off"></i></button> | <button class="btn btn-danger"><i class="fas fa-trash"></i></button></td>
+                                                    </tr>
+                                                @endforeach
+                                            @else
+                                                <tr>
+                                                    There is no un-authorized users
+                                                </tr>                                                
+                                            @endif
                                         </tbody>             
                                     </table>
                                 </div>

@@ -11,6 +11,13 @@ use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
 {
+    protected $user;
+
+    public function __construct(User $user)
+    {
+        $this->user = $user;
+    }
+
     //view render
     public function index()
     {
@@ -19,8 +26,17 @@ class RegisterController extends Controller
 
     public function customRegistration(RegistrationDataRequest $request)
     {  
-        $data = $request->all();
-        $check = $this->create($data);
+        //$data = $request->all();
+        $data = [
+            'usertype' => $request->input('inputUsertype'),
+            'username' => $request->input('inputUsername'),
+            'email' => $request->input('inputEmail'),
+            'password' => Hash::make($request->input('inputPassword')),
+            'reference' => $request->input('inputReference'),
+            'status' => 0,
+        ];
+        //dd($data);
+        $check = $this->user::create($data);
          
         return redirect("login")->withSuccess('You have Registerd. Please wait till admin authenticate your account.');
     }
