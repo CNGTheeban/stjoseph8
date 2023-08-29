@@ -3,6 +3,13 @@
 @section("title", "ST. Joseph's College | Dashboard")
 
 @section("content")
+
+    <?php
+        $user = Auth::user();
+        $user_name = $user->username;
+        $user_type = $user->usertype;
+    ?>
+
     <div class="wrapper">
         <!-- Preloader -->
         @include('partials.preloader')
@@ -12,8 +19,18 @@
         <!-- /.navbar -->
 
         <!-- Main Sidebar Container -->
-        @include('partials.sidebar')        
-
+        @auth
+            @if(auth()->user()->usertype == 'Admin')
+                @include('partials.admin_sidebar')
+            @endif
+            @if(auth()->user()->usertype == 'Parent')
+                @include('partials.parent_sidebar')
+            @endif
+            @if(auth()->user()->usertype == 'Doner')
+                @include('partials.doner_sidebar')
+            @endif
+        @endauth
+        
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
@@ -21,26 +38,35 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">SJC Dashboard</h1>
+                            <h1 class="m-0">SJC <?php echo $user_type; ?> Dashboard</h1>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->
             </div>
             <!-- /.content-header -->
-
+            @if(session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
+            
+            @if(session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @endif
             <!-- Main content -->
             <section class="content">
                 <div class="container-fluid">
                     <!-- Info boxes -->
                     <div class="row">
-                        <div class="col-12 col-sm-6 col-md-3">
+                        <div class="col-12 col-sm-6 col-md-6">
                             <div class="info-box">
-                                <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
+                                <span class="info-box-icon bg-info elevation-1"><i class="fas fa-donate"></i></span>
                                 <div class="info-box-content">
-                                    <span class="info-box-text">CPU Traffic</span>
+                                    <span class="info-box-text">Last Donation</span>
                                     <span class="info-box-number">
-                                        10
-                                        <small>%</small>
+                                        [Date] - <small>[Amount]</small>
                                     </span>
                                 </div>
                             <!-- /.info-box-content -->
@@ -48,12 +74,14 @@
                             <!-- /.info-box -->
                         </div>
                         <!-- /.col -->
-                        <div class="col-12 col-sm-6 col-md-3">
+                        <div class="col-12 col-sm-6 col-md-6">
                             <div class="info-box mb-3">
-                                <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
+                                <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-money-bill"></i></span>
                                 <div class="info-box-content">
-                                    <span class="info-box-text">Likes</span>
-                                    <span class="info-box-number">41,410</span>
+                                    <span class="info-box-text">Last Fee</span>
+                                    <span class="info-box-number">
+                                        [Date] - <small>[Amount]</small>
+                                    </span>
                                 </div>
                                 <!-- /.info-box-content -->
                             </div>
@@ -64,7 +92,7 @@
                         <!-- fix for small devices only -->
                         <div class="clearfix hidden-md-up"></div>
 
-                        <div class="col-12 col-sm-6 col-md-3">
+                        {{-- <div class="col-12 col-sm-6 col-md-3">
                             <div class="info-box mb-3">
                                 <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
                                 <div class="info-box-content">
@@ -86,12 +114,12 @@
                                 <!-- /.info-box-content -->
                             </div>
                             <!-- /.info-box -->
-                        </div>
+                        </div> --}}
                         <!-- /.col -->
                     </div>
                     <!-- /.row -->
 
-                    <div class="row">
+                    {{-- <div class="row">
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
@@ -221,11 +249,11 @@
                             <!-- /.card -->
                         </div>
                         <!-- /.col -->
-                    </div>
+                    </div> --}}
                     <!-- /.row -->
 
                     <!-- Main row -->
-                    <div class="row">
+                    {{-- <div class="row">
                         <!-- Left col -->
                         <div class="col-md-8">
                             <!-- MAP & BOX PANE -->
@@ -822,7 +850,7 @@
                         <!-- /.col -->
                     </div>
                     <!-- /.row -->
-                </div><!--/. container-fluid -->
+                </div><!--/. container-fluid --> --}}
             </section>
             <!-- /.content -->
         </div>

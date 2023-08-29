@@ -33,12 +33,12 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Parents/Doners</h1>
+                            <h1>Unauthorized System Users</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="/index">Dashboard</a></li>
-                                <li class="breadcrumb-item active">Parents/Doners</li>
+                                <li class="breadcrumb-item active">Unauthorized System Users</li>
                             </ol>
                         </div>
                     </div>
@@ -60,32 +60,31 @@
                                     <table id="example1" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
-                                                <th>Parents/Doners ID</th>
-                                                <th>Parents/Doners Name</th>
+                                                <th>User ID</th>
+                                                <th>User Name</th>
+                                                <th>Reference</th>
                                                 <th>Email</th>
                                                 <th>Status</th>
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>Trident</td>
-                                                <td>Internet
-                                                Explorer 4.0
-                                                </td>
-                                                <td>Win 95+</td>
-                                                <td> 4</td>
-                                                <td>X</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Trident</td>
-                                                <td>Internet
-                                                Explorer 5.0
-                                                </td>
-                                                <td>Win 95+</td>
-                                                <td>5</td>
-                                                <td>C</td>
-                                            </tr>
+                                            @if(count($users) != '0')
+                                                @foreach($users as $user)                                               
+                                                    <tr>
+                                                        <td>{{$user->id}}</td>
+                                                        <td>{{$user->username}} - {{$user->usertype}}</td>
+                                                        <td>{{$user->reference}}</td>
+                                                        <td>{{$user->email}}</td>
+                                                        <td><label class="ribbon bg-danger">Disabled</label></td>
+                                                        <td><button class="btn btn-success"><i class="fas fa-power-off"></i></button> | <button class="btn btn-danger"><i class="fas fa-trash"></i></button></td>
+                                                    </tr>
+                                                @endforeach
+                                            @else
+                                                <tr>
+                                                    There is no un-authorized users check
+                                                </tr>                                                
+                                            @endif
                                         </tbody>             
                                     </table>
                                 </div>

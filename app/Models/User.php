@@ -18,9 +18,12 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'usertype',
+        'username',
         'email',
         'password',
+        'reference',
+        'status',
     ];
 
     /**
@@ -41,4 +44,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function hasRole($usertype)
+    {
+        return $this->getAttribute('usertype') == $usertype;
+    }
+
+    public function hasStatus($status)
+    {
+        return $this->getAttribute('status') == $status;
+    }
 }

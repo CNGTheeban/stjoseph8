@@ -14,9 +14,17 @@
         <!-- /.navbar -->
 
         <!-- Main Sidebar Container -->
-        @include('partials.sidebar')
-
-        
+        @auth
+            @if(auth()->user()->usertype == 'Admin')
+                @include('partials.admin_sidebar')
+            @endif
+            @if(auth()->user()->usertype == 'Parent')
+                @include('partials.parent_sidebar')
+            @endif
+            @if(auth()->user()->usertype == 'Doner')
+                @include('partials.doner_sidebar')
+            @endif
+        @endauth        
 
         <!-- Main Footer -->
         @include('partials.footer')

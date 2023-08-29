@@ -6,6 +6,10 @@
 
     <!-- Site wrapper -->
     <div class="wrapper">
+        <?php
+            $user = Auth::user();
+            $user_id = $user->id;
+        ?>
         <!-- Preloader -->
         @include('partials.preloader')
 
@@ -14,7 +18,17 @@
         <!-- /.navbar -->
 
         <!-- Main Sidebar Container -->
-        @include('partials.sidebar')
+        @auth
+            @if(auth()->user()->usertype == 'Admin')
+                @include('partials.admin_sidebar')
+            @endif
+            @if(auth()->user()->usertype == 'Parent')
+                @include('partials.parent_sidebar')
+            @endif
+            @if(auth()->user()->usertype == 'Doner')
+                @include('partials.doner_sidebar')
+            @endif
+        @endauth
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
@@ -34,7 +48,7 @@
                     </div>
                 </div><!-- /.container-fluid -->
             </section>
-
+            {{$childdata}}
             <!-- Main content -->
             <section class="content">
                 <div class="container-fluid">
@@ -46,73 +60,96 @@
                             <!-- card-body -->
                             <div class="card-body">
                                 <form action="" method="POST" id="add_children_form">
+                                    @if($user_id != '')
+                                        <input type="text" class="form-control" name="inputUserId" id="inputUserId" value="{{$user_id}}"placeholder="Enter Your Child's Full Name">
+                                    @else
+                                    <input type="text" class="form-control" name="inputUserId" id="inputUserId" value="0" placeholder="Enter Your Child's Full Name">
+                                    @endif
+                                    @if(count($childdata) != '0')
+                                        @foreach($childdata as $cd)
+                                            <input type="text" class="form-control" name="inputChildId" id="inputChildId" value="{{$cd->id}}"placeholder="Enter Your Child's Full Name">
+                                        @endforeach
+                                    @else
+                                        <input type="text" class="form-control" name="inputChildId" id="inputChildId" value="0" placeholder="Enter Your Child's Full Name">
+                                    @endif
                                     <div class="row">
                                         <div class="col-4">
                                             <div class="form-group">
                                                 <label for="inputFullName">Full Name</label>
-                                                <input type="text" class="form-control" name="inputFullName" id="inputFullName" placeholder="Enter Your Child's Full Name">
+                                                @if(count($childdata) != '0')
+                                                    @foreach($childdata as $cd)
+                                                        <input type="text" class="form-control" name="inputFullName" id="inputFullName" value="{{$cd->fullName}}" placeholder="Enter Your Child's Full Name">
+                                                    @endforeach
+                                                @else
+                                                    <input type="text" class="form-control" name="inputFullName" id="inputFullName" placeholder="Enter Your Child's Full Name">
+                                                @endif
                                             </div>
+                                            @if ($errors->has('inputFullName'))
+                                                <span class="text-danger">{{ $errors->first('inputFullName') }}</span>
+                                            @endif
                                         </div>
                                         <div class="col-4">
                                             <div class="form-group">
                                                 <label for="inputInitialName">Initial Name</label>
-                                                <input type="text" class="form-control" name="inputInitialName" id="inputInitialName" placeholder="Enter Initial Name">
+                                                @if(count($childdata) != '0')
+                                                    @foreach($childdata as $cd)
+                                                        <input type="text" class="form-control" name="inputInitialName" id="inputInitialName" value="{{$cd->initialName}}" placeholder="Enter Initial Name">
+                                                    @endforeach
+                                                @else
+                                                    <input type="text" class="form-control" name="inputInitialName" id="inputInitialName" placeholder="Enter Initial Name">
+                                                @endif
                                             </div>
+                                            @if ($errors->has('inputInitialName'))
+                                                <span class="text-danger">{{ $errors->first('inputInitialName') }}</span>
+                                            @endif
                                         </div>
                                         <div class="col-4">
                                             <div class="form-group">
                                                 <label for="inputDOB">Date of Birth</label>
-                                                <input type="date" class="form-control" name="inputDOB" id="inputDOB" placeholder="Enter your Child's DOB">
+                                                @if(count($childdata) != '0')
+                                                    @foreach($childdata as $cd)
+                                                        <input type="date" class="form-control" name="inputDOB" id="inputDOB" value="{{$cd->DOB}}" placeholder="Enter your Child's DOB">
+                                                    @endforeach
+                                                @else
+                                                    <input type="date" class="form-control" name="inputDOB" id="inputDOB" placeholder="Enter your Child's DOB">
+                                                @endif
                                             </div>
+                                            @if ($errors->has('inputDOB'))
+                                                <span class="text-danger">{{ $errors->first('inputDOB') }}</span>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-6">
                                             <div class="form-group">
                                                 <label for="inputGrade">Child's Grade</label>
-                                                <input type="number" class="form-control" name="inputGrade" id="inputGrade" placeholder="Enter your Child's Grade">
+                                                @if(count($childdata) != '0')
+                                                    @foreach($childdata as $cd)
+                                                        <input type="number" class="form-control" name="inputGrade" id="inputGrade" value="{{$cd->childsGrade}}" placeholder="Enter your Child's Grade">
+                                                    @endforeach
+                                                @else
+                                                    <input type="number" class="form-control" name="inputGrade" id="inputGrade" placeholder="Enter your Child's Grade">
+                                                @endif
                                             </div>
+                                            @if ($errors->has('inputGrade'))
+                                                <span class="text-danger">{{ $errors->first('inputGrade') }}</span>
+                                            @endif
                                         </div>
                                         <div class="col-6">
                                             <div class="form-group">
                                                 <label for="inputAdmissionNO">Child's Admission No</label>
-                                                <input type="text" class="form-control" name="inputAdmissionNO" id="inputAdmissionNO" placeholder="Enter your Child's admission no">
+                                                @if(count($childdata) != '0')
+                                                    @foreach($childdata as $cd)
+                                                        <input type="text" class="form-control" name="inputAdmissionNO" id="inputAdmissionNO" value="{{$cd->childsAdmissionNo}}" placeholder="Enter your Child's admission no">
+                                                    @endforeach
+                                                @else
+                                                    <input type="text" class="form-control" name="inputAdmissionNO" id="inputAdmissionNO" placeholder="Enter your Child's admission no">
+                                                @endif
                                             </div>
+                                            @if ($errors->has('inputAdmissionNO'))
+                                                <span class="text-danger">{{ $errors->first('inputAdmissionNO') }}</span>
+                                            @endif
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <button type="button" class="btn btn-primary float-right"><i class="fas fa-plus"></i> Add</button>
-                                        </div>
-                                    </div>
-                                    <div class="row pt-3">
-                                        <table id="childTempTable" class="table table-bordered table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>Child Name</th>
-                                                    <th>Admission No</th>
-                                                    <th>Date of Birth</th>
-                                                    <th>Grade</th>
-                                                    <th>Actions</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>Trident</td>
-                                                    <td>Internet Explorer 4.0</td>
-                                                    <td>Win 95+</td>
-                                                    <td> 4</td>
-                                                    <td>X</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Trident</td>
-                                                    <td>Internet Explorer 5.0</td>
-                                                    <td>Win 95+</td>
-                                                    <td>5</td>
-                                                    <td>C</td>
-                                                </tr>
-                                            </tbody>             
-                                        </table>
                                     </div>
                                     <div class="row">
                                         <div class="col-12">
