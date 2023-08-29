@@ -30,6 +30,18 @@
             @endif
         @endauth
 
+        @if(session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
+            
+            @if(session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @endif
+
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
@@ -48,7 +60,8 @@
                     </div>
                 </div><!-- /.container-fluid -->
             </section>
-            {{$childdata}}
+          
+           <!--   {{$childdata}} -->
             <!-- Main content -->
             <section class="content">
                 <div class="container-fluid">
@@ -59,18 +72,19 @@
                             </div>
                             <!-- card-body -->
                             <div class="card-body">
-                                <form action="" method="POST" id="add_children_form">
-                                    @if($user_id != '')
-                                        <input type="text" class="form-control" name="inputUserId" id="inputUserId" value="{{$user_id}}"placeholder="Enter Your Child's Full Name">
+                                <form action="{{ route('child.insert') }}" method="POST" id="add_children_form" enctype="multipart/form-data">
+                                @csrf   
+                                @if($user_id != '')
+                                        <input type="hidden" class="form-control" name="inputUserId" id="inputUserId" value="{{$user_id}}"placeholder="Enter Your Child's Full Name">
                                     @else
-                                    <input type="text" class="form-control" name="inputUserId" id="inputUserId" value="0" placeholder="Enter Your Child's Full Name">
+                                    <input type="hidden" class="form-control" name="inputUserId" id="inputUserId" value="0" placeholder="Enter Your Child's Full Name">
                                     @endif
                                     @if(count($childdata) != '0')
                                         @foreach($childdata as $cd)
-                                            <input type="text" class="form-control" name="inputChildId" id="inputChildId" value="{{$cd->id}}"placeholder="Enter Your Child's Full Name">
+                                            <input type="hidden" class="form-control" name="inputChildId" id="inputChildId" value="{{$cd->id}}"placeholder="Enter Your Child's Full Name">
                                         @endforeach
                                     @else
-                                        <input type="text" class="form-control" name="inputChildId" id="inputChildId" value="0" placeholder="Enter Your Child's Full Name">
+                                        <input type="hidden" class="form-control" name="inputChildId" id="inputChildId" value="0" placeholder="Enter Your Child's Full Name">
                                     @endif
                                     <div class="row">
                                         <div class="col-4">
@@ -157,6 +171,22 @@
                                         </div>
                                     </div>
                                 </form>
+                                @if (count($errors) > 0)
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
+                            
+                                @if ($message = Session::get('success'))
+                                    <div class="alert alert-success alert-block">
+                                        <button type="button" class="close" data-dismiss="alert">×</button>
+                                        <strong>{{ $message }}</strong>
+                                    </div>
+                                @endif
                             </div>
                             <!-- /.card-body -->
                         </div>
