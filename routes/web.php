@@ -31,7 +31,12 @@ Route::group(['middleware' => 'auth.check'], function () {
             Route::get('/profile', [userDetailController::class, 'index']);
             Route::get('/addParent', [userDetailController::class, 'addParent'])->name('parent.form');
             Route::post('parent/create', [userDetailController::class, 'createParent'])->name('parent.create');
-            Route::get('/addchild', [ChildController::class, 'addChild']);
+            Route::post('/inserchild', [ChildController::class, 'insertChild'])->name('child.insert');
+            Route::get('/addchild/{id}', [ChildController::class, 'addChild'])->name('index');
+            Route::get('/enablechild/{id}', [ChildController::class, 'enableChild'])->name('index');
+
+            Route::get('/deletechild/{id}', [ChildController::class, 'deleteChild'])->name('index');
+
             Route::get('/editchild', [ChildController::class, 'editChild']);
             Route::get('/addFee', [PayController::class, 'addFee']);
         });
