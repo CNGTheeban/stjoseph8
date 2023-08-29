@@ -118,7 +118,7 @@ class ChildController extends Controller
         ];
         child::where('id', $id)->update($data);
         return redirect()->back()->withInput();
-        }
+    }
 
     public function deleteChild($id)
     {
@@ -127,5 +127,5 @@ class ChildController extends Controller
         ];
         child::where('id', $id)->update($data);
         return redirect()->back()->withInput();
-        }
+    }
 }

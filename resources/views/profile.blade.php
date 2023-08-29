@@ -183,11 +183,11 @@
                                                     <button type="button" class="btn btn-success" id="payfee" name="payfee"><a href="{{ url('addfee/'.$ud->id) }}"><i class="fas fa-donate"></i></a></button> | 
                                                     @if( $ud->status !== 1)
                                                     <button class="btn btn-success" onclick="return confirm('{{ __('Are you sure you want to Enable?') }}')"><a href="{{ url('enablechild/'.$ud->id) }}"><i class="fas fa-toggle-on"></i></a></button>
-                                                    @else
+                                                @else
                                                     <button type="button" class="btn btn-danger" id="deleteChildren" name="deleteChildren" onclick="return confirm('{{ __('Are you sure you want to delete?') }}')"><a href="{{ url('deletechild/'.$ud->id) }}"><i class="fas fa-trash"></i></a></button>
-                                                    @endif
-                                                </td> 
-                                                </tr>
+                                                @endif
+                                            </td> 
+                                        </tr>
                                               
                                         @endforeach
                                               
