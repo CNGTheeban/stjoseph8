@@ -8,6 +8,7 @@ use App\Http\Controllers\ParentController;
 use App\Http\Controllers\ChildController;
 use App\Http\Controllers\PayController;
 use App\Http\Controllers\userController;
+use App\Http\Controllers\FeesController;
 use App\Http\Controllers\userDetailController;
 
 /*
@@ -31,8 +32,10 @@ Route::group(['middleware' => 'auth.check'], function () {
             Route::get('/profile', [userDetailController::class, 'index']);
             Route::get('/addParent', [userDetailController::class, 'addParent'])->name('parent.form');
             Route::post('parent/create', [userDetailController::class, 'createParent'])->name('parent.create');
-            Route::post('/inserchild', [ChildController::class, 'insertChild'])->name('child.insert');
-            Route::get('/addchild/{id}', [ChildController::class, 'addChild'])->name('index');
+            Route::post('/insertchild', [ChildController::class, 'insertChild'])->name('child.insert');
+            Route::post('/insertfee', [FeesController::class, 'insertFee'])->name('fee.insert');
+            Route::get('/addchild/{id}', [ChildController::class, 'addChild'])->name('child.form');
+            Route::get('/addfee/{id}', [ChildController::class, 'addFee'])->name('fees.form');
             Route::get('/enablechild/{id}', [ChildController::class, 'enableChild'])->name('index');
 
             Route::get('/deletechild/{id}', [ChildController::class, 'deleteChild'])->name('index');

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ChildDataRequest extends FormRequest
+class FeesDataRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +24,11 @@ class ChildDataRequest extends FormRequest
     public function rules()
     {
         return [
-            'inputFullName' => 'required',
-            'inputInitialName' => 'required',
-            'inputGrade' => 'required|max:2',
-            'inputDOB' => 'required',
+            'inputChildrenName' => 'required',
+            'inputAdmissionNo' => 'required',
+            'inputClass' => 'required',
+            'inputTerm' => 'required',
+            'inputAmount' => 'required|regex:/^\d+(\.\d{1,2})?$/',
         ];
     }
 }

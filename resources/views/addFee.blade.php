@@ -26,6 +26,18 @@
             @endif
         @endauth
 
+          @if(session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
+            
+            @if(session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @endif
+
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
@@ -55,18 +67,23 @@
                             </div>
                             <!-- card-body -->
                             <div class="card-body">
-                                <form action="" method="POST" id="add_fee_form">
+                                <form action="{{ route('fee.insert') }}" method="POST" id="add_fee_form" enctype="multipart/form-data">
+                                @csrf   
+                                @foreach($childdata as $cd)
                                     <div class="row">
+                                    
+                                                <input type="hidden" class="form-control" name="inputChildrenId" id="inputChildrenId" value="{{$cd->id}}" readonly/>
+                                           
                                         <div class="col-6">
                                             <div class="form-group">
                                                 <label for="inputChildrenName">Child Name</label>
-                                                <input type="text" class="form-control" name="inputChildrenName" id="inputChildrenName" readonly/>
+                                                <input type="text" class="form-control" name="inputChildrenName" id="inputChildrenName" value="{{$cd->fullName}}" readonly/>
                                             </div>
                                         </div>
                                         <div class="col-6">
                                             <div class="form-group">
                                                 <label for="inputAdmissionNo">Admision No</label>
-                                                <input type="text" class="form-control" name="inputAdmissionNo" id="inputAdmissionNo" readonly/>
+                                                <input type="text" class="form-control" name="inputAdmissionNo" id="inputAdmissionNo"  value="{{$cd->childsAdmissionNo}}" readonly/>
                                             </div>
                                         </div>
                                     </div>
@@ -74,13 +91,19 @@
                                         <div class="col-4">
                                             <div class="form-group">
                                                 <label for="inputClass">Class</label>
-                                                <input type="text" class="form-control" name="inputClass" id="inputClass" />
+                                                <input type="text" class="form-control" name="inputClass" id="inputClass" value="{{$cd->childsGrade}}"/>
                                             </div>
                                         </div>
                                         <div class="col-4">
                                             <div class="form-group">
                                                 <label for="inputTerm">Term</label>
-                                                <input type="text" class="form-control" name="inputTerm" id="inputTerm" placeholder="Ener child's your Term"/>
+                                                <select class="form-control" id="inputTerm" name="inputTerm" required focus>
+                                                    <option value="" disabled selected>Please select Term</option>        
+                                                    <option value="1st Term">1st Term</option>
+                                                    <option value="2nd Term">2nd Term</option>
+                                                    <option value="3rd Term">3rd Term</option>
+                                                </select>
+                                                <!-- <input type="text" class="form-control" name="inputTerm" id="inputTerm" placeholder="Ener child's your Term"/> -->
                                             </div>
                                         </div>
                                         <div class="col-4">
@@ -95,7 +118,25 @@
                                             <button type="submit" class="btn btn-primary float-right"><i class="fas fa-donate"></i> Pay</button>
                                         </div>
                                     </div>
+                                    @endforeach
+
                                 </form>
+                                @if (count($errors) > 0)
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
+                            
+                                @if ($message = Session::get('success'))
+                                    <div class="alert alert-success alert-block">
+                                        <button type="button" class="close" data-dismiss="alert">×</button>
+                                        <strong>{{ $message }}</strong>
+                                    </div>
+                                @endif
                             </div>
                             <!-- /.card-body -->
                         </div>

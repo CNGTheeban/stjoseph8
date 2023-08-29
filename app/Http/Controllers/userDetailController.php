@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Contracts\Encryption\DecryptException;
 
 use App\Models\userDetail;
 use App\Models\User;
@@ -27,6 +28,16 @@ class userDetailController extends Controller
        $childDetail = $this->userDetail->join('users', 'users.id', '=', 'user_details.userid')
                                        ->join('child','child.userid','=','user_details.userid')
                                        ->where('user_details.userid',  $u->id)->get();
+                                       foreach($childDetail as $chil)
+                                       {
+                                           try {
+                                               $chil -> fullName = decrypt( $chil -> fullName);
+                                               $chil -> childsAdmissionNo = decrypt( $chil -> childsAdmissionNo);
+                               
+                                           } catch (DecryptException $e) {
+                                               //
+                                           }
+                                       }
         return view('profile')->with('userdata', $userDetail)->with('childdata',$childDetail);
     }
 
