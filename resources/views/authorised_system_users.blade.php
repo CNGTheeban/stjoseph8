@@ -69,22 +69,22 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>[name][type]</td>
-                                                <td>Internet Explorer 4.0</td>
-                                                <td>Internet Explorer 4.0</td>
-                                                <td>Win 95+</td>
-                                                <td> 4</td>
-                                                <td>X</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Trident</td>
-                                                <td>Internet Explorer 5.0</td>
-                                                <td>Internet Explorer 5.0</t d>
-                                                <td>Win 95+</td>
-                                                <td>5</td>
-                                                <td>C</td>
-                                            </tr>
+                                            @if(count($users) != '0')
+                                                @foreach($users as $user)                                               
+                                                    <tr>
+                                                        <td>{{$user->id}}</td>
+                                                        <td>{{$user->username}} - {{$user->usertype}}</td>
+                                                        <td>{{$user->reference}}</td>
+                                                        <td>{{$user->email}}</td>
+                                                        <td><label class="ribbon bg-success">Active</label></td>
+                                                        <td><a type="button" href="{{ url('/disableAuthUsers/'.$user->id) }}" class="btn btn-danger" onclick="return confirm('{{ __('Are you sure you want to Disable?') }}')"><i class="fas fa-power-off"></i></a></td>
+                                                    </tr>
+                                                @endforeach
+                                            @else
+                                                <tr>
+                                                    There is no authorized users
+                                                </tr>                                                
+                                            @endif
                                         </tbody>             
                                     </table>
                                 </div>

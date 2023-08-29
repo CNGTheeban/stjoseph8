@@ -77,12 +77,12 @@
                                                         <td>{{$user->reference}}</td>
                                                         <td>{{$user->email}}</td>
                                                         <td><label class="ribbon bg-danger">Disabled</label></td>
-                                                        <td><button class="btn btn-success"><i class="fas fa-power-off"></i></button> | <button class="btn btn-danger"><i class="fas fa-trash"></i></button></td>
+                                                        <td><a type="button" class="btn btn-success" href="{{ url('/enableUnauthUsers/'.$user->id) }}" onclick="return confirm('{{ __('Are you sure you want to Enable?') }}')"><i class="fas fa-power-off"></i></a> | <a type="button" class="btn btn-danger" href="{{ url('/deleteUnauthUsers/'.$user->id) }}" onclick="return confirm('{{ __('Are you sure you want to Delete?') }}')"><i class="fas fa-trash"></i></a></td>
                                                     </tr>
                                                 @endforeach
                                             @else
                                                 <tr>
-                                                    There is no un-authorized users check
+                                                    There is no un-authorized users
                                                 </tr>                                                
                                             @endif
                                         </tbody>             

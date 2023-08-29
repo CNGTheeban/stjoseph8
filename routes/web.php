@@ -43,12 +43,17 @@ Route::group(['middleware' => 'auth.check'], function () {
 
         Route::group(['middleware' => 'doner'], function () {
             Route::get('/addDonation', [PayController::class, 'addDonation']);
+            Route::get('/profile', [userDetailController::class, 'index']);
         });
 
         Route::group(['middleware' => 'admin'], function () {
             Route::get('/parents', [ParentController::class, 'index']);
             Route::get('/authUsers', [userController::class, 'index']);
             Route::get('/unauthUsers', [userController::class, 'unauthorizedUsers']);
+            Route::get('/enableUnauthUsers/{id}', [userController::class, 'activateUnauthorizedUsers']);
+            Route::get('/deleteUnauthUsers/{id}', [userController::class, 'deleteUnauthorizedUsers']);
+            Route::get('/authUsers', [userController::class, 'authorizedUsers']);
+            Route::get('/disableAuthUsers/{id}', [userController::class, 'deactivateAuthorizedUsers']);
         });
     });
 });
