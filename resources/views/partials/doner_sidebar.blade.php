@@ -33,12 +33,12 @@
                         <p>Profile</p>
                     </a>
                 </li> 
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a href="/parents" class="nav-link">
                         <i class="nav-icon fas fa-users"></i>
                         <p>Donations</p>
                     </a>
-                </li>
+                </li> --}}
                 <li class="nav-item">
                     <a href="/reports" class="nav-link">
                         <i class="nav-icon fas fa-paste"></i>

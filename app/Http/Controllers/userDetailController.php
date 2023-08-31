@@ -32,30 +32,34 @@ class userDetailController extends Controller
                             ->join('child','child.userid','=','user_details.userid')
                             ->join('fees','fees.childid', '=', 'child.id')
                             ->where('user_details.userid',  $u->id)->get();
-                                       foreach($childDetail as $chil)
-                                       {
-                                           try {
-                                               $chil -> fullName = decrypt( $chil -> fullName);
-                                               $chil -> childsAdmissionNo = decrypt( $chil -> childsAdmissionNo);
-                               
-                                           } catch (DecryptException $e) {
-                                               //
-                                           }
-                                       }
-                                       foreach($FeesDetail as $fee)
-                                       {
-                                           try {
-                                               $fee -> fullName = decrypt( $fee -> fullName);
-                                               $fee -> childsAdmissionNo = decrypt( $fee -> childsAdmissionNo);
-                                               $fee -> time = $fee -> created_at->format('H:i');
-                               
-                                           } catch (DecryptException $e) {
-                                               //
-                                           }
-                                       }
-        return view('profile')->with('userdata', $userDetail)
-                              ->with('childdata',$childDetail)
-                              ->with('FeesData',$FeesDetail);
+        foreach($childDetail as $chil)
+        {
+            try {
+                $chil -> fullName = decrypt( $chil -> fullName);
+                $chil -> childsAdmissionNo = decrypt( $chil -> childsAdmissionNo);
+
+            } catch (DecryptException $e) {
+                //
+            }
+        }
+        foreach($FeesDetail as $fee)
+        {
+            try {
+                $fee -> fullName = decrypt( $fee -> fullName);
+                $fee -> childsAdmissionNo = decrypt( $fee -> childsAdmissionNo);
+                $fee -> time = $fee -> created_at->format('H:i');
+
+            } catch (DecryptException $e) {
+                //
+            }
+        }
+        if($u->usertype == 'Parent'){            
+            return view('profile')->with('userdata', $userDetail)
+                ->with('childdata',$childDetail)
+                ->with('FeesData',$FeesDetail);
+        }else{                  
+            return view('DonerProfile')->with('userdata', $userDetail);
+        }
     }
 
     //add parent render

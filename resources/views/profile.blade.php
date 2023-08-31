@@ -220,7 +220,7 @@
                                             <div class="timeline-item">
                                                 <span class="time"><i class="far fa-clock"></i> {{ $ud->time}}</span>
 
-                                                <h3 class="timeline-header"><a href="#">Child Name : </a>   {{ $ud->fullName}}</h3>
+                                                <h3 class="timeline-header">Child Name : {{ $ud->fullName}}</h3>
 
                                                 <div class="timeline-body">
                                                    Admission No : {{ $ud->childsAdmissionNo}}</br> 
