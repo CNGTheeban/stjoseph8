@@ -55,7 +55,9 @@
                             </div>
                             <!-- card-body -->
                             <div class="card-body">
+
                                 <form action="" method="POST" id="add_donation_form">
+                                @csrf  
                                     <div class="row">
                                         <div class="col-6">
                                             <div class="form-group">

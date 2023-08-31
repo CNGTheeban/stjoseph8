@@ -37,16 +37,19 @@ Route::group(['middleware' => 'auth.check'], function () {
             Route::get('/addchild/{id}', [ChildController::class, 'addChild'])->name('child.form');
             Route::get('/addfee/{id}', [ChildController::class, 'addFee'])->name('fees.form');
             Route::get('/enablechild/{id}', [ChildController::class, 'enableChild'])->name('index');
+            Route::get('/profile', [userDetailController::class, 'index']);
 
             Route::get('/deletechild/{id}', [ChildController::class, 'deleteChild'])->name('index');
-
+            Route::get('/addDonation', [PayController::class, 'addDonation']);
             Route::get('/editchild', [ChildController::class, 'editChild']);
             Route::get('/addFee', [PayController::class, 'addFee']);
         });
 
         Route::group(['middleware' => 'doner'], function () {
-            Route::get('/addDonation', [PayController::class, 'addDonation']);
-            Route::get('/profile', [userDetailController::class, 'index']);
+            Route::get('/DonerProfile', [userDetailController::class, 'index']);
+
+            // Route::get('/addDonation', [PayController::class, 'addDonation']);
+            // Route::get('/profile', [userDetailController::class, 'index']);
         });
 
         Route::group(['middleware' => 'admin'], function () {

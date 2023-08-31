@@ -28,7 +28,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/profile" class="nav-link">
+                    <a href="/DonerProfile" class="nav-link">
                         <i class="nav-icon fas fa-users"></i>
                         <p>Profile</p>
                     </a>
