@@ -209,7 +209,7 @@
                                         <!-- timeline time label -->
                                         <div class="time-label">
                                             <span class="bg-danger">
-                                            {{ $ud->created_at}}
+                                            {{ $ud->created_at->format('j F Y')}}
                                             </span>
                                         </div>
                                         <!-- /.timeline-label -->
