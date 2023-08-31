@@ -4,35 +4,25 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Crypt;
 
-
-class Child extends Model
+class Fees extends Model
 {
     /**
      * @var string $table
      */
-    protected $table = 'child';
+    protected $table = 'fees';
 
     /**
      * @var array $fillable
      */
     protected $fillable = [
         'id',
-        'userid',
-        'fullName',
-        'initialName',
-        'DOB',
-        'childsGrade',
-        'childsAdmissionNo',
+        'childid',
+        'term',
+        'amount',
         'status',
         'created_at',
         'updated_at',
         'deleted_at'
-    ];
-
-    protected $hidden = [
-        'fullName',
-        'childsAdmissionNo',
     ];
 }

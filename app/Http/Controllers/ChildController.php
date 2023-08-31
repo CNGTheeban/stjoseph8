@@ -1,12 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\parentModel;
+use Illuminate\Contracts\Encryption\DecryptException;
 
 use App\Models\User;
 use App\Models\Child;
-use Illuminate\Http\Request;
 use App\Http\Requests\ChildDataRequest;
-use Auth;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class ChildController extends Controller
 {
@@ -22,8 +24,37 @@ class ChildController extends Controller
     {
         $user = Auth::user();
         $child = $this->child->where('child.id',  $id)->get();
+        foreach($child as $chil)
+        {
+            try {
+                $chil -> fullName = decrypt( $chil -> fullName);
+                $chil -> childsAdmissionNo = decrypt( $chil -> childsAdmissionNo);
+
+            } catch (DecryptException $e) {
+                //
+            }
+        }
+        
+       
       // $child = $this->child->join('users', 'users.id', '=', 'child.userid')->where('child.id',  $id)->get();//
         return view('addchild')->with('childdata', $child);
+    }
+
+    public function addFee($id)
+    {
+        $user = Auth::user();
+        $child = $this->child->where('child.id',  $id)->get();
+        foreach($child as $chil)
+        {
+            try {
+                $chil -> fullName = decrypt( $chil -> fullName);
+                $chil -> childsAdmissionNo = decrypt( $chil -> childsAdmissionNo);
+
+            } catch (DecryptException $e) {
+                //
+            }
+        }
+        return view('addfee')->with('childdata', $child);
     }
     
     //edit children render
@@ -43,11 +74,11 @@ class ChildController extends Controller
         if($checkUserDetailID == "0"){
             $data = [
                 'userid' => $request->input('inputUserId'),
-                'fullName' => $request->input('inputFullName'),
+                'fullName' => encrypt($request->input('inputFullName')),
                 'initialName' => $request->input('inputInitialName'),
                 'DOB' => $request->input('inputDOB'),
                 'childsGrade' => $request->input('inputGrade'),
-                'childsAdmissionNo' => $request->input('inputAdmissionNO'),       
+                'childsAdmissionNo' => encrypt($request->input('inputAdmissionNO')),       
                 'status' => "1",
             ];
 
@@ -58,11 +89,11 @@ class ChildController extends Controller
         }else{
             $data = [
                 'userid' => $request->input('inputUserId'),
-                'fullName' => $request->input('inputFullName'),
+                'fullName' => encrypt($request->input('inputFullName')),
                 'initialName' => $request->input('inputInitialName'),
                 'DOB' => $request->input('inputDOB'),
                 'childsGrade' => $request->input('inputGrade'),
-                'childsAdmissionNo' => $request->input('inputAdmissionNO'),       
+                'childsAdmissionNo' =>encrypt($request->input('inputAdmissionNO')),       
                 'status' => "1",
             ];
 
@@ -78,7 +109,7 @@ class ChildController extends Controller
             //return redirect()->route('parent.form')->with('success', 'Data has been updated successfully.');
             
         }
-        return redirect()->route('index',$checkUserDetailID)->with('success', $message);
+        return redirect()->route('child.form',$checkUserDetailID)->with('success', $message);
     }
     public function enableChild($id)
     {
