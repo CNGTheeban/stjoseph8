@@ -46,8 +46,8 @@ Route::group(['middleware' => 'auth.check'], function () {
         });
 
         Route::group(['middleware' => 'doner'], function () {
-            Route::get('/addDonation', [PayController::class, 'addDonation']);
-            Route::get('/profile', [userDetailController::class, 'index']);
+            // Route::get('/addDonation', [PayController::class, 'addDonation']);
+            // Route::get('/profile', [userDetailController::class, 'index']);
             Route::get('/DonerProfile', [userDetailController::class, 'index']);
         });
 
