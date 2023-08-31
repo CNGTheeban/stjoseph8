@@ -7,7 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class isParent
+class isUser
 {
     /**
      * Handle an incoming request.
@@ -18,7 +18,7 @@ class isParent
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::user() && Auth::user()->hasRole('Parent')) {
+        if (Auth::user() && Auth::user()->hasRole('User')) {
             return $next($request);
         }
 

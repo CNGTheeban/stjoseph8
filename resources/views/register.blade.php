@@ -15,23 +15,31 @@
                 <form action="{{ url('custom-registration') }}" method="POST">
                     @csrf
                     <div class="input-group mb-3">
-                        <select class="form-control" name="inputUsertype" id="inputUsertype" placeholder="User type">
-                            <option>Parent</option>
-                            <option>Doner</option>
-                        </select>
-                        @if ($errors->has('inputUsertype'))
-                            <span class="text-danger">{{ $errors->first('inputUsertype') }}</span>
+                        <input type="text" class="form-control" name="inputFirstName" id="inputFirstName" placeholder="First Name">
+                        @if ($errors->has('inputFirstName'))
+                            <span class="text-danger">{{ $errors->first('inputFirstName') }}</span>
                         @endif
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" name="inputUsername" id="inputUsername" placeholder="username">
+                        <input type="text" class="form-control" name="inputLastName" id="inputLastName" placeholder="Last Name">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
                             </div>
                         </div>
-                        @if ($errors->has('inputUsername'))
-                            <span class="text-danger">{{ $errors->first('inputUsername') }}</span>
+                        @if ($errors->has('inputLastName'))
+                            <span class="text-danger">{{ $errors->first('inputLastName') }}</span>
+                        @endif
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" name="inputNIC" id="inputNIC" placeholder="NIC No">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                        @if ($errors->has('inputNIC'))
+                            <span class="text-danger">{{ $errors->first('inputNIC') }}</span>
                         @endif
                     </div>
                     <div class="input-group mb-3">
@@ -54,25 +62,6 @@
                         </div>
                         @if ($errors->has('inputPassword'))
                             <span class="text-danger">{{ $errors->first('inputPassword') }}</span>
-                        @endif
-                    </div>
-                    {{-- <div class="input-group mb-3">
-                        <input type="password" class="form-control" name="inputRePassword" id="inputRePassword" placeholder="Retype password">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-lock"></span>
-                            </div>
-                        </div>
-                    </div> --}}
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" name="inputReference" id="inputReference" placeholder="Student Name or Admission No">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-lock"></span>
-                            </div>
-                        </div>
-                        @if ($errors->has('inputReference'))
-                            <span class="text-danger">{{ $errors->first('inputReference') }}</span>
                         @endif
                     </div>
                     <div class="row">

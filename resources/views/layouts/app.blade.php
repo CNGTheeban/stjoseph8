@@ -17,6 +17,14 @@
         <link rel="stylesheet" href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
         <!-- Theme style -->
         <link rel="stylesheet" href="{{ asset('css/adminlte.css') }}">
+        <style>
+            .dark-mode input:-webkit-autofill, .dark-mode input:-webkit-autofill:hover, .dark-mode input:-webkit-autofill:focus, .dark-mode textarea:-webkit-autofill, .dark-mode textarea:-webkit-autofill:hover, .dark-mode textarea:-webkit-autofill:focus, .dark-mode select:-webkit-autofill, .dark-mode select:-webkit-autofill:hover, .dark-mode select:-webkit-autofill:focus{
+                -webkit-text-fill-color:none;
+            }
+            .dark-mode .form-control input:focus, .dark-mode .form-control select:focus{
+                background-color: transparent!important;
+            }
+        </style>
     </head>
     <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
         

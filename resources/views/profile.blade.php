@@ -24,11 +24,8 @@
                 @include('partials.admin_sidebar')
 
             @endif
-            @if(auth()->user()->usertype == 'Parent')
+            @if(auth()->user()->usertype == 'User')
                 @include('partials.parent_sidebar')
-            @endif
-            @if(auth()->user()->usertype == 'Doner')
-                @include('partials.doner_sidebar')
             @endif
         @endauth
 
@@ -151,7 +148,7 @@
                             <div class="card">
                                 <div class="card-header p-2">
                                     <h3 class="card-title p-2">Children</h3>
-                                    <a href="{{ url('addchild/'.'0') }}" type="button" class="btn btn-primary float-right"><i class="fas fa-user-plus"></i> New Children</a>
+                                    <a href="{{ url('addchild/'.'0') }}" type="button" class="btn btn-primary float-right"><i class="fas fa-user-plus"></i> Add Student</a>
                                 </div><!-- /.card-header -->
                                 <div class="card-body">
                                     <table id="example1" class="table table-bordered table-striped">
@@ -177,11 +174,10 @@
                                             <td><label class="ribbon bg-danger">Disabled</label></td>
                                             @endif
                                           
-                                            <td>
-                                           
-                                                    <button type="button" class="btn btn-warning" id="editChildren" name="editChildren"><a href="{{ url('addchild/'.$ud->id) }}"><i class="fas fa-edit"></i></a></button> | 
-                                                    <button type="button" class="btn btn-success" id="payfee" name="payfee"><a href="{{ url('addfee/'.$ud->id) }}"><i class="fas fa-donate"></i></a></button> | 
-                                                    @if( $ud->status !== 1)
+                                            <td>                                           
+                                                <button type="button" class="btn btn-warning" id="editChildren" name="editChildren"><a href="{{ url('addchild/'.$ud->id) }}"><i class="fas fa-edit"></i></a></button> | 
+                                                <button type="button" class="btn btn-success" id="payfee" name="payfee"><a href="{{ url('addfee/'.$ud->id) }}"><i class="fas fa-donate"></i></a></button> | 
+                                                @if( $ud->status !== 1)
                                                     <button class="btn btn-success" onclick="return confirm('{{ __('Are you sure you want to Enable?') }}')"><a href="{{ url('enablechild/'.$ud->id) }}"><i class="fas fa-toggle-on"></i></a></button>
                                                 @else
                                                     <button type="button" class="btn btn-danger" id="deleteChildren" name="deleteChildren" onclick="return confirm('{{ __('Are you sure you want to delete?') }}')"><a href="{{ url('deletechild/'.$ud->id) }}"><i class="fas fa-trash"></i></a></button>
@@ -196,153 +192,39 @@
                                     </table>
                                 </div><!-- /.card-body -->
                             </div>
-                            <!-- /.card -->
-                            <div class="card">
-                                <div class="card-header p-2">
-                                    <h3 class="card-title p-2">Children Fees</h3>
-                                    <!-- <a href="{{ url('addDonation') }}" type="button" class="btn btn-primary float-right"><i class="fas fa-donate"></i> Donate Here</a> -->
-                                </div><!-- /.card-header -->
-                                <div class="card-body">
-                                    <!-- The timeline -->
-                                    @foreach($FeesData as $ud)
-                                    <div class="timeline timeline-inverse">
-                                        <!-- timeline time label -->
-                                        <div class="time-label">
-                                            <span class="bg-danger">
-                                            {{ $ud->created_at->format('j F Y')}}
-                                            </span>
-                                        </div>
-                                        <!-- /.timeline-label -->
-                                        <!-- timeline item -->
-                                        <div>
-                                            <i class="fas fa-envelope bg-primary"></i>
-
-                                            <div class="timeline-item">
-                                                <span class="time"><i class="far fa-clock"></i> {{ $ud->time}}</span>
-
-                                                <h3 class="timeline-header"><a href="#">Child Name : </a>   {{ $ud->fullName}}</h3>
-
-                                                <div class="timeline-body">
-                                                   Admission No : {{ $ud->childsAdmissionNo}}</br> 
-                                                   Term : {{ $ud->term}} </br>
-                                                   Amount : {{ $ud->amount}}
-                                                </div>
-                                                <div class="timeline-footer">
-                                                    <a href="#" class="btn btn-primary btn-sm">Read more</a>
-                                                    <a href="#" class="btn btn-danger btn-sm">Delete</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                       
-                                      
-                                        <div>
-                                            <i class="far fa-clock bg-gray"></i>
-                                        </div>
-                                    </div>
-                                    @endforeach
-                                </div><!-- /.card-body -->
-                            </div>
-
 
                             <div class="card">
                                 <div class="card-header p-2">
-                                    <h3 class="card-title p-2">Donations</h3>
-                                    <a href="{{ url('addDonation') }}" type="button" class="btn btn-primary float-right"><i class="fas fa-donate"></i> Donate Here</a>
+                                    <h3 class="card-title p-2">Fees Summery</h3>
                                 </div><!-- /.card-header -->
                                 <div class="card-body">
                                     <!-- The timeline -->
                                     <div class="timeline timeline-inverse">
-                                        <!-- timeline time label -->
-                                        <div class="time-label">
-                                            <span class="bg-danger">
-                                            28 August 2023
-                                            </span>
-                                        </div>
-                                        <!-- /.timeline-label -->
-                                        <!-- timeline item -->
-                                        <div>
-                                            <i class="fas fa-money-bill-wave bg-success"></i>
-
-                                            <div class="timeline-item">
-                                                <span class="time"><i class="far fa-clock"></i> 12:05 P.M</span>
-
-                                                <h3 class="timeline-header">3rd Term Fee - 15,000 LKR</h3>
-
-                                                {{-- <div class="timeline-body"></div> --}}
-                                                {{-- <div class="timeline-footer">
-                                                    <a href="#" class="btn btn-primary btn-sm">Read more</a>
-                                                    <a href="#" class="btn btn-danger btn-sm">Delete</a>
-                                                </div> --}}
+                                        @foreach($FeesData as $ud)
+                                            <!-- timeline time label -->
+                                            <div class="time-label">
+                                                <span class="bg-primary">
+                                                    {{ $ud->created_at->format('j F Y')}}
+                                                </span>
                                             </div>
-                                        </div><!-- timeline time label -->
-                                        <div class="time-label">
-                                            <span class="bg-danger">
-                                            25 August 2023
-                                            </span>
-                                        </div>
-                                        <!-- /.timeline-label -->
-                                        <!-- timeline item -->
-                                        <div>
-                                            <i class="fas fa-donate bg-success"></i>
+                                            <!-- /.timeline-label -->
+                                            <!-- timeline item -->
+                                            <div>
+                                                <i class="fas fa-money-bill-wave bg-success"></i>
 
-                                            <div class="timeline-item">
-                                                <span class="time"><i class="far fa-clock"></i> 02:05 A.M</span>
+                                                <div class="timeline-item">
+                                                    <span class="time"><i class="far fa-clock"></i> {{ $ud->created_at->format('H:i a')}}</span>
 
-                                                <h3 class="timeline-header">Donation - 5,000 LKR</h3>
+                                                    <h3 class="timeline-header">Student Name: {{ $ud->fullName}}</h3>
 
-                                                {{-- <div class="timeline-body"></div> --}}
-                                                {{-- <div class="timeline-footer">
-                                                    <a href="#" class="btn btn-primary btn-sm">Read more</a>
-                                                    <a href="#" class="btn btn-danger btn-sm">Delete</a>
-                                                </div> --}}
-                                            </div>
-                                        </div>
-                                        <!-- END timeline item -->
-                                        <!-- timeline item -->
-                                        {{-- <div>
-                                            <i class="fas fa-comments bg-warning"></i>
-
-                                            <div class="timeline-item">
-                                                <span class="time"><i class="far fa-clock"></i> 27 mins ago</span>
-
-                                                <h3 class="timeline-header"><a href="#">Jay White</a> commented on your post</h3>
-
-                                                <div class="timeline-body">
-                                                    Take me to your leader!
-                                                    Switzerland is small and neutral!
-                                                    We are more like Germany, ambitious and misunderstood!
-                                                </div>
-                                                <div class="timeline-footer">
-                                                    <a href="#" class="btn btn-warning btn-flat btn-sm">View comment</a>
+                                                    <div class="timeline-body">                                                        
+                                                        Admission No : {{ $ud->childsAdmissionNo}}</br> 
+                                                        Term : {{ $ud->term}} </br>
+                                                        Amount : {{ $ud->amount}}
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div> --}}
-                                        <!-- END timeline item -->
-                                        <!-- timeline time label -->
-                                        {{-- <div class="time-label">
-                                            <span class="bg-success">
-                                            3 Jan. 2014
-                                            </span>
-                                        </div>
-                                        <!-- /.timeline-label -->
-                                        <!-- timeline item -->
-                                        <div>
-                                            <i class="fas fa-camera bg-purple"></i>
-
-                                            <div class="timeline-item">
-                                                <span class="time"><i class="far fa-clock"></i> 2 days ago</span>
-
-                                                <h3 class="timeline-header"><a href="#">Mina Lee</a> uploaded new photos</h3>
-
-                                                <div class="timeline-body">
-                                                    <img src="https://placehold.it/150x100" alt="...">
-                                                    <img src="https://placehold.it/150x100" alt="...">
-                                                    <img src="https://placehold.it/150x100" alt="...">
-                                                    <img src="https://placehold.it/150x100" alt="...">
-                                                </div>
-                                            </div>
-                                        </div> --}}
-                                        <!-- END timeline item -->
+                                        @endforeach
                                         <div>
                                             <i class="far fa-clock bg-gray"></i>
                                         </div>

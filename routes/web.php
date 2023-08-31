@@ -28,7 +28,7 @@ Route::group(['middleware' => 'auth.check'], function () {
         Route::get('/', function () {return view('index');});
         Route::get('/index', function () {return view('index');});
         
-        Route::group(['middleware' => 'parent'], function () {
+        Route::group(['middleware' => 'user'], function () {
             Route::get('/profile', [userDetailController::class, 'index']);
             Route::get('/addParent', [userDetailController::class, 'addParent'])->name('parent.form');
             Route::post('parent/create', [userDetailController::class, 'createParent'])->name('parent.create');

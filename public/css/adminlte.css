@@ -24064,7 +24064,6 @@ body.text-sm .input-group-text {
 .dark-mode .custom-file-label::after {
   border-color: #6c757d;
 }
-
 .dark-mode select {
   background-color: #343a40;
   color: #fff;
