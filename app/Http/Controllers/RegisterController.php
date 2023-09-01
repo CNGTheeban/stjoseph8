@@ -8,6 +8,9 @@ use Hash;
 use Session;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Contracts\Encryption\DecryptException;
+use Mail;
 
 class RegisterController extends Controller
 {
@@ -15,7 +18,7 @@ class RegisterController extends Controller
 
     public function __construct(User $user)
     {
-        $this->user = $user;
+        $user = Auth::user();
     }
 
     //view render
@@ -26,19 +29,32 @@ class RegisterController extends Controller
 
     public function customRegistration(RegistrationDataRequest $request)
     {  
-        //$data = $request->all();
+        // $data = array('name'=>"Virat Gandhi");
+   
+        // Mail::send(['text'=>'mail'], $data, function($message) {
+        //    $message->to('g.sobana24@gmail.com', 'Tutorials Point')->subject
+        //       ('Laravel Basic Testing Mail');
+        //    $message->from('stjones154@outlook.com','Virat Gandhi');
+        // });
+        // echo "Basic Email Sent. Check your inbox.";
+
+        $data = $request->all();
         $data = [
-            'usertype' => $request->input('inputUsertype'),
-            'username' => $request->input('inputUsername'),
+            'usertype' => 'User',
+            'firstname' => $request->input('inputFirstName'),
+            'lastname' => $request->input('inputLastName'),
+            'nic' => $request->input('inputNIC'),
             'email' => $request->input('inputEmail'),
             'password' => Hash::make($request->input('inputPassword')),
-            'reference' => $request->input('inputReference'),
+            'reference' =>'User',
             'status' => 0,
         ];
         //dd($data);
-        $check = $this->user::create($data);
-         
-        return redirect("login")->withSuccess('You have Registerd. Please wait till admin authenticate your account.');
+        $check = User::create($data);
+        event(new Registered($check));
+
+        auth()->login($check);
+        return redirect("login")->withSuccess('You have Registerd. please check your email for a verification link.');
     }
 
     // public function create(array $data)

@@ -10,6 +10,7 @@ use App\Http\Controllers\PayController;
 use App\Http\Controllers\userController;
 use App\Http\Controllers\FeesController;
 use App\Http\Controllers\userDetailController;
+use App\Http\Controllers\VerificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,10 +24,20 @@ use App\Http\Controllers\userDetailController;
 */
 Route::group(['middleware' => 'auth.check'], function () {
     //Your protected routes here
-    Route::group(['middleware' => 'isActive'], function () {
-    
+     Route::get('/email/verify', [VerificationController::class, 'show'])->name('verification.notice');
+    Route::get('/email/verify/{id}/{hash}', [VerificationController::class, 'verify'])->name('verification.verify')->middleware(['signed']);
+    Route::post('/email/resend', [VerificationController::class, 'resend'])->name('verification.resend');
+    Route::group(['middleware' => ['verified']], function() {
         Route::get('/', function () {return view('index');});
         Route::get('/index', function () {return view('index');});
+       
+    });
+    Route::group(['middleware' => 'isActive'], function () {
+      
+            // Route::get('/', function () {return view('index');});
+            // Route::get('/index', function () {return view('index');});
+        
+       
         
         Route::group(['middleware' => 'user'], function () {
             Route::get('/profile', [userDetailController::class, 'index']);
