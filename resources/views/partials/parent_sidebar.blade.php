@@ -33,18 +33,18 @@
                         <p>Profile</p>
                     </a>
                 </li>
-                {{-- <li class="nav-item">
-                    <a href="/parents" class="nav-link">
-                        <i class="nav-icon fas fa-users"></i>
-                        <p>Childrens</p>
-                    </a>
-                </li> --}}
                 <li class="nav-item">
+                    <a href="/feePayments" class="nav-link">
+                        <i class="nav-icon fas fa-money-bill-alt"></i>
+                        <p>Fee Payment</p>
+                    </a>
+                </li>
+                {{-- <li class="nav-item">
                     <a href="/reports" class="nav-link">
                         <i class="nav-icon fas fa-paste"></i>
                         <p>Reports</p>
                     </a>
-                </li>
+                </li> --}}
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

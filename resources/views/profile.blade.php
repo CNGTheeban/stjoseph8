@@ -147,7 +147,7 @@
                         <div class="col-md-9">
                             <div class="card">
                                 <div class="card-header p-2">
-                                    <h3 class="card-title p-2">Children</h3>
+                                    <h3 class="card-title p-2">Student</h3>
                                     <a href="{{ url('addchild/'.'0') }}" type="button" class="btn btn-primary float-right"><i class="fas fa-user-plus"></i> Add Student</a>
                                 </div><!-- /.card-header -->
                                 <div class="card-body">
@@ -155,10 +155,11 @@
                                         <thead>
                                             <tr style="text-align:center">
                                                 <th>Admission No</th>
-                                                <th>Name</th>
+                                                <th>First Name</th>
+                                                <th>Last Name</th>
                                                 <th>Grade</th>
                                                 <th>Status</th>
-                                                <th>Actions</th>
+                                                {{-- <th>Actions</th> --}}
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -174,7 +175,7 @@
                                             <td><label class="ribbon bg-danger">Disabled</label></td>
                                             @endif
                                           
-                                            <td>                                           
+                                            {{-- <td>                                           
                                                 <button type="button" class="btn btn-warning" id="editChildren" name="editChildren"><a href="{{ url('addchild/'.$ud->id) }}"><i class="fas fa-edit"></i></a></button> | 
                                                 <button type="button" class="btn btn-success" id="payfee" name="payfee"><a href="{{ url('addfee/'.$ud->id) }}"><i class="fas fa-donate"></i></a></button> | 
                                                 @if( $ud->status !== 1)
@@ -182,7 +183,7 @@
                                                 @else
                                                     <button type="button" class="btn btn-danger" id="deleteChildren" name="deleteChildren" onclick="return confirm('{{ __('Are you sure you want to delete?') }}')"><a href="{{ url('deletechild/'.$ud->id) }}"><i class="fas fa-trash"></i></a></button>
                                                 @endif
-                                            </td> 
+                                            </td>  --}}
                                         </tr>
                                               
                                         @endforeach
@@ -192,46 +193,6 @@
                                     </table>
                                 </div><!-- /.card-body -->
                             </div>
-
-                            <div class="card">
-                                <div class="card-header p-2">
-                                    <h3 class="card-title p-2">Fees Summery</h3>
-                                </div><!-- /.card-header -->
-                                <div class="card-body">
-                                    <!-- The timeline -->
-                                    <div class="timeline timeline-inverse">
-                                        @foreach($FeesData as $ud)
-                                            <!-- timeline time label -->
-                                            <div class="time-label">
-                                                <span class="bg-primary">
-                                                    {{ $ud->created_at->format('j F Y')}}
-                                                </span>
-                                            </div>
-                                            <!-- /.timeline-label -->
-                                            <!-- timeline item -->
-                                            <div>
-                                                <i class="fas fa-money-bill-wave bg-success"></i>
-
-                                                <div class="timeline-item">
-                                                    <span class="time"><i class="far fa-clock"></i> {{ $ud->created_at->format('H:i a')}}</span>
-
-                                                    <h3 class="timeline-header">Student Name: {{ $ud->fullName}}</h3>
-
-                                                    <div class="timeline-body">                                                        
-                                                        Admission No : {{ $ud->childsAdmissionNo}}</br> 
-                                                        Term : {{ $ud->term}} </br>
-                                                        Amount : {{ $ud->amount}}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        @endforeach
-                                        <div>
-                                            <i class="far fa-clock bg-gray"></i>
-                                        </div>
-                                    </div>
-                                </div><!-- /.card-body -->
-                            </div>
-                            <!-- /.card -->
                         </div>
                         <!-- /.col -->
                     </div>
