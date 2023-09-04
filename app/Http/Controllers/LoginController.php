@@ -23,6 +23,7 @@ class LoginController extends Controller
         if (Auth::attempt(['email' => $request['inputEmail'], 'password' => $request['inputPassword']])) {
             //return redirect()->intended('index')->withSuccess('Logged in');
             //auth()->login($user);
+            return redirect("/index")->withSuccess('You have LoggedIn.');
             return redirect("/")->withSuccess('You have LoggedIn.');
         }
   
@@ -35,6 +36,6 @@ class LoginController extends Controller
 
         // Perform any additional actions if needed
 
-        return redirect('/'); // Redirect to the desired page after logout
+        return redirect('/login'); // Redirect to the desired page after logout
     }
 }

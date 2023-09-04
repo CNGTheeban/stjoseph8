@@ -70,13 +70,15 @@
                         @endif
                     </div>
                     <div class="row">
-                        <div class="col-12">
+                        <div class="col-6"><a href="/login" class="btn btn-primary btn-block">Login</a></div>
+                        <div class="col-6">
                             <button type="submit" name="inputSubmit" id="inputSubmit" class="btn btn-secondary btn-block">Register</button>
                         </div>
                     </div>
                 </form>
-                <a href="/login" class="text-center">I already have a membership</a>
+                <br>
+                <a href="/addDonation" class="btn btn-secondary btn-block">Donate Here</a>
             </div>
         </div>
-    </div> 
+    </div>
 @endsection

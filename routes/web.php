@@ -6,10 +6,13 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ParentController;
 use App\Http\Controllers\ChildController;
+use App\Http\Controllers\studentController;
 use App\Http\Controllers\PayController;
+use App\Http\Controllers\donationController;
 use App\Http\Controllers\userController;
 use App\Http\Controllers\FeesController;
 use App\Http\Controllers\userDetailController;
+use App\Http\Controllers\dashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,19 +28,20 @@ Route::group(['middleware' => 'auth.check'], function () {
     //Your protected routes here
     Route::group(['middleware' => 'isActive'], function () {
     
-        Route::get('/', function () {return view('index');});
-        Route::get('/index', function () {return view('index');});
+        // Route::get('/', function () {return view('index');});
+        // Route::get('/index', function () {return view('index');});
+        Route::get('/index', [dashboardController::class, 'adminDashboard']);
+        Route::get('/', [dashboardController::class, 'adminDashboard']);
         
         Route::group(['middleware' => 'user'], function () {
-            Route::get('/profile', [userDetailController::class, 'index']);
             Route::get('/addParent', [userDetailController::class, 'addParent'])->name('parent.form');
             Route::post('parent/create', [userDetailController::class, 'createParent'])->name('parent.create');
-            Route::post('/insertchild', [ChildController::class, 'insertChild'])->name('child.insert');
             Route::post('/insertfee', [FeesController::class, 'insertFee'])->name('fee.insert');
-            Route::get('/addchild/{id}', [ChildController::class, 'addChild'])->name('child.form');
+            Route::get('/addStudent', [studentController::class, 'index'])->name('student.form');
+            Route::post('/insertStudent', [studentController::class, 'insertStudent'])->name('student.insert');
             Route::get('/addfee/{id}', [ChildController::class, 'addFee'])->name('fees.form');
             Route::get('/enablechild/{id}', [ChildController::class, 'enableChild'])->name('index');
-            Route::get('/profile', [userDetailController::class, 'index']);
+            Route::get('/profile', [userDetailController::class, 'index'])->name('profile.load');
 
             Route::get('/deletechild/{id}', [ChildController::class, 'deleteChild'])->name('index');
             Route::get('/addDonation', [PayController::class, 'addDonation']);
@@ -69,6 +73,9 @@ Route::post('custom-login', [LoginController::class, 'customLogin'])->name('logi
 Route::get('register', [RegisterController::class, 'index'])->name('register-user');
 Route::post('custom-registration', [RegisterController::class, 'customRegistration'])->name('register.custom'); 
 Route::get('logout', [LoginController:: class, 'logout']);
+
+Route::get('/addDonation', [donationController::class, 'index'])->name('donation');
+Route::post('/pay-donation', [donationController::class, 'donate'])->name('pay.donation');
 
 // Route::get('/addParent', [ParentController::class, 'addParent'])->name('parent.index');
 // Route::get('/register', [RegisterController::class, 'index']);
