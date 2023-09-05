@@ -7,7 +7,12 @@ use App\Http\Requests\RegistrationDataRequest;
 use Hash;
 use Session;
 use App\Models\User;
+use App\Models\UserVerify;
+
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+use Mail; 
+
 
 class RegisterController extends Controller
 {
@@ -26,17 +31,31 @@ class RegisterController extends Controller
 
     public function customRegistration(RegistrationDataRequest $request)
     {  
-        //$data = $request->all();
+        $data = $request->all();
         $data = [
-            'usertype' => $request->input('inputUsertype'),
-            'username' => $request->input('inputUsername'),
+            'usertype' => 'User',
+            'firstname' => $request->input('inputFirstName'),
+            'lastname' => $request->input('inputLastName'),
+            'nic' => $request->input('inputNIC'),
             'email' => $request->input('inputEmail'),
             'password' => Hash::make($request->input('inputPassword')),
-            'reference' => $request->input('inputReference'),
-            'status' => 0,
+            'reference' =>'User',
+            'is_email_verified' => 0,
+
+            'status' => 1,
         ];
-        //dd($data);
         $check = $this->user::create($data);
+
+        $token = Str::random(64);
+        UserVerify::create([
+            'user_id' =>  $check->id, 
+            'token' => $token
+          ]);
+        Mail::send('email.emailVerificationEmail', ['token' => $token], function($message) use($request){
+            $message->to($request->email);
+            $message->subject('Email Verification Mail');
+        });
+        //dd($data);
          
         return redirect("login")->withSuccess('You have Registerd. Please wait till admin authenticate your account.');
     }
@@ -59,4 +78,26 @@ class RegisterController extends Controller
     //     ];
     //     return User::create($insertData);
     // }
+
+    public function verifyAccount($token)
+    {
+        $verifyUser = UserVerify::where('token', $token)->first();
+  
+        $message = 'Sorry your email cannot be identified.';
+  
+        if(!is_null($verifyUser) ){
+            $user = $verifyUser->user;
+              
+            if(!$user->is_email_verified) {
+                $verifyUser->user->is_email_verified = 1;
+                $verifyUser->user->save();
+                $message = "Your e-mail is verified. You can now login.";
+            } else {
+                $message = "Your e-mail is already verified. You can now login.";
+            }
+        }
+  
+      return redirect()->route('login')->with('message', $message);
+    }
+
 }
