@@ -27,7 +27,7 @@ use App\Http\Controllers\dashboardController;
 */
 Route::group(['middleware' => 'auth.check'], function () {
     //Your protected routes here
-     Route::get('/email/verify', [VerificationController::class, 'show'])->name('verification.notice');
+    Route::get('/email/verify', [VerificationController::class, 'show'])->name('verification.notice');
     Route::get('/email/verify/{id}/{hash}', [VerificationController::class, 'verify'])->name('verification.verify')->middleware(['signed']);
     Route::post('/email/resend', [VerificationController::class, 'resend'])->name('verification.resend');
     Route::group(['middleware' => ['verified']], function() {
@@ -35,11 +35,6 @@ Route::group(['middleware' => 'auth.check'], function () {
         Route::get('/index', function () {return view('index');});
        
     });
-    Route::group(['middleware' => 'isActive'], function () {
-      
-            // Route::get('/', function () {return view('index');});
-            // Route::get('/index', function () {return view('index');});
-      
     Route::group(['middleware' => 'isActive'], function () {
     
         // Route::get('/', function () {return view('index');});
