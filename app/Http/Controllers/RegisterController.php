@@ -46,8 +46,8 @@ class RegisterController extends Controller
             'nic' => $request->input('inputNIC'),
             'email' => $request->input('inputEmail'),
             'password' => Hash::make($request->input('inputPassword')),
-            'reference' =>'User',
-            'status' => 0,
+            //'reference' =>'User',
+            'status' => 1,
         ];
         //dd($data);
         $check = User::create($data);
