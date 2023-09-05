@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserDetailDataRequest extends FormRequest
+class DonationDataRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,13 +24,12 @@ class UserDetailDataRequest extends FormRequest
     public function rules()
     {
         return [
-            'inputAddressLine1' => 'required',
-            'inputAddressLine1' => '',
-            'inputCity' => 'required',
-            'inputProvince' => 'required',
-            'inputCountry' => 'required',
+            'inputFirstName' => 'required',
+            'inputLastName' => 'required',
+            'inputEmail' => 'required',
             'inputContactNo' => 'required',
-            'inputMobileNo' => '',
+            'inputDonRef' => 'required',
+            'inputDonAmount' => 'required',
         ];
     }
 }

@@ -20,24 +20,24 @@ class ChildController extends Controller
     }
 
     //add children render
-    public function addChild($id)
+    public function addStudent()
     {
         $user = Auth::user();
-        $child = $this->child->where('child.id',  $id)->get();
-        foreach($child as $chil)
-        {
-            try {
-                $chil -> fullName = decrypt( $chil -> fullName);
-                $chil -> childsAdmissionNo = decrypt( $chil -> childsAdmissionNo);
+        // $child = $this->child->where('child.id',  $id)->get();
+        // foreach($child as $chil)
+        // {
+        //     try {
+        //         $chil -> fullName = decrypt( $chil -> fullName);
+        //         $chil -> childsAdmissionNo = decrypt( $chil -> childsAdmissionNo);
 
-            } catch (DecryptException $e) {
-                //
-            }
-        }
-        
+        //     } catch (DecryptException $e) {
+        //         //
+        //     }
+        // }        
        
-      // $child = $this->child->join('users', 'users.id', '=', 'child.userid')->where('child.id',  $id)->get();//
-        return view('addchild')->with('childdata', $child);
+        // // $child = $this->child->join('users', 'users.id', '=', 'child.userid')->where('child.id',  $id)->get();//
+        // return view('addchild')->with('childdata', $child);
+        return view('addStudent');
     }
 
     public function addFee($id)
@@ -61,9 +61,7 @@ class ChildController extends Controller
     public function editChild()
     {
         return view('editchild');
-    }
-
-  
+    }  
 
     public function insertChild(ChildDataRequest $request)
     {

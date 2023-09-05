@@ -47,6 +47,6 @@ class ParentController extends Controller
         ];
 
         parentModel::create($data);
-        return redirect()->url('addParent')->with('success', 'Data has been inserted successfully.');
+        return redirect()->url('/profile')->with('success', 'Data has been inserted successfully.');
     }
 }

@@ -47,12 +47,18 @@
                                 </label>
                             </div>
                         </div>
-                        <div class="col-4">
+                    </div>                    
+                    <div class="row">
+                        <div class="col-6">
+                            <a href="/register" class="btn btn-primary btn-block">Register</a>
+                        </div>
+                        <div class="col-6">
                             <button type="submit" class="btn btn-secondary btn-block">Sign In</button>
                         </div>
                     </div>
                 </form>
-                <a href="/register" class="text-center">I don't have a membership account</a>
+                <br>
+                <a href="/addDonation" class="btn btn-secondary btn-block">Donate Here</a>
             </div>
         </div>
     </div>

@@ -12,12 +12,6 @@ class PayController extends Controller
         return view('feePayments');
     }
 
-    //add donation render
-    public function addDonation()
-    {
-        return view('addDonation');
-    }
-
     //add fee render
     public function addFee()
     {
