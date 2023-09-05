@@ -12,6 +12,7 @@ use App\Models\UserVerify;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Mail; 
+use Illuminate\Contracts\Encryption\DecryptException;
 
 
 class RegisterController extends Controller
@@ -33,13 +34,13 @@ class RegisterController extends Controller
     {  
         $data = $request->all();
         $data = [
-            'usertype' => 'User',
-            'firstname' => $request->input('inputFirstName'),
-            'lastname' => $request->input('inputLastName'),
-            'nic' => $request->input('inputNIC'),
-            'email' => $request->input('inputEmail'),
+            'usertype' => encrypt('User'),
+            'firstname' => encrypt($request->input('inputFirstName')),
+            'lastname' => encrypt($request->input('inputLastName')),
+            'nic' => encrypt($request->input('inputNIC')),
+            'email' => encrypt($request->input('inputEmail')),
             'password' => Hash::make($request->input('inputPassword')),
-            'reference' =>'User',
+            'reference' =>encrypt('User'),
             'is_email_verified' => 0,
 
             'status' => 1,
@@ -52,7 +53,7 @@ class RegisterController extends Controller
             'token' => $token
           ]);
         Mail::send('email.emailVerificationEmail', ['token' => $token], function($message) use($request){
-            $message->to($request->email);
+            $message->to($request->input('inputEmail'));
             $message->subject('Email Verification Mail');
         });
         //dd($data);
