@@ -1,6 +1,6 @@
 @extends("layouts.app")
 
-@section("title", "ST. Joseph's College | Add Fee")
+@section("title", "ST. Joseph's College | Fee Payments")
 
 @section("content")
 
@@ -18,11 +18,8 @@
             @if(auth()->user()->usertype == 'Admin')
                 @include('partials.admin_sidebar')
             @endif
-            @if(auth()->user()->usertype == 'Parent')
+            @if(auth()->user()->usertype == 'User')
                 @include('partials.parent_sidebar')
-            @endif
-            @if(auth()->user()->usertype == 'Doner')
-                @include('partials.doner_sidebar')
             @endif
         @endauth
 
@@ -45,12 +42,12 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Pay Fees</h1>
+                            <h1>Fee Payment</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="/index">Home</a></li>
-                                <li class="breadcrumb-item active">Pay Fees</li>
+                                <li class="breadcrumb-item active">Fee Payment</li>
                             </ol>
                         </div>
                     </div>
@@ -63,27 +60,23 @@
                     <div class="row">
                         <div class="card card-default">
                             <div class="card-header">
-                                <h3 class="card-title">Pay Children's Fee</h3>
+                                <h3 class="card-title">Pay Student's Fee</h3>
                             </div>
                             <!-- card-body -->
                             <div class="card-body">
                                 <form action="{{ route('fee.insert') }}" method="POST" id="add_fee_form" enctype="multipart/form-data">
-                                @csrf   
-                                @foreach($childdata as $cd)
-                                    <div class="row">
-                                    
-                                                <input type="hidden" class="form-control" name="inputChildrenId" id="inputChildrenId" value="{{$cd->id}}" readonly/>
-                                           
-                                        <div class="col-6">
-                                            <div class="form-group">
-                                                <label for="inputChildrenName">Child Name</label>
-                                                <input type="text" class="form-control" name="inputChildrenName" id="inputChildrenName" value="{{$cd->fullName}}" readonly/>
-                                            </div>
-                                        </div>
+                                    @csrf   
+                                    <div class="row"> 
                                         <div class="col-6">
                                             <div class="form-group">
                                                 <label for="inputAdmissionNo">Admision No</label>
-                                                <input type="text" class="form-control" name="inputAdmissionNo" id="inputAdmissionNo"  value="{{$cd->childsAdmissionNo}}" readonly/>
+                                                <input type="text" class="form-control" name="inputAdmissionNo" id="inputAdmissionNo" readonly/>
+                                            </div>
+                                        </div>                                   
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label for="inputChildrenName">Child Name</label>
+                                                <input type="text" class="form-control" name="inputChildrenName" id="inputChildrenName" readonly/>
                                             </div>
                                         </div>
                                     </div>
@@ -91,7 +84,7 @@
                                         <div class="col-4">
                                             <div class="form-group">
                                                 <label for="inputClass">Class</label>
-                                                <input type="text" class="form-control" name="inputClass" id="inputClass" value="{{$cd->childsGrade}}"/>
+                                                <input type="text" class="form-control" name="inputClass" id="inputClass" />
                                             </div>
                                         </div>
                                         <div class="col-4">
@@ -118,8 +111,6 @@
                                             <button type="submit" class="btn btn-primary float-right"><i class="fas fa-donate"></i> Pay</button>
                                         </div>
                                     </div>
-                                    @endforeach
-
                                 </form>
                                 @if (count($errors) > 0)
                                     <div class="alert alert-danger">
@@ -152,5 +143,4 @@
         @include('partials.footer')
     </div>
     <!-- ./wrapper -->
-
 @endsection

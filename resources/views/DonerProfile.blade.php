@@ -24,11 +24,8 @@
                 @include('partials.admin_sidebar')
 
             @endif
-            @if(auth()->user()->usertype == 'Parent')
+            @if(auth()->user()->usertype == 'User')
                 @include('partials.parent_sidebar')
-            @endif
-            @if(auth()->user()->usertype == 'Doner')
-                @include('partials.doner_sidebar')
             @endif
         @endauth
 

@@ -7,7 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class isDoner
+class isUser
 {
     /**
      * Handle an incoming request.
@@ -18,10 +18,10 @@ class isDoner
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::user() &&  Auth::user()->hasRole('Doner')) {
+        if (Auth::user() && Auth::user()->hasRole('User')) {
             return $next($request);
         }
 
-        return redirect('/')->with('error','You have not Doner access');
+        return redirect('/')->with('error','You have not Parent access');
     }
 }

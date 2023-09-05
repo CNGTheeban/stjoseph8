@@ -4865,6 +4865,7 @@ input[type="button"].btn-block {
 
 .card-title {
   margin-bottom: 0.75rem;
+  line-height:2.5!important;
 }
 
 .card-subtitle {
@@ -24064,7 +24065,6 @@ body.text-sm .input-group-text {
 .dark-mode .custom-file-label::after {
   border-color: #6c757d;
 }
-
 .dark-mode select {
   background-color: #343a40;
   color: #fff;

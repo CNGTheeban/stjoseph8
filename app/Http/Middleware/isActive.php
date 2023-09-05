@@ -22,6 +22,13 @@ class isActive
             //Auth::logout();
             return redirect('/login')->with('error','Your account is not active. Please contact support.');
         }
+        else if (!Auth::user()->email_verified_at) {
+            auth()->logout();
+            return redirect('/login')
+                    ->with('error', 'You need to confirm your account. We have sent you an activation code, please check your email.');
+          }
+   
+        return $next($request);
         return $next($request);
     }
 }

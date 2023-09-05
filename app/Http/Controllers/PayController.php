@@ -6,6 +6,12 @@ use Illuminate\Http\Request;
 
 class PayController extends Controller
 {
+    //add fee render
+    public function index()
+    {
+        return view('feePayments');
+    }
+
     //add donation render
     public function addDonation()
     {

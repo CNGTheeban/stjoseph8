@@ -24,11 +24,11 @@ class RegistrationDataRequest extends FormRequest
     public function rules()
     {
         return [
-            'inputUsertype' => 'required|string',
-            'inputUsername' => 'required',
+            'inputFirstName' => 'required',
+            'inputLastName' => 'required',
+            'inputNIC' => 'required|max:12|unique:users,nic',
             'inputEmail' => 'required|email|unique:users,email',
             'inputPassword' => 'required|min:6',
-            'inputReference' => 'required',
         ];
     }
 }

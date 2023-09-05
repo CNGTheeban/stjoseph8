@@ -17,10 +17,6 @@ class UserDetails extends Migration
         Schema::create('user_details', function (Blueprint $table) {
             $table->id();
             $table->integer('userid');
-            $table->string('username');
-            $table->string('firstname');
-            $table->string('lastname');
-            $table->char('nic', 12);
             $table->string('addressline1');
             $table->string('addressline2');
             $table->string('city');

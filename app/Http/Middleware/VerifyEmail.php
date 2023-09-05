@@ -3,11 +3,10 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-
-class isParent
+class VerifyEmail
 {
     /**
      * Handle an incoming request.
@@ -18,10 +17,12 @@ class isParent
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::user() && Auth::user()->hasRole('Parent')) {
-            return $next($request);
-        }
-
-        return redirect('/')->with('error','You have not Parent access');
+        if (!Auth::user()->email_verified_at) {
+            auth()->logout();
+            return redirect()->route('login')
+                    ->with('message', 'You need to confirm your account. We have sent you an activation code, please check your email.');
+          }
+   
+        return $next($request);
     }
 }
