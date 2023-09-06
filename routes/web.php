@@ -13,6 +13,7 @@ use App\Http\Controllers\userController;
 use App\Http\Controllers\FeesController;
 use App\Http\Controllers\userDetailController;
 use App\Http\Controllers\dashboardController;
+use App\Http\Controllers\VerificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,44 +27,56 @@ use App\Http\Controllers\dashboardController;
 */
 Route::group(['middleware' => 'auth.check'], function () {
     //Your protected routes here
+
     Route::group(['middleware' => 'isActive'], function () {
     
-        // Route::get('/', function () {return view('index');});
-        // Route::get('/index', function () {return view('index');});
-        Route::get('/index', [dashboardController::class, 'adminDashboard']);
-        Route::get('/', [dashboardController::class, 'adminDashboard']);
+        Route::get('/', function () {return view('index');});
+        Route::get('/index', function () {return view('index');});
+
+        Route::get('/email/verify', [VerificationController::class, 'show'])->name('verification.notice');
+        Route::get('/email/verify/{id}/{hash}', [VerificationController::class, 'verify'])->name('verification.verify')->middleware(['signed']);
+        Route::post('/email/resend', [VerificationController::class, 'resend'])->name('verification.resend');
         
-        Route::group(['middleware' => 'user'], function () {
-            Route::get('/addParent', [userDetailController::class, 'addParent'])->name('parent.form');
-            Route::post('parent/create', [userDetailController::class, 'createParent'])->name('parent.create');
-            Route::post('/insertfee', [FeesController::class, 'insertFee'])->name('fee.insert');
-            Route::get('/addStudent', [studentController::class, 'index'])->name('student.form');
-            Route::post('/insertStudent', [studentController::class, 'insertStudent'])->name('student.insert');
-            Route::get('/addfee/{id}', [ChildController::class, 'addFee'])->name('fees.form');
-            Route::get('/enablechild/{id}', [ChildController::class, 'enableChild'])->name('index');
-            Route::get('/profile', [userDetailController::class, 'index'])->name('profile.load');
-
-            Route::get('/deletechild/{id}', [ChildController::class, 'deleteChild'])->name('index');
-            Route::get('/addDonation', [PayController::class, 'addDonation']);
-            Route::get('/editchild', [ChildController::class, 'editChild']);
-            Route::get('/feePayments', [PayController::class, 'index']);
-            Route::get('/addFee', [PayController::class, 'addFee']);
+        Route::group(['middleware' => ['verified']], function() {
+            Route::get('/', function () {return view('index');});
+            Route::get('/index', function () {return view('index');});
+       
         });
+        Route::group(['middleware' => 'isActive'], function () {
+      
+            // Route::get('/', function () {return view('index');});
+            // Route::get('/index', function () {return view('index');});
+            Route::get('/index', [dashboardController::class, 'adminDashboard']);
+            Route::get('/', [dashboardController::class, 'adminDashboard']);
 
-        // Route::group(['middleware' => 'doner'], function () {
-        //     // Route::get('/addDonation', [PayController::class, 'addDonation']);
-        //     // Route::get('/profile', [userDetailController::class, 'index']);
-        //     Route::get('/DonerProfile', [userDetailController::class, 'index']);
-        // });
+        
+            Route::group(['middleware' => 'user'], function () {
+                Route::get('/profile', [userDetailController::class, 'index']);
+                Route::get('/addParent', [userDetailController::class, 'addParent'])->name('parent.form');
+                Route::post('parent/create', [userDetailController::class, 'createParent'])->name('parent.create');
+                Route::post('/insertchild', [ChildController::class, 'insertChild'])->name('child.insert');
+                Route::post('/insertfee', [FeesController::class, 'insertFee'])->name('fee.insert');
+                Route::get('/addchild/{id}', [ChildController::class, 'addChild'])->name('child.form');
+                Route::get('/addfee/{id}', [ChildController::class, 'addFee'])->name('fees.form');
+                Route::get('/enablechild/{id}', [ChildController::class, 'enableChild'])->name('index');
+                Route::get('/profile', [userDetailController::class, 'index']);
 
-        Route::group(['middleware' => 'admin'], function () {
-            Route::get('/parents', [ParentController::class, 'index']);
-            Route::get('/authUsers', [userController::class, 'index']);
-            Route::get('/unauthUsers', [userController::class, 'unauthorizedUsers']);
-            Route::get('/enableUnauthUsers/{id}', [userController::class, 'activateUnauthorizedUsers']);
-            Route::get('/deleteUnauthUsers/{id}', [userController::class, 'deleteUnauthorizedUsers']);
-            Route::get('/authUsers', [userController::class, 'authorizedUsers']);
-            Route::get('/disableAuthUsers/{id}', [userController::class, 'deactivateAuthorizedUsers']);
+                Route::get('/deletechild/{id}', [ChildController::class, 'deleteChild'])->name('index');
+                Route::get('/addDonation', [PayController::class, 'addDonation']);
+                Route::get('/editchild', [ChildController::class, 'editChild']);
+                Route::get('/feePayments', [PayController::class, 'index']);
+                Route::get('/addFee', [PayController::class, 'addFee']);
+            });
+
+            Route::group(['middleware' => 'admin'], function () {
+                Route::get('/parents', [ParentController::class, 'index']);
+                Route::get('/authUsers', [userController::class, 'index']);
+                Route::get('/unauthUsers', [userController::class, 'unauthorizedUsers']);
+                Route::get('/enableUnauthUsers/{id}', [userController::class, 'activateUnauthorizedUsers']);
+                Route::get('/deleteUnauthUsers/{id}', [userController::class, 'deleteUnauthorizedUsers']);
+                Route::get('/authUsers', [userController::class, 'authorizedUsers']);
+                Route::get('/disableAuthUsers/{id}', [userController::class, 'deactivateAuthorizedUsers']);
+            });
         });
     });
 });

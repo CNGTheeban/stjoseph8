@@ -10,10 +10,6 @@ use App\Models\User;
 use App\Models\UserVerify;
 
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
-use Mail; 
-use Illuminate\Contracts\Encryption\DecryptException;
-
 
 class RegisterController extends Controller
 {
@@ -21,7 +17,7 @@ class RegisterController extends Controller
 
     public function __construct(User $user)
     {
-        $this->user = $user;
+        $user = Auth::user();
     }
 
     //view render
@@ -32,31 +28,19 @@ class RegisterController extends Controller
 
     public function customRegistration(RegistrationDataRequest $request)
     {  
-        $data = $request->all();
+        //$data = $request->all();
         $data = [
-            'usertype' => encrypt('User'),
-            'firstname' => encrypt($request->input('inputFirstName')),
-            'lastname' => encrypt($request->input('inputLastName')),
-            'nic' => encrypt($request->input('inputNIC')),
-            'email' => encrypt($request->input('inputEmail')),
+            'usertype' => 'User',
+            'firstname' => $request->input('inputFirstName'),
+            'lastname' => $request->input('inputLastName'),
+            'nic' => $request->input('inputNIC'),
+            'email' => $request->input('inputEmail'),
             'password' => Hash::make($request->input('inputPassword')),
-            'reference' =>encrypt('User'),
-            'is_email_verified' => 0,
-
+            //'reference' =>'User',
             'status' => 1,
         ];
-        $check = $this->user::create($data);
-
-        $token = Str::random(64);
-        UserVerify::create([
-            'user_id' =>  $check->id, 
-            'token' => $token
-          ]);
-        Mail::send('email.emailVerificationEmail', ['token' => $token], function($message) use($request){
-            $message->to($request->input('inputEmail'));
-            $message->subject('Email Verification Mail');
-        });
         //dd($data);
+        $check = $this->user::create($data);
          
         return redirect("login")->withSuccess('You have Registerd. Please wait till admin authenticate your account.');
     }

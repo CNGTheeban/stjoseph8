@@ -24,7 +24,9 @@ class RegistrationDataRequest extends FormRequest
     public function rules()
     {
         return [
-            // 'inputUsertype' => 'required|string',
+            'inputFirstName' => 'required',
+            'inputLastName' => 'required',
+            'inputNIC' => 'required|max:12|unique:users,nic',
             'inputFirstName' => 'required',
             'inputLastName' => 'required',
             'inputEmail' => 'required|email|unique:users,email',

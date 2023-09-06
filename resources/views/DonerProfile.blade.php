@@ -157,20 +157,20 @@
                                         <!-- timeline time label -->
                                         <div class="time-label">
                                             <span class="bg-danger">
-                                            10 Feb. 2014
+                                            25 August 2023
                                             </span>
                                         </div>
                                         <!-- /.timeline-label -->
                                         <!-- timeline item -->
                                         <div>
-                                            <i class="fas fa-envelope bg-primary"></i>
+                                            <i class="fas fa-donate bg-success"></i>
 
                                             <div class="timeline-item">
-                                                <span class="time"><i class="far fa-clock"></i> 12:05</span>
+                                                <span class="time"><i class="far fa-clock"></i> 12:05 P.M</span>
 
-                                                <h3 class="timeline-header"><a href="#">Support Team</a> sent you an email</h3>
+                                                <h3 class="timeline-header">You Donated 10,000 LKR</h3>
 
-                                                <div class="timeline-body">
+                                                {{-- <div class="timeline-body">
                                                     Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
                                                     weebly ning heekya handango imeem plugg dopplr jibjab, movity
                                                     jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
@@ -179,12 +179,12 @@
                                                 <div class="timeline-footer">
                                                     <a href="#" class="btn btn-primary btn-sm">Read more</a>
                                                     <a href="#" class="btn btn-danger btn-sm">Delete</a>
-                                                </div>
+                                                </div> --}}
                                             </div>
                                         </div>
                                         <!-- END timeline item -->
                                         <!-- timeline item -->
-                                        <div>
+                                        {{-- <div>
                                             <i class="fas fa-user bg-info"></i>
 
                                             <div class="timeline-item">
@@ -238,7 +238,7 @@
                                                     <img src="https://placehold.it/150x100" alt="...">
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                         <!-- END timeline item -->
                                         <div>
                                             <i class="far fa-clock bg-gray"></i>

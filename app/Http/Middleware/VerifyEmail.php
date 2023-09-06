@@ -3,11 +3,10 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-
-class isActive
+class VerifyEmail
 {
     /**
      * Handle an incoming request.
@@ -18,17 +17,12 @@ class isActive
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->status != '1') {
-            //Auth::logout();
-            return redirect('/login')->with('error','Your account is not active. Please contact support.');
-        }
-        else if (!Auth::user()->email_verified_at) {
+        if (!Auth::user()->email_verified_at) {
             auth()->logout();
-            return redirect('/login')
-                    ->with('error', 'You need to confirm your account. We have sent you an activation code, please check your email.');
+            return redirect()->route('login')
+                    ->with('message', 'You need to confirm your account. We have sent you an activation code, please check your email.');
           }
    
-        return $next($request);
         return $next($request);
     }
 }
