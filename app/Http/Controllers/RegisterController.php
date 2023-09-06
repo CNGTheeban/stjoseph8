@@ -31,18 +31,17 @@ class RegisterController extends Controller
         //$data = $request->all();
         $data = [
             'usertype' => 'User',
-            'firstname' => $request->input('inputFirstName'),
-            'lastname' => $request->input('inputLastName'),
-            'nic' => $request->input('inputNIC'),
-            'email' => $request->input('inputEmail'),
+            'firstname' => encrypt($request->input('inputFirstName')),
+            'lastname' => encrypt($request->input('inputLastName')),
+            'nic' => encrypt($request->input('inputNIC')),
+            'email' => encrypt($request->input('inputEmail')),
             'password' => Hash::make($request->input('inputPassword')),
-            //'reference' =>'User',
             'status' => 1,
         ];
         //dd($data);
-        $check = $this->user::create($data);
+        User::create($data);
          
-        return redirect("login")->withSuccess('You have Registerd. Please wait till admin authenticate your account.');
+        return redirect("login")->withSuccess('You have Registered. Please wait till admin authenticate your account.');
     }
 
     // public function create(array $data)
