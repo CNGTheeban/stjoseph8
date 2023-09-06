@@ -5,6 +5,8 @@ use Illuminate\Contracts\Encryption\DecryptException;
 
 use App\Models\userDetail;
 use App\Models\User;
+use App\Models\Student;
+
 use Illuminate\Http\Request;
 use App\Http\Requests\UserDetailDataRequest;
 use Auth;
@@ -25,20 +27,41 @@ class userDetailController extends Controller
         $u = Auth::user();
         $userDetail = $this->userDetail->join('users', 'users.id', '=', 'user_details.userid')
                                        ->where('user_details.userid',  $u->id)->get();
+        if(count($userDetail)==0){
+            $userDetail = $this->user->where('id',  $u->id)->get();
+        }
         foreach($userDetail as $User)
         {
             try {
-                $User -> firstname = decrypt( $User -> firstname);
-                $User -> lastname = decrypt( $User -> lastname);
-                $User -> nic = decrypt( $User -> nic);
-                $User -> email = decrypt( $User -> email);
+                $User -> firstname = base64_decode( $User -> firstname);
+                $User -> lastname = base64_decode( $User -> lastname);
+                $User -> nic = base64_decode( $User -> nic);
+                $User -> email = base64_decode( $User -> email);
 
 
             } catch (DecryptException $e) {
                 //
             }
         }
-        //dd($u);
+
+        $childDetail = Student::join('users','users.id', '=', 'student.userid')
+                                       ->where('student.userid',  $u->id)
+                                       ->where('student.status',  1)->get();
+                                       foreach($childDetail as $Student)
+                                       {
+                                           try {
+                                               $Student -> admissionNo = base64_decode( $Student -> admissionNo);
+                                               $Student -> firstName = base64_decode( $Student -> firstName);
+                                               $Student -> lastName = base64_decode( $Student -> lastName);
+                                               $Student -> DOB = base64_decode( $Student -> DOB);
+                                               $Student -> currentGrade = base64_decode( $Student -> currentGrade);
+                               
+                               
+                                           } catch (DecryptException $e) {
+                                               //
+                                           }
+                                        }
+        // dd($childDetail);
         // $childDetail = $this->userDetail->join('users', 'users.id', '=', 'user_details.userid')
         //                                ->join('child','child.userid','=','user_details.userid')
         //                                ->where('user_details.userid',  $u->id)->get();
@@ -67,16 +90,33 @@ class userDetailController extends Controller
         //         //
         //     }
         // }
-        return view('profile')->with('userdata', $userDetail);
-        //                      ->with('childdata',$childDetail)
+        return view('profile')->with('userdata', $userDetail)
+                             ->with('childdata',$childDetail);
                             //   ->with('FeesData',$FeesDetail);
     }
 
     //add parent render
     public function addParent()
     {
-        $u = Auth::user();        
-        $userDetail = $this->userDetail->join('users', 'users.id', '=', 'user_details.userid')->where('user_details.userid',  $u->id)->get();
+        $u = Auth::user();
+        $userDetail = $this->userDetail->join('users', 'users.id', '=', 'user_details.userid')
+                                       ->where('user_details.userid',  $u->id)->get();
+        if(count($userDetail)==0){
+            $userDetail = $this->user->where('id',  $u->id)->get();
+        }
+        foreach($userDetail as $User)
+        {
+            try {
+                $User -> firstname = base64_decode( $User -> firstname);
+                $User -> lastname = base64_decode( $User -> lastname);
+                $User -> nic = base64_decode( $User -> nic);
+                $User -> email = base64_decode( $User -> email);
+
+
+            } catch (DecryptException $e) {
+                //
+            }
+        }
         return view('addParent')->with('data', $userDetail);
     }
 
@@ -87,7 +127,7 @@ class userDetailController extends Controller
         $checkUserDetailID = $request->input('inputUserDetailID');
         $userID = $request->input('inputUserID');
         $message = '';
-        if($checkUserDetailID == "0"){
+        if($checkUserDetailID == "0" ||$checkUserDetailID == null ){
             $data = [
                 'userid' => $request->input('inputUserID'),
                 'addressline1' => $request->input('inputAddressLine1'),
@@ -99,9 +139,14 @@ class userDetailController extends Controller
                 'mobileno' => $request->input('inputMobileNo'),            
                 'status' => "1",
             ];
-
+            $udata = [
+            'firstname' => base64_encode($request->input('inputFirstName')),
+            'lastname' => base64_encode($request->input('inputLastName')),
+            'nic' => base64_encode($request->input('inputNIC')),
+            ];
             //parentModel::create($data);
             $this->userDetail->create($data);
+            $this->user->where('id', $userID)->update($udata);
             $message = 'Data has been inserted successfully.';
             //return redirect()->route('parent.form')->with('success', 'Data has been inserted successfully.');
         }else{
@@ -116,20 +161,21 @@ class userDetailController extends Controller
                 'status' => "1",
             ];
 
-            $uData = [
-                'firstname' => $request->input('inputFirstName'),
-                'lastname' => $request->input('inputLastName'),
-                'nic' => $request->input('inputNIC'),
-                'email' => $request->input('inputEmail'),
+            $udata = [
+                'firstname' => base64_encode($request->input('inputFirstName')),
+                'lastname' => base64_encode($request->input('inputLastName')),
+                'nic' => base64_encode($request->input('inputNIC')),
             ];
 
             //parentModel::create($data);
             $this->userDetail->where('userid', $checkUserDetailID)->update($data);
-            //$this->user->where('id', $userID)->update($uData);
+            $this->user->where('id', $userID)->update($udata);
             $message = 'Data has been updated successfully.';
             //return redirect()->route('parent.form')->with('success', 'Data has been updated successfully.');
             
         }
-        return redirect()->route('profile.load');
+        return redirect()->route('profile.load')->with('success', $message);
+        // return redirect()->route('parent.form',$checkUserDetailID)->with('success', $message);
+
     }
 }

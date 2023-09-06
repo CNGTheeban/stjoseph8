@@ -18,7 +18,7 @@
             @if(auth()->user()->usertype == 'Admin')
                 @include('partials.admin_sidebar')
             @endif
-            @if(auth()->user()->usertype == 'User')
+            @if(base64_decode(auth()->user()->usertype) == 'User')
                 @include('partials.parent_sidebar')
             @endif
         @endauth
@@ -66,27 +66,27 @@
                             <div class="card-body">
                                 <form action="{{ route('fee.insert') }}" method="POST" id="add_fee_form" enctype="multipart/form-data">
                                     @csrf   
-                                    <div class="row"> 
-                                        <div class="col-6">
-                                            <div class="form-group">
-                                                <label for="inputAdmissionNo">Admision No</label>
-                                                <input type="text" class="form-control" name="inputAdmissionNo" id="inputAdmissionNo" readonly/>
-                                            </div>
-                                        </div>                                   
-                                        <div class="col-6">
-                                            <div class="form-group">
-                                                <label for="inputChildrenName">Child Name</label>
-                                                <input type="text" class="form-control" name="inputChildrenName" id="inputChildrenName" readonly/>
-                                            </div>
-                                        </div>
-                                    </div>
+                                   
                                     <div class="row">
-                                        <div class="col-4">
+                                        <!-- <div class="col-4">
                                             <div class="form-group">
                                                 <label for="inputClass">Class</label>
                                                 <input type="text" class="form-control" name="inputClass" id="inputClass" />
                                             </div>
+                                        </div> -->
+                                        <div class="col-4">
+                                            <div class="form-group">
+                                                <label for="inputTerm">Term</label>
+                                                <select class="form-control" id="inputTerm" name="inputStudentId" required focus>
+                                                    <option value="" disabled selected>Please select Student</option>   
+                                                    @foreach($StudentData as $ud)     
+                                                    <option value="{{ $ud->id }}">{{ $ud->admissionNo }} - {{ $ud->firstName }}</option>
+                                                    @endforeach
+                                                </select>
+                                                <!-- <input type="text" class="form-control" name="inputTerm" id="inputTerm" placeholder="Ener child's your Term"/> -->
+                                            </div>
                                         </div>
+                                  
                                         <div class="col-4">
                                             <div class="form-group">
                                                 <label for="inputTerm">Term</label>

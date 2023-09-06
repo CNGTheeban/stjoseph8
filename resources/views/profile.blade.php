@@ -10,8 +10,8 @@
         use App\Http\Requests\RegistrationDataRequest;
 
             $user = Auth::user();
-            $user_name = decrypt($user->firstname);
-            $user_type = decrypt($user->usertype);
+            $user_name = base64_decode($user->firstname);
+            $user_type = base64_decode($user->usertype);
         ?>
         <!-- Preloader -->
         @include('partials.preloader')
@@ -26,10 +26,11 @@
                 @include('partials.admin_sidebar')
 
             @endif
-            @if(decrypt(auth()->user()->usertype) == 'User')
+            @if(base64_decode(auth()->user()->usertype) == 'User')
                 @include('partials.parent_sidebar')
             @endif
         @endauth
+     
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
@@ -38,6 +39,17 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
+            @if(session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
+            
+            @if(session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @endif
                             <h1>Welcome,
                                 @foreach($userdata as $ud)
                                     {{ $ud->firstname }} {{ $ud->lastname }}
@@ -160,33 +172,35 @@
                                                 <th>First Name</th>
                                                 <th>Last Name</th>
                                                 <th>Grade</th>
-                                                <th>Status</th>
-                                                {{-- <th>Actions</th> --}}
+                                                <!-- <th>Status</th> -->
+                                                 <!-- <th>Actions</th>  -->
+                                                 
                                             </tr>
                                         </thead>
                                         <tbody>                                            
-                                            {{-- @foreach($childdata as $ud)
+                                            @foreach($childdata as $ud)
                                                 <tr>
-                                                    <td> {{ $ud->childsAdmissionNo }}</td>
-                                                    <td> {{ $ud->fullName }}</td>
-                                                    <td> {{ $ud->childsGrade }}</td>
-                                                    @if( $ud->status == 1)
+                                                    <td> {{ $ud->admissionNo }}</td>
+                                                    <td> {{ $ud->firstName }}</td>
+                                                    <td> {{ $ud->lastName }}</td>
+                                                    <td> {{ $ud->currentGrade }}</td>
+                                                    <!-- @if( $ud->status == 1)
                                                     <td><label class="ribbon bg-success">Active</label></td>
                                                     @else
                                                     <td><label class="ribbon bg-danger">Disabled</label></td>
-                                                    @endif
+                                                    @endif -->
                                                 
-                                                    {{-- <td>                                           
-                                                        <button type="button" class="btn btn-warning" id="editChildren" name="editChildren"><a href="{{ url('addchild/'.$ud->id) }}"><i class="fas fa-edit"></i></a></button> | 
+                                                    <!-- <td>                                           
+                                                        <button type="button" class="btn btn-warning" id="editChildren" name="editChildren"><a href="{{ url('addStudent/'.$ud->id) }}"><i class="fas fa-edit"></i></a></button> | 
                                                         <button type="button" class="btn btn-success" id="payfee" name="payfee"><a href="{{ url('addfee/'.$ud->id) }}"><i class="fas fa-donate"></i></a></button> | 
                                                         @if( $ud->status !== 1)
                                                             <button class="btn btn-success" onclick="return confirm('{{ __('Are you sure you want to Enable?') }}')"><a href="{{ url('enablechild/'.$ud->id) }}"><i class="fas fa-toggle-on"></i></a></button>
                                                         @else
                                                             <button type="button" class="btn btn-danger" id="deleteChildren" name="deleteChildren" onclick="return confirm('{{ __('Are you sure you want to delete?') }}')"><a href="{{ url('deletechild/'.$ud->id) }}"><i class="fas fa-trash"></i></a></button>
                                                         @endif
-                                                    </td>
+                                                    </td> -->
                                                 </tr>                                              
-                                            @endforeach --}}
+                                            @endforeach 
                                         </tbody>             
                                     </table>
                                 </div><!-- /.card-body -->

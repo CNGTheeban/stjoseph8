@@ -22,7 +22,7 @@
             @if(auth()->user()->usertype == 'Admin')
                 @include('partials.admin_sidebar')
             @endif
-            @if(auth()->user()->usertype == 'User')
+            @if(base64_decode(auth()->user()->usertype) == 'User')
                 @include('partials.parent_sidebar')
             @endif
         @endauth
