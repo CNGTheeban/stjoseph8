@@ -8,7 +8,6 @@ use Hash;
 use Session;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\RegistrationDataRequest;
 
 class LoginController extends Controller
 {
@@ -21,30 +20,11 @@ class LoginController extends Controller
     public function customLogin(LoginDataRequest $request)
     {
         $credentials = $request->request;
-        $u = Auth::user();
-        $userDetail = User::get();
-        $email = $request['inputEmail'];
-        $userType= "";
-        foreach($userDetail as $Ur)
-        {
-          
-            if(decrypt( $Ur -> email) == $email){
-                $email = $Ur -> email;
-                $userType = decrypt($Ur ->usertype);
-            }
-        }
-        // dd($userType);
-        if (Auth::attempt(['email' => $email, 'password' => $request['inputPassword']])) {
+        if (Auth::attempt(['email' => $request['inputEmail'], 'password' => $request['inputPassword']])) {
             //return redirect()->intended('index')->withSuccess('Logged in');
             //auth()->login($user);
-            if($userType == 'User'){
-                return redirect("/profile")->withSuccess('You have LoggedIn.');
-
-            }else{
-                return redirect("/index")->withSuccess('You have LoggedIn.');
-                return redirect("/")->withSuccess('You have LoggedIn.');
-            }
-           
+            return redirect("/index")->withSuccess('You have LoggedIn.');
+            return redirect("/")->withSuccess('You have LoggedIn.');
         }
   
         return redirect("login")->withSuccess('Login details are not valid');

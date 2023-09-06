@@ -10,6 +10,8 @@ use App\Models\User;
 use App\Models\UserVerify;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+use Mail;
 
 class RegisterController extends Controller
 {
@@ -36,9 +38,21 @@ class RegisterController extends Controller
             'nic' => $request->input('inputNIC'),
             'email' => $request->input('inputEmail'),
             'password' => Hash::make($request->input('inputPassword')),
-            //'reference' =>'User',
             'status' => 1,
+            'reference' =>'User',
+            'is_email_verified' => 0,
         ];
+        $check = $this->user::create($data);
+
+        $token = Str::random(64);
+        UserVerify::create([
+            'user_id' =>  $check->id, 
+            'token' => $token
+          ]);
+        Mail::send('email.emailVerificationEmail', ['token' => $token], function($message) use($request){
+            $message->to($request->email);
+            $message->subject('Email Verification Mail');
+        });
         //dd($data);
         $check = $this->user::create($data);
          

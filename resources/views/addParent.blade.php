@@ -7,12 +7,15 @@
     <!-- Site wrapper -->
     <div class="wrapper">
         <?php
-        use App\Http\Requests\RegistrationDataRequest;
-
             $user = Auth::user();
             $user_id = $user->id;
+<<<<<<< HEAD
             $user_name = decrypt($user->firstname);
             $user_type = decrypt($user->usertype);
+=======
+            $user_name = $user->username;
+            $user_type = $user->usertype;
+>>>>>>> parent of 0444190 (Email Module)
         ?>
         <!-- Preloader -->
         @include('partials.preloader')
@@ -26,7 +29,7 @@
             @if(auth()->user()->usertype == 'Admin')
                 @include('partials.admin_sidebar')
             @endif
-            @if(decrypt(auth()->user()->usertype) == 'User')
+            @if(auth()->user()->usertype == 'User')
                 @include('partials.parent_sidebar')
             @endif
         @endauth
