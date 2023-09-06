@@ -10,8 +10,8 @@
         use App\Http\Requests\RegistrationDataRequest;
 
             $user = Auth::user();
-            $user_name = decrypt($user->firstname);
-            $user_type = decrypt($user->usertype);
+            $user_name = base64_decode($user->firstname);
+            $user_type = base64_decode($user->usertype);
         ?>
         <!-- Preloader -->
         @include('partials.preloader')
@@ -26,7 +26,7 @@
                 @include('partials.admin_sidebar')
 
             @endif
-            @if(decrypt(auth()->user()->usertype) == 'User')
+            @if(base64_decode(auth()->user()->usertype) == 'User')
                 @include('partials.parent_sidebar')
             @endif
         @endauth

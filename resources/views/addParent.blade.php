@@ -11,7 +11,7 @@
 
             $user = Auth::user();
             $user_id = $user->id;
-            $user_name = decrypt($user->inputFirstName);
+            $user_name = decrypt($user->firstname);
             $user_type = decrypt($user->usertype);
         ?>
         <!-- Preloader -->

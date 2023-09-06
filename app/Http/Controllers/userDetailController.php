@@ -28,10 +28,10 @@ class userDetailController extends Controller
         foreach($userDetail as $User)
         {
             try {
-                $User -> firstname = decrypt( $User -> firstname);
-                $User -> lastname = decrypt( $User -> lastname);
-                $User -> nic = decrypt( $User -> nic);
-                $User -> email = decrypt( $User -> email);
+                $User -> firstname = base64_decode( $User -> firstname);
+                $User -> lastname = base64_decode( $User -> lastname);
+                $User -> nic = base64_decode( $User -> nic);
+                $User -> email = base64_decode( $User -> email);
 
 
             } catch (DecryptException $e) {
