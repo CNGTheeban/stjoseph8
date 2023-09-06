@@ -10,7 +10,8 @@
         use App\Http\Requests\RegistrationDataRequest;
 
             $user = Auth::user();
-            $user_name = base64_decode($user->firstname);
+            $first_name = base64_decode($user->firstname);
+            $last_name = base64_decode($user->lastname);
             $user_type = base64_decode($user->usertype);
         ?>
         <!-- Preloader -->
@@ -22,7 +23,7 @@
 
         <!-- Main Sidebar Container -->
         @auth
-            @if(auth()->user()->usertype == 'Admin')
+            @if(base64_decode(auth()->user()->usertype) == 'Admin')
                 @include('partials.admin_sidebar')
 
             @endif

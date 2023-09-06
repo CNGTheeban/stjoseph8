@@ -15,14 +15,11 @@
 
         <!-- Main Sidebar Container -->
         @auth
-            @if(auth()->user()->usertype == 'Admin')
+            @if(base64_decode(auth()->user()->usertype) == 'Admin')
                 @include('partials.admin_sidebar')
             @endif
-            @if(auth()->user()->usertype == 'Parent')
+            @if(base64_decode(auth()->user()->usertype) == 'User')
                 @include('partials.parent_sidebar')
-            @endif
-            @if(auth()->user()->usertype == 'Doner')
-                @include('partials.doner_sidebar')
             @endif
         @endauth        
 

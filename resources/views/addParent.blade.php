@@ -11,8 +11,9 @@
 
             $user = Auth::user();
             $user_id = $user->id;
-            $user_name = decrypt($user->firstname);
-            $user_type = decrypt($user->usertype);
+            $first_name = base64_decode($user->firstname);
+            $last_name = base64_decode($user->lastname);
+            $user_type = base64_decode($user->usertype);
         ?>
         <!-- Preloader -->
         @include('partials.preloader')
@@ -23,10 +24,10 @@
 
         <!-- Main Sidebar Container -->
         @auth
-            @if(auth()->user()->usertype == 'Admin')
+            @if(base64_decode(auth()->user()->usertype) == 'Admin')
                 @include('partials.admin_sidebar')
             @endif
-            @if(decrypt(auth()->user()->usertype) == 'User')
+            @if(base64_decode(auth()->user()->usertype) == 'User')
                 @include('partials.parent_sidebar')
             @endif
         @endauth

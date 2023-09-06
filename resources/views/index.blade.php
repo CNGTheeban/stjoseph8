@@ -6,8 +6,9 @@
 
     <?php
         $user = Auth::user();
-        $user_name = $user->username;
-        $user_type = $user->usertype;
+        $first_name = base64_decode($user->firstName);
+        $last_name = base64_decode($user->lastName);
+        $user_type = base64_decode($user->usertype);
     ?>
 
     <div class="wrapper">
@@ -20,10 +21,10 @@
 
         <!-- Main Sidebar Container -->
         @auth
-            @if(auth()->user()->usertype == 'Admin')
+            @if(base64_decode(auth()->user()->usertype) == 'Admin')
                 @include('partials.admin_sidebar')
             @endif
-            @if(auth()->user()->usertype == 'User')
+            @if(base64_decode(auth()->user()->usertype) == 'User')
                 @include('partials.parent_sidebar')
             @endif
         @endauth
@@ -123,7 +124,7 @@
                     <!-- /.row -->
                     <div class="row">
                         @auth
-                            @if(auth()->user()->usertype == 'Admin')
+                            @if(base64_decode(auth()->user()->usertype) == 'Admin')
                                 <div class="col-6">
                                     <div class="card">
                                         <div class="card-header">

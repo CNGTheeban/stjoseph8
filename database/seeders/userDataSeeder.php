@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Hash;
 
 class userDataSeeder extends Seeder
 {
@@ -22,7 +23,7 @@ class userDataSeeder extends Seeder
                 'lastname' => base64_encode('Admin'),
                 'nic' => '',
                 'email' => base64_encode('admin@gmail.com'),
-                'password' => base64_encode('admin'),
+                'password' => Hash::make('admin'),
                 'status' => '1'
             ],
             [
@@ -31,7 +32,7 @@ class userDataSeeder extends Seeder
                 'lastname' => base64_encode('User'),
                 'nic' => '',
                 'email' => base64_encode('parent@gmail.com'),
-                'password' => base64_encode('parent'),
+                'password' => Hash::make('parent'),
                 'status' => '1'
             ]
         ];

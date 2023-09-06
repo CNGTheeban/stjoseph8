@@ -30,24 +30,8 @@
                 <li class="nav-item">
                     <a href="/" class="nav-link">
                         <i class="nav-icon fas fa-users"></i>
-                        <p>System Users <i class="right fas fa-angle-left"></i></p>
+                        <p>Students</p>
                     </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="/authUsers" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Authorised</p>
-                            </a>
-                        </li>
-                    </ul>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="/unauthUsers" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Unauthorised</p>
-                            </a>
-                        </li>
-                    </ul>
                 </li>
                 {{-- <li class="nav-item">
                     <a href="/parents" class="nav-link">
