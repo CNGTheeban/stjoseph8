@@ -40,11 +40,7 @@ class RegisterController extends Controller
             'nic' => base64_encode($request->input('inputNIC')),
             'email' => base64_encode($request->input('inputEmail')),
             'password' => Hash::make($request->input('inputPassword')),
-<<<<<<< HEAD
             //'reference' =>encrypt('User'),
-=======
-            'reference' =>base64_encode('User'),
->>>>>>> Email-Module.Sobana
             'is_email_verified' => 0,
             'status' => 1,
         ];
@@ -54,7 +50,8 @@ class RegisterController extends Controller
         UserVerify::create([
             'user_id' =>  $check->id, 
             'token' => $token
-          ]);
+        ]);
+        
         Mail::send('email.emailVerificationEmail', ['token' => $token], function($message) use($request){
             $message->to($request->input('inputEmail'));
             $message->subject('Email Verification Mail');

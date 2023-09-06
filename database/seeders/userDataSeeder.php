@@ -17,21 +17,21 @@ class userDataSeeder extends Seeder
         // Seed users
         $dataList = [
             [
-                'usertype' => bcrypt('Admin'),
-                'firstname' => bcrypt('Admin'),
-                'lastname' => bcrypt('Admin'),
+                'usertype' => base64_encode('Admin'),
+                'firstname' => base64_encode('Admin'),
+                'lastname' => base64_encode('Admin'),
                 'nic' => '',
-                'email' => bcrypt('admin@gmail.com'),
-                'password' => bcrypt('admin'),
+                'email' => base64_encode('admin@gmail.com'),
+                'password' => base64_encode('admin'),
                 'status' => '1'
             ],
             [
-                'usertype' => bcrypt('User'),
-                'firstname' => bcrypt('User'),
-                'lastname' => bcrypt('User'),
+                'usertype' => base64_encode('User'),
+                'firstname' => base64_encode('User'),
+                'lastname' => base64_encode('User'),
                 'nic' => '',
-                'email' => bcrypt('parent@gmail.com'),
-                'password' => bcrypt('parent'),
+                'email' => base64_encode('parent@gmail.com'),
+                'password' => base64_encode('parent'),
                 'status' => '1'
             ]
         ];

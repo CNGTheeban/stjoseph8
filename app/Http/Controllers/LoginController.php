@@ -26,14 +26,13 @@ class LoginController extends Controller
         $email = $request['inputEmail'];
         $userType= "";
         foreach($userDetail as $Ur)
-        {
-          
+        {          
             if(base64_decode( $Ur -> email) == $email){
                 $email = $Ur -> email;
                 $userType = base64_decode($Ur ->usertype);
             }
         }
-        // dd($userType);
+        //dd(Auth::attempt(['email' => $email, 'password' => $request['inputPassword']]));
         if (Auth::attempt(['email' => $email, 'password' => $request['inputPassword']])) {
             //return redirect()->intended('index')->withSuccess('Logged in');
             //auth()->login($user);
