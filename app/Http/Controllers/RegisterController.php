@@ -40,7 +40,7 @@ class RegisterController extends Controller
             'nic' => encrypt($request->input('inputNIC')),
             'email' => encrypt($request->input('inputEmail')),
             'password' => Hash::make($request->input('inputPassword')),
-            'reference' =>encrypt('User'),
+            //'reference' =>encrypt('User'),
             'is_email_verified' => 0,
             'status' => 1,
         ];
