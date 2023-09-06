@@ -27,8 +27,6 @@ class RegistrationDataRequest extends FormRequest
             'inputFirstName' => 'required',
             'inputLastName' => 'required',
             'inputNIC' => 'required|max:12|unique:users,nic',
-            'inputFirstName' => 'required',
-            'inputLastName' => 'required',
             'inputEmail' => 'required|email|unique:users,email',
             'inputPassword' => 'required|min:6',
         ];

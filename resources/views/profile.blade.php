@@ -10,7 +10,8 @@
         use App\Http\Requests\RegistrationDataRequest;
 
             $user = Auth::user();
-            $user_name = decrypt($user->firstname);
+            $firstname = decrypt($user->firstname);
+            $lastname = decrypt($user->lastname);
             $user_type = decrypt($user->usertype);
         ?>
         <!-- Preloader -->
@@ -39,18 +40,14 @@
                     <div class="row mb-2">
                         <div class="col-sm-6">
                             <h1>Welcome,
-                                @foreach($userdata as $ud)
-                                    {{ $ud->firstname }} {{ $ud->lastname }}
-                                @endforeach
+                                {{ $firstname }} {{ $lastname }}
                             </h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
                                 <li class="breadcrumb-item active">Welcome, 
-                                    @foreach($userdata as $ud)
-                                        {{ $ud->firstname }} {{ $ud->lastname }}
-                                    @endforeach
+                                    {{ $firstname }} {{ $lastname }}
                                 </li>
                             </ol>
                         </div>
@@ -70,9 +67,7 @@
                                         <img class="profile-user-img img-fluid img-circle" src="img/user4-128x128.jpg" alt="User profile picture">
                                     </div> -->
                                     <h3 class="profile-username text-center">
-                                        @foreach($userdata as $ud)
-                                            {{ $ud->firstname }} {{ $ud->lastname }}
-                                        @endforeach
+                                        {{ $firstname }} {{ $lastname }}
                                     </h3>
                                     <p class="text-muted text-center"><?php echo $user_type; ?></p>
                                     <!-- <ul class="list-group list-group-unbordered mb-3">
