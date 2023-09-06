@@ -62,10 +62,18 @@
                     </a>
                 </li> --}}
                 <li class="nav-item">
-                    <a href="/reports" class="nav-link">
+                    <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-paste"></i>
-                        <p>Reports</p>
+                        <p>Reports <i class="right fas fa-angle-left"></i></p>
                     </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Fees</p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </nav>
