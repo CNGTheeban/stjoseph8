@@ -42,7 +42,6 @@ class RegisterController extends Controller
             'password' => Hash::make($request->input('inputPassword')),
             'reference' =>encrypt('User'),
             'is_email_verified' => 0,
-
             'status' => 1,
         ];
         $check = $this->user::create($data);
