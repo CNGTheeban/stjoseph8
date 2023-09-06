@@ -53,7 +53,6 @@ class studentController extends Controller
         //$checkUserID = $request->input('inputUserId');
         //dd($request->input());
         $data = [
-<<<<<<< HEAD
             'student_userid' =>  $request->input('inputUserId'),
             'student_admissionNo' => base64_encode($request->input('inputAdmissionNo')), 
             'student_firstName' => base64_encode($request->input('inputFirstName')),
@@ -66,20 +65,6 @@ class studentController extends Controller
         //Student::create($data);
         $this->student->create($data);
         return redirect()->route('profile.load')->with('success', 'Student has been registered successfully.');
-=======
-            'userid' =>  $request->input('inputUserId'),
-            'admissionNo' => base64_encode($request->input('inputAdmissionNo')), 
-            'firstName' => base64_encode($request->input('inputFirstName')),
-            'lastName' => base64_encode($request->input('inputLastName')),
-            'DOB' => base64_encode($request->input('inputDOB')),
-            'currentGrade' => base64_encode($request->input('inputGrade')),      
-            'status' => 0,
-        ];
-
-        //parentModel::create($data);
-        student::create($data);
-        return redirect()->route('profile.load')->with('success', 'Student has been registered successfully, Please wait till admin will confirm your payment.');
->>>>>>> Email-Module
     }
 
     //view student details in admin
