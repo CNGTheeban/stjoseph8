@@ -89,7 +89,7 @@ Route::get('logout', [LoginController:: class, 'logout']);
 
 Route::get('/addDonation', [donationController::class, 'index'])->name('donation');
 Route::post('/pay-donation', [donationController::class, 'donate'])->name('pay.donation');
-
+Route::get('account/verify/{token}', [RegisterController::class, 'verifyAccount'])->name('user.verify'); 
 // Route::get('/addParent', [ParentController::class, 'addParent'])->name('parent.index');
 // Route::get('/register', [RegisterController::class, 'index']);
 // Route::get('/login', [LoginController::class, 'index']);

@@ -7,9 +7,11 @@
     <!-- Site wrapper -->
     <div class="wrapper">
         <?php
+        use App\Http\Requests\RegistrationDataRequest;
+
             $user = Auth::user();
-            $user_name = $user->username;
-            $user_type = $user->usertype;
+            $user_name = decrypt($user->firstname);
+            $user_type = decrypt($user->usertype);
         ?>
         <!-- Preloader -->
         @include('partials.preloader')
@@ -24,7 +26,7 @@
                 @include('partials.admin_sidebar')
 
             @endif
-            @if(auth()->user()->usertype == 'User')
+            @if(decrypt(auth()->user()->usertype) == 'User')
                 @include('partials.parent_sidebar')
             @endif
         @endauth

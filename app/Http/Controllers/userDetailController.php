@@ -25,7 +25,24 @@ class userDetailController extends Controller
         $u = Auth::user();
         $userDetail = $this->userDetail->join('users', 'users.id', '=', 'user_details.userid')
                                        ->where('user_details.userid',  $u->id)->get();
+<<<<<<< HEAD
 
+=======
+        foreach($userDetail as $User)
+        {
+            try {
+                $User -> firstname = decrypt( $User -> firstname);
+                $User -> lastname = decrypt( $User -> lastname);
+                $User -> nic = decrypt( $User -> nic);
+                $User -> email = decrypt( $User -> email);
+
+
+            } catch (DecryptException $e) {
+                //
+            }
+        }
+        //dd($u);
+>>>>>>> Dev.Sobana---Custom-Email-Verification
         // $childDetail = $this->userDetail->join('users', 'users.id', '=', 'user_details.userid')
         //                                ->join('child','child.userid','=','user_details.userid')
         //                                ->where('user_details.userid',  $u->id)->get();

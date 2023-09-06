@@ -31,7 +31,13 @@ class User extends Authenticatable implements MustVerifyEmail
         'status',
         'created_at',
         'updated_at',
+<<<<<<< HEAD
         'deleted_at'
+=======
+        'deleted_at',
+        'is_email_verified'
+
+>>>>>>> Dev.Sobana---Custom-Email-Verification
     ];
 
     /**
