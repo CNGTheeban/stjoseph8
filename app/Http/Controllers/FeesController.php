@@ -12,23 +12,23 @@ class FeesController extends Controller
 {
     public function insertFee(FeesDataRequest $request)
     {
-        $checkChildID = $request->input('inputChildrenId');
-        $checkFeeId = Fees::where('childid', '=', $request->input('inputChildrenId'))->
+        $checkChildID = $request->input('inputStudentId');
+        $checkFeeId = Fees::where('childid', '=', $request->input('inputStudentId'))->
                             where('term', '=', $request->input('inputTerm'))->exists();
         $message = '';
         if($checkFeeId){
             $data = [
-                'childid' => $request->input('inputChildrenId'),
+                'childid' => $request->input('inputStudentId'),
                 'term' => $request->input('inputTerm'),
                 'amount' => $request->input('inputAmount'),    
                 'status' => "1",
             ];
-        Fees::where('childid', '=', $request->input('inputChildrenId'))->
+        Fees::where('childid', '=', $request->input('inputStudentId'))->
               where('term', '=', $request->input('inputTerm'))->update($data);
         $message = 'Data has been Updated successfully.';
         }else{
             $data = [
-                'childid' => $request->input('inputChildrenId'),
+                'childid' => $request->input('inputStudentId'),
                 'term' => $request->input('inputTerm'),
                 'amount' => $request->input('inputAmount'),    
                 'status' => "1",
@@ -38,6 +38,6 @@ class FeesController extends Controller
         $message = 'Data has been inserted successfully.';
         }
         
-        return redirect()->route('fees.form',$checkChildID)->with('success', $message);
+        return redirect()->route('fee.load')->with('success', $message);
     }
 }

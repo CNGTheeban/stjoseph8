@@ -39,7 +39,7 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                        @if(session('success'))
+            @if(session('success'))
                 <div class="alert alert-success">
                     {{ session('success') }}
                 </div>
