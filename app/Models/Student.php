@@ -18,22 +18,24 @@ class Student extends Model
      * @var array $fillable
      */
     protected $fillable = [
-        'id',
-        'userid',
-        'admissionNo',
-        'firstName',
-        'lastName',
-        'DOB',
-        'currentGrade',
-        'status',
+        'student_id',
+        'student_userid',
+        'student_admissionNo',
+        'student_firstName',
+        'student_lastName',
+        'student_DOB',
+        'student_currentGrade',
+        'student_status',
         'created_at',
         'updated_at',
         'deleted_at'
     ];
 
     protected $hidden = [
-        'firstName',
-        'lastName',
-        'admissionNo',
+        'student_firstName',
+        'student_lastName',
+        'student_admissionNo',
+        'student_DOB',
+        'student_currentGrade',
     ];
 }

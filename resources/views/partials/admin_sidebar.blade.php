@@ -28,7 +28,7 @@
                     </a>
                 </li>                            
                 <li class="nav-item">
-                    <a href="/" class="nav-link">
+                    <a href="/viewStudent" class="nav-link">
                         <i class="nav-icon fas fa-users"></i>
                         <p>Students</p>
                     </a>
@@ -46,7 +46,7 @@
                     </a>
                 </li> --}}
                 <li class="nav-item">
-                    <a href="/reports" class="nav-link">
+                    <a href="/unauthUsers" class="nav-link">
                         <i class="nav-icon fas fa-paste"></i>
                         <p>Reports</p>
                     </a>

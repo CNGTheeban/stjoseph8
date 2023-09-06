@@ -30,12 +30,12 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Unauthorized System Users</h1>
+                            <h1>Students</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="/index">Dashboard</a></li>
-                                <li class="breadcrumb-item active">Unauthorized System Users</li>
+                                <li class="breadcrumb-item active">Students</li>
                             </ol>
                         </div>
                     </div>
@@ -57,24 +57,37 @@
                                     <table id="example1" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
-                                                <th>User ID</th>
-                                                <th>User Name</th>
-                                                <th>Reference</th>
+                                                <th>Admission No</th>
+                                                <th>Student Name</th>
+                                                <th>Parent Name</th>
                                                 <th>Email</th>
+                                                <th>Grade</th>
                                                 <th>Status</th>
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @if(count($users) != '0')
-                                                @foreach($users as $user)                                               
+                                            @if(count($students) != '0')
+                                                @foreach($students as $student)                              
                                                     <tr>
-                                                        <td>{{$user->id}}</td>
-                                                        <td>{{$user->username}} - {{$user->usertype}}</td>
-                                                        <td>{{$user->reference}}</td>
-                                                        <td>{{$user->email}}</td>
-                                                        <td><label class="ribbon bg-danger">Disabled</label></td>
-                                                        <td><a type="button" class="btn btn-success" href="{{ url('/enableUnauthUsers/'.$user->id) }}" onclick="return confirm('{{ __('Are you sure you want to Enable?') }}')"><i class="fas fa-power-off"></i></a> | <a type="button" class="btn btn-danger" href="{{ url('/deleteUnauthUsers/'.$user->id) }}" onclick="return confirm('{{ __('Are you sure you want to Delete?') }}')"><i class="fas fa-trash"></i></a></td>
+                                                        <td>{{ base64_decode($student->student_admissionNo) }}</td>
+                                                        <td>{{ base64_decode($student->student_firstName) }} {{ base64_decode($student->student_lastName) }}</td>
+                                                        <td>{{ base64_decode($student->firstname) }} {{ base64_decode($student->lastname) }}</td>
+                                                        <td>{{ base64_decode($student->email) }}</td>
+                                                        <td>{{ base64_decode($student->student_currentGrade) }}</td>
+                                                        <td>
+                                                            @if($student->student_status != 1)
+                                                                <label class="ribbon bg-danger">Disabled</label>
+                                                            @else
+                                                                <label class="ribbon bg-success">Active</label>
+                                                            @endif
+                                                        </td>
+                                                        <td>                                                            
+                                                            @if($student->student_status == 0)
+                                                                <a type="button" class="btn btn-success" href="{{ url('/enableStudents/'.$student->student_id) }}" onclick="return confirm('{{ __('Are you sure you want to Enable?') }}')"><i class="fas fa-power-off"></i></a> | <a type="button" class="btn btn-danger" href="{{ url('/deleteStudents/'.$student->student_id) }}" onclick="return confirm('{{ __('Are you sure you want to Delete?') }}')"><i class="fas fa-trash"></i></a></td>
+                                                            @else
+                                                                <a type="button" class="btn btn-danger" href="{{ url('/disableStudents/'.$student->student_id) }}" onclick="return confirm('{{ __('Are you sure you want to Disable?') }}')"><i class="fas fa-power-off"></i></a> | <a type="button" class="btn btn-danger" href="{{ url('/deleteStudents/'.$student->student_id) }}" onclick="return confirm('{{ __('Are you sure you want to Delete?') }}')"><i class="fas fa-trash"></i></a></td>
+                                                            @endif
                                                     </tr>
                                                 @endforeach
                                             @else

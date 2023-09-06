@@ -15,14 +15,14 @@ class Student extends Migration
     {
         //create table
         Schema::create('student', function (Blueprint $table) {
-            $table->id();
-            $table->text('userid');
-            $table->text('admissionNo');
-            $table->text('firstName');
-            $table->text('lastName');
-            $table->text('DOB');
-            $table->text('currentGrade');
-            $table->text('status');
+            $table->id('student_id');
+            $table->text('student_userid');
+            $table->text('student_admissionNo');
+            $table->text('student_firstName');
+            $table->text('student_lastName');
+            $table->text('student_DOB');
+            $table->text('student_currentGrade');
+            $table->text('student_status');
             $table->timestamps();
             $table->softDeletes($column = 'deleted_at', $precision = 0);
         });

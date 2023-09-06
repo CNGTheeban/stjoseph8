@@ -64,6 +64,10 @@ Route::group(['middleware' => 'auth.check'], function () {
             Route::get('/deleteUnauthUsers/{id}', [userController::class, 'deleteUnauthorizedUsers']);
             Route::get('/authUsers', [userController::class, 'authorizedUsers']);
             Route::get('/disableAuthUsers/{id}', [userController::class, 'deactivateAuthorizedUsers']);
+            Route::get('/viewStudent', [studentController::class, 'viewStudent']);
+            Route::get('/enableStudents/{id}', [studentController::class, 'activateStudents']);
+            Route::get('/disableStudents/{id}', [studentController::class, 'deactivateStudents']);
+            Route::get('/deleteStudents/{id}', [studentController::class, 'deleteStudents']);
         });
     });
 });

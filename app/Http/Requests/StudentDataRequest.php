@@ -25,7 +25,11 @@ class StudentDataRequest extends FormRequest
     {        
         return [
             'inputUserId' => 'required',
-            'inputAdmissionNo' => 'required|unique:student,admissionNo',
+            'inputAdmissionNo' => [
+                'required',
+                // new UniqueDecodedAdmissionNo('student', 'student_admissionNo')
+                'unique:'.base64_decode('student,student_admissionNo'),
+            ],
             'inputFirstName' => 'required',
             'inputLastName' => 'required',
             'inputDOB' => 'required',
