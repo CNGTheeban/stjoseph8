@@ -46,7 +46,7 @@ Route::group(['middleware' => 'auth.check'], function () {
             Route::get('/deletechild/{id}', [ChildController::class, 'deleteChild'])->name('index');
             Route::get('/addDonation', [PayController::class, 'addDonation']);
             Route::get('/editchild', [ChildController::class, 'editChild']);
-            Route::get('/feePayments', [PayController::class, 'index']);
+            Route::get('/feePayments', [PayController::class, 'index'])->name('fee.load');
             Route::get('/addFee', [PayController::class, 'addFee']);
         });
 

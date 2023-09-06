@@ -23,7 +23,16 @@
             @endif
         @endauth
 
-          @if(session('success'))
+         
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                        @if(session('success'))
                 <div class="alert alert-success">
                     {{ session('success') }}
                 </div>
@@ -34,14 +43,6 @@
                     {{ session('error') }}
                 </div>
             @endif
-
-        <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
-            <!-- Content Header (Page header) -->
-            <section class="content-header">
-                <div class="container-fluid">
-                    <div class="row mb-2">
-                        <div class="col-sm-6">
                             <h1>Fee Payment</h1>
                         </div>
                         <div class="col-sm-6">
@@ -78,42 +79,23 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>07/07/2023</td>
-                                            <td>[First Name] [Last Name]</td>
-                                            <td>6</td>
-                                            <td>[Term Details]</td>
-                                            <td>12000</td>
-                                            <td>Paid | Unpaid</td>
+                                    @foreach($StudentData as $ud)
+                                    <tr>
+                                            <td>{{ $ud->admissionNo }}</td>
+                                            <td>{{ $ud->created_at }}</td>
+                                            <td>{{ $ud->firstName }} {{ $ud->lastName }}</td>
+                                            <td>{{ $ud->currentGrade }}</td>
+                                            <td>{{ $ud->term }}</td>
+                                            <td>{{ $ud->amount }}</td>
+                                            @if( $ud->status !== 1)
+                                            <td>Unpaid</td>
+                                            @else
+                                            <td>Paid</td>
+                                            @endif
                                         </tr>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>27/08/2023</td>
-                                            <td>John Abragham</td>
-                                            <td>6</td>
-                                            <td>[Term Details]</td>
-                                            <td>12000</td>
-                                            <td>Paid | Unpaid</td>
-                                        </tr>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>26/08/2023</td>
-                                            <td>Peter Abragham</td>
-                                            <td>6</td>
-                                            <td>[Term Details]</td>
-                                            <td>12000</td>
-                                            <td>Paid | Unpaid</td>
-                                        </tr>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>27/07/2023</td>
-                                            <td>John Abragham</td>
-                                            <td>6</td>
-                                            <td>[Term Details]</td>
-                                            <td>12000</td>
-                                            <td>Paid | Unpaid</td>
-                                        </tr>
+                                    @endforeach
+                                       
+                                     
                                     </tbody>
                                 </table>
                             </div>

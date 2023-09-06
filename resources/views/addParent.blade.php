@@ -11,8 +11,12 @@
 
             $user = Auth::user();
             $user_id = $user->id;
+<<<<<<< HEAD
             $first_name = base64_decode($user->firstname);
             $last_name = base64_decode($user->lastname);
+=======
+            $user_name = base64_decode($user->firstname);
+>>>>>>> Email-Module
             $user_type = base64_decode($user->usertype);
         ?>
         <!-- Preloader -->
@@ -71,7 +75,7 @@
                     <div class="row">
                         <div class="card card-default">
                             <div class="card-header">
-                                <h3 class="card-title">Creat <?php echo $user_type; ?></h3>
+                                <h3 class="card-title">Create <?php echo $user_type; ?></h3>
                             </div>
                             <!-- card-body -->
                             <div class="card-body">
@@ -81,7 +85,7 @@
                                     <input type="hidden" class="form-control" name="inputUserName" id="inputUserName" value="<?php echo $user_name; ?>" readonly>
                                     @if(count($data) != "0")
                                         @foreach($data as $user)
-                                            <input type="hidden" class="form-control" name="inputUserDetailID" id="inputUserDetailID" value="{{ $user->userdetailid }}" readonly>
+                                            <input type="hidden" class="form-control" name="inputUserDetailID" id="inputUserDetailID" value="{{ $user->id }}" readonly>
                                         @endforeach
                                     @else
                                         <input type="hidden" class="form-control" name="inputUserDetailID" id="inputUserDetailID" value="0" readonly>
@@ -215,10 +219,10 @@
                                                 <label for="inputEmail">Email</label>
                                                 @if(count($data) != "0")
                                                     @foreach($data as $user)
-                                                        <input type="email" class="form-control" name="inputEmail" id="inputEmail" placeholder="Enter your Email" value="{{ $user['email'] }}" />
+                                                        <input type="email" class="form-control" name="inputEmail" id="inputEmail" placeholder="Enter your Email" value="{{ $user['email'] }}" readonly/>
                                                     @endforeach
                                                 @else
-                                                    <input type="email" class="form-control" name="inputEmail" id="inputEmail" placeholder="Enter your Email" />
+                                                    <input type="email" class="form-control" name="inputEmail" id="inputEmail" placeholder="Enter your Email" readonly/>
                                                 @endif
                                             </div>
                                             @if ($errors->has('inputEmail'))
