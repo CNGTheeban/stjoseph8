@@ -83,7 +83,7 @@ class RegisterController extends Controller
     public function verifyAccount($token)
     {
         $verifyUser = UserVerify::where('token', $token)->first();
-  
+        $timestamp = now();
         $message = 'Sorry your email cannot be identified.';
   
         if(!is_null($verifyUser) ){
@@ -91,6 +91,7 @@ class RegisterController extends Controller
               
             if(!$user->is_email_verified) {
                 $verifyUser->user->is_email_verified = 1;
+                $verifyUser->user->email_verified_at = $timestamp;
                 $verifyUser->user->save();
                 $message = "Your e-mail is verified. You can now login.";
             } else {

@@ -11,7 +11,7 @@
 
             $user = Auth::user();
             $user_id = $user->id;
-            $user_name = decrypt($user->inputFirstName);
+            $user_name = decrypt($user->firstname);
             $user_type = decrypt($user->usertype);
         ?>
         <!-- Preloader -->
@@ -70,7 +70,7 @@
                     <div class="row">
                         <div class="card card-default">
                             <div class="card-header">
-                                <h3 class="card-title">Creat <?php echo $user_type; ?></h3>
+                                <h3 class="card-title">Create <?php echo $user_type; ?></h3>
                             </div>
                             <!-- card-body -->
                             <div class="card-body">
