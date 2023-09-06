@@ -34,13 +34,13 @@ class RegisterController extends Controller
     {  
         $data = $request->all();
         $data = [
-            'usertype' => encrypt('User'),
-            'firstname' => encrypt($request->input('inputFirstName')),
-            'lastname' => encrypt($request->input('inputLastName')),
-            'nic' => encrypt($request->input('inputNIC')),
-            'email' => encrypt($request->input('inputEmail')),
+            'usertype' => base64_encode('User'),
+            'firstname' => base64_encode($request->input('inputFirstName')),
+            'lastname' => base64_encode($request->input('inputLastName')),
+            'nic' => base64_encode($request->input('inputNIC')),
+            'email' => base64_encode($request->input('inputEmail')),
             'password' => Hash::make($request->input('inputPassword')),
-            //'reference' =>encrypt('User'),
+            'reference' =>base64_encode('User'),
             'is_email_verified' => 0,
             'status' => 1,
         ];

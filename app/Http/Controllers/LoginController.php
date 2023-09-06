@@ -28,9 +28,9 @@ class LoginController extends Controller
         foreach($userDetail as $Ur)
         {
           
-            if(decrypt( $Ur -> email) == $email){
+            if(base64_decode( $Ur -> email) == $email){
                 $email = $Ur -> email;
-                $userType = decrypt($Ur ->usertype);
+                $userType = base64_decode($Ur ->usertype);
             }
         }
         // dd($userType);
