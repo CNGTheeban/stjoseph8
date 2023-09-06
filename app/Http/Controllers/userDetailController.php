@@ -25,9 +25,6 @@ class userDetailController extends Controller
         $u = Auth::user();
         $userDetail = $this->userDetail->join('users', 'users.id', '=', 'user_details.userid')
                                        ->where('user_details.userid',  $u->id)->get();
-<<<<<<< HEAD
-
-=======
         foreach($userDetail as $User)
         {
             try {
@@ -42,7 +39,6 @@ class userDetailController extends Controller
             }
         }
         //dd($u);
->>>>>>> Dev.Sobana---Custom-Email-Verification
         // $childDetail = $this->userDetail->join('users', 'users.id', '=', 'user_details.userid')
         //                                ->join('child','child.userid','=','user_details.userid')
         //                                ->where('user_details.userid',  $u->id)->get();

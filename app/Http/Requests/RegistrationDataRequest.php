@@ -24,15 +24,11 @@ class RegistrationDataRequest extends FormRequest
     public function rules()
     {
         return [
-<<<<<<< HEAD
             'inputFirstName' => 'required',
             'inputLastName' => 'required',
             'inputNIC' => 'required|max:12|unique:users,nic',
-=======
-            // 'inputUsertype' => 'required|string',
             'inputFirstName' => 'required',
             'inputLastName' => 'required',
->>>>>>> Dev.Sobana---Custom-Email-Verification
             'inputEmail' => 'required|email|unique:users,email',
             'inputPassword' => 'required|min:6',
         ];
