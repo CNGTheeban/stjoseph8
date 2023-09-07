@@ -40,10 +40,6 @@ class RegisterController extends Controller
             'nic' => base64_encode($request->input('inputNIC')),
             'email' => base64_encode($request->input('inputEmail')),
             'password' => Hash::make($request->input('inputPassword')),
-<<<<<<< HEAD
-=======
-            //'reference' =>encrypt('User'),
->>>>>>> Email-Module.Theeban
             'is_email_verified' => 0,
             'status' => 1,
         ];
