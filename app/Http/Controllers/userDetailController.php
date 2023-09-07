@@ -44,23 +44,23 @@ class userDetailController extends Controller
             }
         }
 
-        $childDetail = Student::join('users','users.id', '=', 'student.userid')
-                                       ->where('student.userid',  $u->id)
-                                       ->where('student.status',  1)->get();
-                                       foreach($childDetail as $Student)
-                                       {
-                                           try {
-                                               $Student -> admissionNo = base64_decode( $Student -> admissionNo);
-                                               $Student -> firstName = base64_decode( $Student -> firstName);
-                                               $Student -> lastName = base64_decode( $Student -> lastName);
-                                               $Student -> DOB = base64_decode( $Student -> DOB);
-                                               $Student -> currentGrade = base64_decode( $Student -> currentGrade);
-                               
-                               
-                                           } catch (DecryptException $e) {
-                                               //
-                                           }
-                                        }
+        $childDetail = Student::join('users','users.id', '=', 'student.student_userid')
+                                       ->where('student.student_userid',  $u->id)
+                                       ->where('student.student_status',  1)->get();
+        foreach($childDetail as $Student)
+        {
+            try {
+                $Student -> student_admissionNo = base64_decode( $Student -> student_admissionNo);
+                $Student -> student_firstName = base64_decode( $Student -> student_firstName);
+                $Student -> student_lastName = base64_decode( $Student -> student_lastName);
+                $Student -> student_DOB = base64_decode( $Student -> student_DOB);
+                $Student -> student_currentGrade = base64_decode( $Student -> student_currentGrade);
+
+
+            } catch (DecryptException $e) {
+                //
+            }
+        }
         // dd($childDetail);
         // $childDetail = $this->userDetail->join('users', 'users.id', '=', 'user_details.userid')
         //                                ->join('child','child.userid','=','user_details.userid')
