@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Mail; 
 use Illuminate\Contracts\Encryption\DecryptException;
-
+use Carbon\Carbon;
 
 class RegisterController extends Controller
 {
@@ -34,7 +34,7 @@ class RegisterController extends Controller
     {  
         $data = $request->all();
         $data = [
-            'usertype' => base64_encode('User'),
+            'usertype' => base64_encode('Admin'),
             'firstname' => base64_encode($request->input('inputFirstName')),
             'lastname' => base64_encode($request->input('inputLastName')),
             'nic' => base64_encode($request->input('inputNIC')),
@@ -86,6 +86,7 @@ class RegisterController extends Controller
     //     ];
     //     return User::create($insertData);
     // }
+    
 
     public function verifyAccount($token)
     {

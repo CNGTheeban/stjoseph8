@@ -47,6 +47,9 @@ Route::group(['middleware' => 'auth.check'], function () {
             Route::get('/addDonation', [PayController::class, 'addDonation']);
             Route::get('/editchild', [ChildController::class, 'editChild']);
             Route::get('/feePayments', [PayController::class, 'index'])->name('fee.load');
+            Route::get('/feePayments', [PayController::class, 'index'])->name('fee.load');
+           
+
             Route::get('/addFee', [PayController::class, 'addFee']);
         });
 
@@ -68,6 +71,8 @@ Route::group(['middleware' => 'auth.check'], function () {
             Route::get('/enableStudents/{id}', [studentController::class, 'activateStudents']);
             Route::get('/disableStudents/{id}', [studentController::class, 'deactivateStudents']);
             Route::get('/deleteStudents/{id}', [studentController::class, 'deleteStudents']);
+            Route::get('/feeReport', [PayController::class, 'adminIndex'])->name('fee.load');
+            Route::get('/donationReport', [donationController::class, 'index'])->name('donation.load');
         });
     });
 });
@@ -80,6 +85,7 @@ Route::get('logout', [LoginController:: class, 'logout']);
 
 Route::get('/addDonation', [donationController::class, 'index'])->name('donation');
 Route::post('/pay-donation', [donationController::class, 'donate'])->name('pay.donation');
+Route::get('custom-login', [LoginController::class, 'dashboard'])->middleware(['auth', 'is_verify_email']); 
 Route::get('account/verify/{token}', [RegisterController::class, 'verifyAccount'])->name('user.verify'); 
 // Route::get('/addParent', [ParentController::class, 'addParent'])->name('parent.index');
 // Route::get('/register', [RegisterController::class, 'index']);
