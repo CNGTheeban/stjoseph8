@@ -59,7 +59,7 @@ class studentController extends Controller
             'student_lastName' => base64_encode($request->input('inputLastName')),
             'student_DOB' => base64_encode($request->input('inputDOB')),
             'student_currentGrade' => base64_encode($request->input('inputGrade')),      
-            'student_status' => "1",
+            'student_status' => "0",
         ];
         //dd($data);
         //Student::create($data);

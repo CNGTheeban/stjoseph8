@@ -14,13 +14,16 @@ class Fees extends Migration
     public function up()
     {
         Schema::create('fees', function (Blueprint $table) {
-            $table->id();
-            $table->integer('childid');
-            $table->string('term');
-            $table->double('amount');
-            $table->integer('status');
-            $table->timestamps();
-            $table->softDeletes($column = 'deleted_at', $precision = 0);
+            $table->id('fee_id');
+            $table->integer('fee_studentid');
+            $table->string('fee_term');
+            $table->string('fee_currentClass');
+            $table->string('fee_purpose');
+            $table->double('fee_amount');
+            $table->integer('fee_status');
+            $table->timestamp('fee_created_at')->useCurrent()->nullable();
+            $table->timestamp('fee_updated_at')->useCurrent()->nullable();
+            $table->softDeletes($column = 'fee_deleted_at', $precision = 0);
         });
     }
 

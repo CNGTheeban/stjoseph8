@@ -23,17 +23,17 @@
             @endif
         @endauth
 
-          @if(session('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
-                </div>
-            @endif
+        @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
             
-            @if(session('error'))
-                <div class="alert alert-danger">
-                    {{ session('error') }}
-                </div>
-            @endif
+        @if(session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
@@ -68,22 +68,15 @@
                                     @csrf   
                                    
                                     <div class="row">
-                                        <!-- <div class="col-4">
-                                            <div class="form-group">
-                                                <label for="inputClass">Class</label>
-                                                <input type="text" class="form-control" name="inputClass" id="inputClass" />
-                                            </div>
-                                        </div> -->
                                         <div class="col-4">
                                             <div class="form-group">
-                                                <label for="inputTerm">Term</label>
-                                                <select class="form-control" id="inputTerm" name="inputStudentId" required focus>
+                                                <label for="inputTerm">Student</label>
+                                                <select class="form-control" id="inputStudentId" name="inputStudentId" required focus>
                                                     <option value="" disabled selected>Please select Student</option>   
-                                                    @foreach($StudentData as $ud)     
-                                                    <option value="{{ $ud->id }}">{{ $ud->admissionNo }} - {{ $ud->firstName }}</option>
+                                                    @foreach($StudentData as $std)     
+                                                        <option value="{{ $std->student_id }}">{{ $std->student_admissionNo }} - {{ $std->student_firstName }}{{ $std->student_lastName }}</option>
                                                     @endforeach
                                                 </select>
-                                                <!-- <input type="text" class="form-control" name="inputTerm" id="inputTerm" placeholder="Ener child's your Term"/> -->
                                             </div>
                                         </div>
                                   
@@ -100,6 +93,20 @@
                                             </div>
                                         </div>
                                         <div class="col-4">
+                                            <div class="form-group">
+                                                <label for="inputClass">Class</label>
+                                                <input type="text" class="form-control" name="inputCurrentClass" id="inputCurrentClass" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label for="inputAmount">Purpose</label>
+                                                <input type="text" class="form-control" name="inputPurpose" id="inputPurpose" />
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
                                             <div class="form-group">
                                                 <label for="inputAmount">Amount</label>
                                                 <input type="text" class="form-control" name="inputAmount" id="inputAmount" />

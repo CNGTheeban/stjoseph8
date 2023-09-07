@@ -44,10 +44,10 @@ class userDetailController extends Controller
             }
         }
 
-        $childDetail = Student::join('users','users.id', '=', 'student.student_userid')
+        $Students = Student::join('users','users.id', '=', 'student.student_userid')
                                        ->where('student.student_userid',  $u->id)
                                        ->where('student.student_status',  1)->get();
-        foreach($childDetail as $Student)
+        foreach($Students as $Student)
         {
             try {
                 $Student -> student_admissionNo = base64_decode( $Student -> student_admissionNo);
@@ -91,7 +91,7 @@ class userDetailController extends Controller
         //     }
         // }
         return view('profile')->with('userdata', $userDetail)
-                             ->with('childdata',$childDetail);
+                             ->with('students',$Students);
                             //   ->with('FeesData',$FeesDetail);
     }
 

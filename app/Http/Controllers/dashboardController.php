@@ -26,96 +26,121 @@ class dashboardController extends Controller
         $latestDonation = $this->donationDetails->latest()->first();
 
         //get total donation - annually
-        $transactions = $this->donationDetails->all();
-        $annualTotal = 0;
+        $donationTransactions = $this->donationDetails->all();
+
+        //General variables
         $currentYear = date('Y');
-        foreach ($transactions as $transaction) {
-            // Assuming 'amount' is the name of the encrypted amount column in the transactions table
-            $decryptedAmount = Crypt::decrypt($transaction->amount);
+        $currentMonth = date('m Y');
+        $today = date('d m Y');
+
+
+        //donation variables
+        $annualDonationTotal = 0;
+        $formattedAnnualDonationAmount = 0;
         
-            // Assuming 'transaction_date' is the name of the date column in the transactions table
-            $transactionYear = date('Y', strtotime($transaction->created_at));
+        $monthlyDonationTotal = 0;
+        $formattedMontlyDonationAmount = 0;
+
+        $todayDonationTotal = 0;
+        $formattedTodayDonationAmount = 0;
         
-            if ($transactionYear == $currentYear) {
-                $annualTotal += $decryptedAmount;
+        $overallTotal = 0;
+        $formattedOverallDonationAmount = 0;
+
+        //get total donation - Annual
+        if(count($donationTransactions) != 0){
+            foreach ($donationTransactions as $donationTransaction) {
+                // Assuming 'amount' is the name of the encrypted amount column in the transactions table
+                $decryptedDonationAmount = Crypt::decrypt($donationTransaction->amount);
+            
+                // Assuming 'transaction_date' is the name of the date column in the transactions table
+                $donationTransactionYear = date('Y', strtotime($donationTransaction->created_at));
+            
+                if ($donationTransactionYear == $currentYear) {
+                    $annualDonationTotal += $decryptedDonationAmount;
+                }
             }
-            $formattedAnnualAmount = number_format($annualTotal, 0, '', ',');
+            $formattedAnnualDonationAmount = number_format($annualDonationTotal, 0, '', ',');
         }
 
+        //dd($annualDonationTotal);
         //get total donation - monthly
-        $monthlyTotal = 0;
-        $currentMonth = date('m Y');
-        foreach ($transactions as $transaction) {
-            // Assuming 'amount' is the name of the encrypted amount column in the transactions table
-            $decryptedAmount = Crypt::decrypt($transaction->amount);
-        
-            // Assuming 'transaction_date' is the name of the date column in the transactions table
-            $transactionMonth = date('m Y', strtotime($transaction->created_at));
-        
-            if ($transactionMonth == $currentMonth) {
-                $monthlyTotal += $decryptedAmount;
+        if(count($donationTransactions) != 0){
+            foreach ($donationTransactions as $donationTransaction) {
+                // Assuming 'amount' is the name of the encrypted amount column in the transactions table
+                $decryptedDonationAmount = Crypt::decrypt($donationTransaction->amount);
+            
+                // Assuming 'transaction_date' is the name of the date column in the transactions table
+                $donationTransactionMonth = date('m Y', strtotime($donationTransaction->created_at));
+            
+                if ($donationTransactionMonth == $currentMonth) {
+                    $monthlyDonationTotal += $decryptedDonationAmount;
+                }
             }
-            $formattedMontlyAmount = number_format($monthlyTotal, 0, '', ',');
+            $formattedMontlyDonationAmount = number_format($monthlyDonationTotal, 0, '', ',');
         }
 
         //get total donation - today
-        $todayTotal = 0;
-        $today = date('d m Y');
-        foreach ($transactions as $transaction) {
-            // Assuming 'amount' is the name of the encrypted amount column in the transactions table
-            $decryptedAmount = Crypt::decrypt($transaction->amount);
-        
-            // Assuming 'transaction_date' is the name of the date column in the transactions table
-            $transactionDay = date('d m Y', strtotime($transaction->created_at));
-        
-            if ($transactionDay == $today) {
-                $todayTotal += $decryptedAmount;
+        if(count($donationTransactions) != 0){
+            foreach ($donationTransactions as $donationTransaction) {
+                // Assuming 'amount' is the name of the encrypted amount column in the transactions table
+                $decryptedDonationAmount = Crypt::decrypt($donationTransaction->amount);
+            
+                // Assuming 'transaction_date' is the name of the date column in the transactions table
+                $donationTransactionDay = date('d m Y', strtotime($donationTransaction->created_at));
+            
+                if ($donationTransactionDay == $today) {
+                    $todayDonationTotal += $decryptedDonationAmount;
+                }
             }
-            $formattedTodayAmount = number_format($todayTotal, 0, '', ',');
+            $formattedTodayDonationAmount = number_format($todayDonationTotal, 0, '', ',');
         }
 
         //get total donation - overall
-        $overallTotal = 0;
-        foreach ($transactions as $transaction) {
-            // Assuming 'amount' is the name of the encrypted amount column in the transactions table
-            $decryptedAmount = Crypt::decrypt($transaction->amount);
+        if(count($donationTransactions) != 0){
+            foreach ($donationTransactions as $donationTransaction) {
+                // Assuming 'amount' is the name of the encrypted amount column in the transactions table
+                $decryptedOverAllAmount = Crypt::decrypt($donationTransaction->amount);
 
-            $overallTotal += $decryptedAmount;
+                $overallTotal += $decryptedOverAllAmount;
 
-            $formattedOverallAmount = number_format($overallTotal, 0, '', ',');
-        }
-        // dd($formattedOverallAmount);
-
-        foreach($donationData as $donData)
-        {
-            try {
-                $donData -> firstName = decrypt($donData -> firstName);
-                $donData -> lastName = decrypt($donData -> lastName);
-                $donData -> email = decrypt($donData -> email);
-                $donData -> contactno = decrypt($donData -> contactno);
-                $donData -> amount = decrypt($donData -> amount);
-
-            } catch (DecryptException $e) {
-                //
             }
+            $formattedOverallDonationAmount = number_format($overallTotal, 0, '', ',');
+            // dd($formattedOverallAmount);
         }
 
-        try {
-            $latestDonation -> firstName = Crypt::decrypt($latestDonation->firstName);
-            $latestDonation -> amount = Crypt::decrypt($latestDonation->amount);
-            // Use $decryptedData as needed
-        } catch (DecryptException $e) {
-            // Handle decryption failure
-            // Log or report the error, or take appropriate action
+        if(count($donationData) != 0){
+            foreach($donationData as $donData)
+            {
+                try {
+                    $donData -> firstName = decrypt($donData -> firstName);
+                    $donData -> lastName = decrypt($donData -> lastName);
+                    $donData -> email = decrypt($donData -> email);
+                    $donData -> contactno = decrypt($donData -> contactno);
+                    $donData -> amount = decrypt($donData -> amount);
+
+                } catch (DecryptException $e) {
+                    //
+                }
+            }
+
+            try {
+                $latestDonation -> firstName = Crypt::decrypt($latestDonation->firstName);
+                $latestDonation -> amount = Crypt::decrypt($latestDonation->amount);
+                // Use $decryptedData as needed
+            } catch (DecryptException $e) {
+                // Handle decryption failure
+                // Log or report the error, or take appropriate action
+            }
         }
 
         $data = [
             'latestDonation' => $latestDonation,
             'donationData' => $donationData,
-            'annualTotal' => $formattedAnnualAmount,
-            'monthlyTotal' => $formattedMontlyAmount,
-            'todayTotal' => $formattedTodayAmount,
-            'overallTotal' => $formattedOverallAmount
+            'annualTotal' => $formattedAnnualDonationAmount,
+            'monthlyTotal' => $formattedMontlyDonationAmount,
+            'todayTotal' => $formattedTodayDonationAmount,
+            'overallTotal' => $formattedOverallDonationAmount
         ];
 
         return view('index')->with('data', $data);

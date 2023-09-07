@@ -36,18 +36,13 @@ Route::group(['middleware' => 'auth.check'], function () {
         Route::group(['middleware' => 'user'], function () {
             Route::get('/addParent', [userDetailController::class, 'addParent'])->name('parent.form');
             Route::post('parent/create', [userDetailController::class, 'createParent'])->name('parent.create');
-            Route::post('/insertfee', [FeesController::class, 'insertFee'])->name('fee.insert');
             Route::get('/addStudent', [studentController::class, 'index'])->name('student.form');
             Route::post('/insertStudent', [studentController::class, 'insertStudent'])->name('student.insert');
-            Route::get('/addfee/{id}', [ChildController::class, 'addFee'])->name('fees.form');
-            Route::get('/enablechild/{id}', [ChildController::class, 'enableChild'])->name('index');
             Route::get('/profile', [userDetailController::class, 'index'])->name('profile.load');
 
-            Route::get('/deletechild/{id}', [ChildController::class, 'deleteChild'])->name('index');
-            Route::get('/addDonation', [PayController::class, 'addDonation']);
-            Route::get('/editchild', [ChildController::class, 'editChild']);
-            Route::get('/feePayments', [PayController::class, 'index'])->name('fee.load');
-            Route::get('/addFee', [PayController::class, 'addFee']);
+            Route::get('/feePayments', [FeesController::class, 'index'])->name('fee.load');
+            Route::get('/addFee', [FeesController::class, 'addFee']);
+            Route::post('/insertfee', [FeesController::class, 'insertFee'])->name('fee.insert');
         });
 
         // Route::group(['middleware' => 'doner'], function () {

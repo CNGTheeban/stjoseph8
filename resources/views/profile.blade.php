@@ -40,17 +40,17 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-            @if(session('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
-                </div>
-            @endif
-            
-            @if(session('error'))
-                <div class="alert alert-danger">
-                    {{ session('error') }}
-                </div>
-            @endif
+                            @if(session('success'))
+                                <div class="alert alert-success">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
+                            
+                            @if(session('error'))
+                                <div class="alert alert-danger">
+                                    {{ session('error') }}
+                                </div>
+                            @endif
                             <h1>Welcome,
                                 @foreach($userdata as $ud)
                                     {{ $ud->firstname }} {{ $ud->lastname }}
@@ -173,33 +173,22 @@
                                                 <th>First Name</th>
                                                 <th>Last Name</th>
                                                 <th>Grade</th>
-                                                <!-- <th>Status</th> -->
-                                                 <!-- <th>Actions</th>  -->
+                                                <th>Status</th>
                                                  
                                             </tr>
                                         </thead>
                                         <tbody>                                            
-                                            @foreach($childdata as $ud)
+                                            @foreach($students as $student)
                                                 <tr>
-                                                    <td> {{ $ud->admissionNo }}</td>
-                                                    <td> {{ $ud->firstName }}</td>
-                                                    <td> {{ $ud->lastName }}</td>
-                                                    <td> {{ $ud->currentGrade }}</td>
-                                                    <!-- @if( $ud->status == 1)
-                                                    <td><label class="ribbon bg-success">Active</label></td>
+                                                    <td> {{ $student->student_admissionNo }}</td>
+                                                    <td> {{ $student->student_firstName }}</td>
+                                                    <td> {{ $student->student_lastName }}</td>
+                                                    <td> {{ $student->student_currentGrade }}</td>
+                                                    @if( $student->student_status == 1)
+                                                        <td><label class="ribbon bg-success">Active</label></td>
                                                     @else
-                                                    <td><label class="ribbon bg-danger">Disabled</label></td>
-                                                    @endif -->
-                                                
-                                                    <!-- <td>                                           
-                                                        <button type="button" class="btn btn-warning" id="editChildren" name="editChildren"><a href="{{ url('addStudent/'.$ud->id) }}"><i class="fas fa-edit"></i></a></button> | 
-                                                        <button type="button" class="btn btn-success" id="payfee" name="payfee"><a href="{{ url('addfee/'.$ud->id) }}"><i class="fas fa-donate"></i></a></button> | 
-                                                        @if( $ud->status !== 1)
-                                                            <button class="btn btn-success" onclick="return confirm('{{ __('Are you sure you want to Enable?') }}')"><a href="{{ url('enablechild/'.$ud->id) }}"><i class="fas fa-toggle-on"></i></a></button>
-                                                        @else
-                                                            <button type="button" class="btn btn-danger" id="deleteChildren" name="deleteChildren" onclick="return confirm('{{ __('Are you sure you want to delete?') }}')"><a href="{{ url('deletechild/'.$ud->id) }}"><i class="fas fa-trash"></i></a></button>
-                                                        @endif
-                                                    </td> -->
+                                                        <td><label class="ribbon bg-danger">Admin need to Check</label></td>
+                                                    @endif
                                                 </tr>                                              
                                             @endforeach 
                                         </tbody>             

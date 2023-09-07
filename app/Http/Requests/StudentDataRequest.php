@@ -30,7 +30,6 @@ class StudentDataRequest extends FormRequest
                 'required',
                 new UniqueDecodedAdmissionNo,
             ],
-            //'inputAdmissionNo' => 'required|unique:base64_decode->student,student_admissionNo',
             'inputFirstName' => 'required',
             'inputLastName' => 'required',
             'inputDOB' => 'required',

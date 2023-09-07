@@ -16,13 +16,15 @@ class Fees extends Model
      * @var array $fillable
      */
     protected $fillable = [
-        'id',
-        'childid',
-        'term',
-        'amount',
-        'status',
-        'created_at',
-        'updated_at',
-        'deleted_at'
+        'fee_id',
+        'fee_studentid',
+        'fee_term',
+        'fee_currentClass',
+        'fee_purpose',
+        'fee_amount',
+        'fee_status',
+        'fee_created_at',
+        'fee_updated_at',
+        'fee_deleted_at'
     ];
 }
