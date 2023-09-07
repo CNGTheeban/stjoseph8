@@ -85,4 +85,29 @@ class FeesController extends Controller
         
         return redirect()->route('fee.load')->with('success', $message);
     }
+
+    // view all fee details via admin
+    public function adminIndex()
+    {
+        $u = Auth::user();
+        $students = Student::join('fees','fees.fee_studentid','=','student.student_id')
+        ->where('student.student_status',  1)->get();
+        foreach($students as $Student)
+        {
+            try {
+                $Student -> student_admissionNo = base64_decode( $Student -> student_admissionNo);
+                $Student -> student_firstName = base64_decode( $Student -> student_firstName);
+                $Student -> student_lastName = base64_decode( $Student -> student_lastName);
+                $Student -> student_DOB = base64_decode( $Student -> student_DOB);
+                $Student -> student_currentGrade = base64_decode( $Student -> student_currentGrade);
+                $Student -> created_at = $Student ->created_at->format('m/d/Y');
+
+
+            } catch (DecryptException $e) {
+                //
+            }
+         }
+        //  dd($students);
+        return view('feeReport')->with('StudentData', $students);
+    }
 }
