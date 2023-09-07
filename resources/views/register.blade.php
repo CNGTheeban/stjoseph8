@@ -44,7 +44,7 @@
                             </div>
                         </div>
                         @if ($errors->has('inputNIC'))
-                            <span class="text-danger">{{ $errors->first('inputNIC') }}</span>
+                            <!-- <span class="text-danger">{{ $errors->first('inputNIC') }}</span> -->
                         @endif
                     </div>
                     <div class="input-group mb-3">
@@ -55,7 +55,7 @@
                             </div>
                         </div>
                         @if ($errors->has('inputEmail'))
-                            <span class="text-danger">{{ $errors->first('inputEmail') }}</span>
+                            <!-- <span class="text-danger">{{ $errors->first('inputEmail') }}</span> -->
                         @endif
                     </div>
                     <div class="input-group mb-3">
@@ -76,6 +76,15 @@
                         </div>
                     </div>
                 </form>
+                @if (count($errors) > 0)
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
                 <br>
                 <a href="/addDonation" class="btn btn-secondary btn-block">Donate Here</a>
             </div>

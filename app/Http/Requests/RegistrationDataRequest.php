@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\UniqueDecodedUserEmail;
+use App\Rules\UniqueDecodedUserNIC;
 
 class RegistrationDataRequest extends FormRequest
 {
@@ -27,7 +29,8 @@ class RegistrationDataRequest extends FormRequest
             // 'inputUsertype' => 'required|string',
             'inputFirstName' => 'required',
             'inputLastName' => 'required',
-            'inputEmail' => 'required|email|unique:users,email',
+            'inputEmail' => ['required',new UniqueDecodedUserEmail],
+            'inputNIC' => ['required',new UniqueDecodedUserNIC],
             'inputPassword' => 'required|min:6',
         ];
     }

@@ -25,12 +25,15 @@
                 background-color: transparent!important;
             }
         </style>
-    </head>
+    @stack('styles')    
+</head>
     <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
         
         @yield('content')
 
+
         <!-- REQUIRED SCRIPTS -->
+
         <!-- jQuery -->
         <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
         <!-- Bootstrap -->
@@ -68,6 +71,7 @@
         
         <!-- AdminLTE App -->
         <script src="{{ asset('js/adminlte.js') }}"></script>
+        @stack('scripts')
 
         <script>
             $(function () {
@@ -84,7 +88,6 @@
                 // maxDate.appendTo('#feePaymentTable_wrapper #feePaymentTable_filter');
             });
 
-            
             // let minDate, maxDate;
  
             // // Custom filtering function which will search data in column four between two values
@@ -119,6 +122,8 @@
             // document.querySelectorAll('#min, #max').forEach((el) => {
             //     el.addEventListener('change', () => table.draw());
             // });
+
     </script>
+
     </body>
 </html>

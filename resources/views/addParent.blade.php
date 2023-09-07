@@ -11,12 +11,12 @@
 
             $user = Auth::user();
             $user_id = $user->id;
-<<<<<<< HEAD
+
             $first_name = base64_decode($user->firstname);
             $last_name = base64_decode($user->lastname);
-=======
+
             $user_name = base64_decode($user->firstname);
->>>>>>> Email-Module
+
             $user_type = base64_decode($user->usertype);
         ?>
         <!-- Preloader -->

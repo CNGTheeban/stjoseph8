@@ -45,11 +45,25 @@
                         <p>System Users</p>
                     </a>
                 </li> --}}
-                <li class="nav-item">
+                <li class="nav-item has-treeview menu-close">
                     <a href="/unauthUsers" class="nav-link">
                         <i class="nav-icon fas fa-paste"></i>
                         <p>Reports</p>
                     </a>
+                    <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/feeReport" class="nav-link">
+                        <i class="nav-icon fas fa-paste"></i>
+                        <p>Fees</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/donationReport" class="nav-link">
+                        <i class="nav-icon fas fa-paste"></i>
+                        <p>Donation</p>
+                        </a>
+                    </li>
+                    </ul>
                 </li>
             </ul>
         </nav>

@@ -37,10 +37,20 @@ class LoginController extends Controller
             //return redirect()->intended('index')->withSuccess('Logged in');
             //auth()->login($user);
             if($userType == 'User'){
-                return redirect("/profile")->withSuccess('You have LoggedIn.');
+                if (!Auth::user()->is_email_verified) {
+       
+                    auth()->logout();
+                    return redirect("login")->withSuccess('You need to confirm your account. We have sent you an activation code, please check your email.');
+
+
+                  }else{
+                    return redirect("/profile")->withSuccess('You have LoggedIn.');
+
+                  }
+            
 
             }else{
-                return redirect("/index")->withSuccess('You have LoggedIn.');
+                return redirect("/parents")->withSuccess('You have LoggedIn.');
                 return redirect("/")->withSuccess('You have LoggedIn.');
             }
            

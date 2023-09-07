@@ -80,7 +80,7 @@
                                                 <select class="form-control" id="inputTerm" name="inputStudentId" required focus>
                                                     <option value="" disabled selected>Please select Student</option>   
                                                     @foreach($StudentData as $ud)     
-                                                    <option value="{{ $ud->id }}">{{ $ud->admissionNo }} - {{ $ud->firstName }}</option>
+                                                    <option value="{{ $ud->student_id }}">{{ $ud->student_admissionNo }} - {{ $ud->student_firstName }}</option>
                                                     @endforeach
                                                 </select>
                                                 <!-- <input type="text" class="form-control" name="inputTerm" id="inputTerm" placeholder="Ener child's your Term"/> -->
