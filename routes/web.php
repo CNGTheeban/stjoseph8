@@ -26,8 +26,6 @@ Route::group(['middleware' => 'auth.check'], function () {
     //Your protected routes here
     Route::group(['middleware' => 'isActive'], function () {
     
-        // Route::get('/', function () {return view('index');});
-        // Route::get('/index', function () {return view('index');});
         Route::get('/index', [dashboardController::class, 'adminDashboard']);
         Route::get('/', [dashboardController::class, 'adminDashboard']);
         
@@ -38,27 +36,10 @@ Route::group(['middleware' => 'auth.check'], function () {
             Route::post('/insertStudent', [studentController::class, 'insertStudent'])->name('student.insert');
             Route::get('/profile', [userDetailController::class, 'index'])->name('profile.load');
 
-<<<<<<< HEAD
-            Route::get('/deletechild/{id}', [ChildController::class, 'deleteChild'])->name('index');
-            Route::get('/addDonation', [PayController::class, 'addDonation']);
-            Route::get('/editchild', [ChildController::class, 'editChild']);
-            Route::get('/feePayments', [PayController::class, 'index'])->name('fee.load');
-            Route::get('/feePayments', [PayController::class, 'index'])->name('fee.load');
-           
-
-            Route::get('/addFee', [PayController::class, 'addFee']);
-=======
             Route::get('/feePayments', [FeesController::class, 'index'])->name('fee.load');
             Route::get('/addFee', [FeesController::class, 'addFee']);
             Route::post('/insertfee', [FeesController::class, 'insertFee'])->name('fee.insert');
->>>>>>> Email-Module.Theeban
         });
-
-        // Route::group(['middleware' => 'doner'], function () {
-        //     // Route::get('/addDonation', [PayController::class, 'addDonation']);
-        //     // Route::get('/profile', [userDetailController::class, 'index']);
-        //     Route::get('/DonerProfile', [userDetailController::class, 'index']);
-        // });
 
         Route::group(['middleware' => 'admin'], function () {
             Route::get('/parents', [ParentController::class, 'index']);
