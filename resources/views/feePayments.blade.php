@@ -81,13 +81,13 @@
                                     <tbody>
                                     @foreach($StudentData as $ud)
                                     <tr>
-                                            <td>{{ $ud->admissionNo }}</td>
+                                            <td>{{ $ud->student_admissionNo }}</td>
                                             <td>{{ $ud->created_at }}</td>
-                                            <td>{{ $ud->firstName }} {{ $ud->lastName }}</td>
-                                            <td>{{ $ud->currentGrade }}</td>
+                                            <td>{{ $ud->student_firstName }} {{ $ud->student_lastName }}</td>
+                                            <td>{{ $ud->student_currentGrade }}</td>
                                             <td>{{ $ud->term }}</td>
                                             <td>{{ $ud->amount }}</td>
-                                            @if( $ud->status !== 1)
+                                            @if( $ud->student_status !== 1)
                                             <td>Unpaid</td>
                                             @else
                                             <td>Paid</td>

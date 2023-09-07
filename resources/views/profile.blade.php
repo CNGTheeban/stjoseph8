@@ -181,10 +181,10 @@
                                         <tbody>                                            
                                             @foreach($childdata as $ud)
                                                 <tr>
-                                                    <td> {{ $ud->admissionNo }}</td>
-                                                    <td> {{ $ud->firstName }}</td>
-                                                    <td> {{ $ud->lastName }}</td>
-                                                    <td> {{ $ud->currentGrade }}</td>
+                                                    <td> {{ $ud->student_admissionNo }}</td>
+                                                    <td> {{ $ud->student_firstName }}</td>
+                                                    <td> {{ $ud->student_lastName }}</td>
+                                                    <td> {{ $ud->student_currentGrade }}</td>
                                                     <!-- @if( $ud->status == 1)
                                                     <td><label class="ribbon bg-success">Active</label></td>
                                                     @else

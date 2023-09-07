@@ -124,10 +124,12 @@ class userDetailController extends Controller
     // public function createParent(CreateParentDataRequest $request)
     public function createParent(UserDetailDataRequest $request)
     {
-        $checkUserDetailID = $request->input('inputUserDetailID');
+        $u = Auth::user();
+
+        $checkUserDetailID = userDetail::where('user_details.userid',  $u->id)->exists();
         $userID = $request->input('inputUserID');
         $message = '';
-        if($checkUserDetailID == "0" ||$checkUserDetailID == null ){
+        if(!$checkUserDetailID){
             $data = [
                 'userid' => $request->input('inputUserID'),
                 'addressline1' => $request->input('inputAddressLine1'),

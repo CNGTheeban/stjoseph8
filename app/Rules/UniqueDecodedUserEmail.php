@@ -5,7 +5,8 @@ namespace App\Rules;
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 
-class UniqueDecodedAdmissionNo implements Rule
+
+class UniqueDecodedUserEmail implements Rule
 {
     /**
      * Create a new rule instance.
@@ -26,13 +27,9 @@ class UniqueDecodedAdmissionNo implements Rule
      */
     public function passes($attribute, $value)
     {
-       // Decode the base64-encoded value
-        //dd($value);
-        $encodedValue = base64_encode($value); // Decoding base64
-        //dd($encodedValue);
-        // Check if the decoded value is unique in the database
-        return !DB::table('student')
-            ->where('student_admissionNo', $encodedValue)
+        $encodedValue = base64_encode($value);
+        return !DB::table('users')
+            ->where('email', $encodedValue)
             ->exists();
     }
 
@@ -43,6 +40,6 @@ class UniqueDecodedAdmissionNo implements Rule
      */
     public function message()
     {
-        return 'The Admission No already exisit';
+        return 'User Email Already exist.';
     }
 }
