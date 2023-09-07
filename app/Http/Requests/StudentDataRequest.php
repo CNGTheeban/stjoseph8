@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\UniqueDecodedAdmissionNo;
 
 class StudentDataRequest extends FormRequest
 {
@@ -27,9 +28,9 @@ class StudentDataRequest extends FormRequest
             'inputUserId' => 'required',
             'inputAdmissionNo' => [
                 'required',
-                // new UniqueDecodedAdmissionNo('student', 'student_admissionNo')
-                'unique:'.base64_decode('student,student_admissionNo'),
+                new UniqueDecodedAdmissionNo,
             ],
+            //'inputAdmissionNo' => 'required|unique:base64_decode->student,student_admissionNo',
             'inputFirstName' => 'required',
             'inputLastName' => 'required',
             'inputDOB' => 'required',
