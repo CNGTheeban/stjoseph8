@@ -7,9 +7,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ParentController;
 use App\Http\Controllers\ChildController;
 use App\Http\Controllers\studentController;
-use App\Http\Controllers\PayController;
 use App\Http\Controllers\donationController;
-use App\Http\Controllers\userController;
 use App\Http\Controllers\FeesController;
 use App\Http\Controllers\userDetailController;
 use App\Http\Controllers\dashboardController;
@@ -53,12 +51,6 @@ Route::group(['middleware' => 'auth.check'], function () {
 
         Route::group(['middleware' => 'admin'], function () {
             Route::get('/parents', [ParentController::class, 'index']);
-            Route::get('/authUsers', [userController::class, 'index']);
-            Route::get('/unauthUsers', [userController::class, 'unauthorizedUsers']);
-            Route::get('/enableUnauthUsers/{id}', [userController::class, 'activateUnauthorizedUsers']);
-            Route::get('/deleteUnauthUsers/{id}', [userController::class, 'deleteUnauthorizedUsers']);
-            Route::get('/authUsers', [userController::class, 'authorizedUsers']);
-            Route::get('/disableAuthUsers/{id}', [userController::class, 'deactivateAuthorizedUsers']);
             Route::get('/viewStudent', [studentController::class, 'viewStudent']);
             Route::get('/enableStudents/{id}', [studentController::class, 'activateStudents']);
             Route::get('/disableStudents/{id}', [studentController::class, 'deactivateStudents']);
