@@ -26,11 +26,19 @@ class UniqueDecodedAdmissionNo implements Rule
      */
     public function passes($attribute, $value)
     {
+<<<<<<< HEAD
        // Decode the base64-encoded value
         //dd($value);
         $encodedValue = base64_encode($value); // Decoding base64
         //dd($encodedValue);
         // Check if the decoded value is unique in the database
+=======
+        // encode the input value
+        //dd($value);
+        $encodedValue = base64_encode($value); // Decoding base64
+        //dd($encodedValue);
+        // Check if the encoded value is unique in the database
+>>>>>>> Email-Module.Theeban
         return !DB::table('student')
             ->where('student_admissionNo', $encodedValue)
             ->exists();
