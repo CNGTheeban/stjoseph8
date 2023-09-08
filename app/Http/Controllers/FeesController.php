@@ -38,6 +38,6 @@ class FeesController extends Controller
         $message = 'Data has been inserted successfully.';
         }
         
-        return redirect()->route('fee.load')->with('success', $message);
+        return redirect()->route('fees.load')->with('success', $message);
     }
 }

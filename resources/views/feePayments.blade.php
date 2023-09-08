@@ -87,7 +87,7 @@
                                             <td>{{ $ud->student_currentGrade }}</td>
                                             <td>{{ $ud->term }}</td>
                                             <td>{{ $ud->amount }}</td>
-                                            @if( $ud->student_status !== 1)
+                                            @if( $ud->status !== 1)
                                             <td>Unpaid</td>
                                             @else
                                             <td>Paid</td>

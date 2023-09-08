@@ -30,7 +30,7 @@ class PayController extends Controller
             }
          }
         //  dd($students);
-        return view('feePayments')->with('StudentData', $students);
+        return view('/feePayments')->with('StudentData', $students);
     }
 // view all fee details via admin
     public function adminIndex()
