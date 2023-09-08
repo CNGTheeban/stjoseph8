@@ -13,7 +13,7 @@
                 <img src="{{ asset('img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">{{ base64_decode(auth()->user()->firstName) }}</a>
+                <a href="#" class="d-block">{{ base64_decode(auth()->user()->firstname) }}</a>
             </div>
         </div>
 
