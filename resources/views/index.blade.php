@@ -86,7 +86,13 @@
                                 <div class="info-box-content">
                                     <span class="info-box-text">Last Fee</span>
                                     <span class="info-box-number">
-                                        [Date] - <small>[Amount]</small>
+                                    @if($data['latestFees'] != null)
+                                            <?php
+                                                $latestFees = $data['latestFees'];
+                                                $latestDonation = $data['latestDonation'];
+                                            ?>
+                                                {{ date("j F Y", strtotime($latestFees['fee_created_at']))}} - <small>LKR {{ $latestFees['fee_amount'] }}</small>
+                                        @endif
                                     </span>
                                 </div>
                                 <!-- /.info-box-content -->
@@ -155,15 +161,15 @@
                                                 <div class="col-sm-6 col-6">
                                                     <div class="description-block border-right">
                                                         {{-- <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> 17%</span> --}}
-                                                        <h5 class="description-header text-success">$35,210.43</h5>
-                                                        <span class="description-text">TOTAL REVENUE</span>
+                                                        <h5 class="description-header text-success">LKR {{ $data['overallfeesTotal'] }}</h5>
+                                                        <span class="description-text">Total</span>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6 col-6">
                                                     <div class="description-block">
                                                         {{-- <span class="description-percentage text-warning"><i class="fas fa-caret-left"></i> 0%</span> --}}
-                                                        <h5 class="description-header text-success">$10,390.90</h5>
-                                                        <span class="description-text">TOTAL COST</span>
+                                                        <h5 class="description-header text-success">LKR {{ $data['annualFeesTotal'] }}</h5>
+                                                        <span class="description-text">Annually</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -171,15 +177,15 @@
                                                 <div class="col-sm-6 col-6">
                                                     <div class="description-block border-right">
                                                         {{-- <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> 20%</span> --}}
-                                                        <h5 class="description-header text-success">$24,813.53</h5>
-                                                        <span class="description-text">TOTAL PROFIT</span>
+                                                        <h5 class="description-header text-success">LKR {{ $data['monthlyFeesTotal'] }}</h5>
+                                                        <span class="description-text">Monthly</span>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6 col-6">
                                                     <div class="description-block">
                                                         {{-- <span class="description-percentage text-danger"><i class="fas fa-caret-down"></i> 18%</span> --}}
-                                                        <h5 class="description-header text-success">1200</h5>
-                                                        <span class="description-text">GOAL COMPLETIONS</span>
+                                                        <h5 class="description-header text-success">LKR {{ $data['todayFeesTotal'] }}</h5>
+                                                        <span class="description-text">Today</span>
                                                     </div>
                                                 </div>
                                             </div>

@@ -79,25 +79,6 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-<<<<<<< HEAD
-                                    @foreach($StudentData as $ud)
-                                    <tr>
-                                            <td>{{ $ud->student_admissionNo }}</td>
-                                            <td>{{ $ud->created_at }}</td>
-                                            <td>{{ $ud->student_firstName }} {{ $ud->student_lastName }}</td>
-                                            <td>{{ $ud->student_currentGrade }}</td>
-                                            <td>{{ $ud->term }}</td>
-                                            <td>{{ $ud->amount }}</td>
-                                            @if( $ud->status !== 1)
-                                            <td>Unpaid</td>
-                                            @else
-                                            <td>Paid</td>
-                                            @endif
-                                        </tr>
-                                    @endforeach
-                                       
-                                     
-=======
                                         @foreach($studentFeeDetails as $std)
                                             <tr>
                                                 <td>{{ $std->student_admissionNo }}</td>
@@ -113,7 +94,6 @@
                                                 @endif
                                             </tr>
                                         @endforeach
->>>>>>> Email-Module.Theeban
                                     </tbody>
                                 </table>
                             </div>

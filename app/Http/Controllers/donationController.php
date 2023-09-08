@@ -16,6 +16,13 @@ class donationController extends Controller
     //add donation render
     public function index()
     {
+       
+        // dd($donationdata);    
+        return view('/addDonation');
+    }
+
+    public function Adindex()
+    {
         $donationdata = $this->donation->get();
         foreach($donationdata as $don)
         {
