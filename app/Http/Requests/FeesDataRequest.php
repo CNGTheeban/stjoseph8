@@ -24,8 +24,10 @@ class FeesDataRequest extends FormRequest
     public function rules()
     {
         return [
-    
+            'inputStudentId' => 'required',
             'inputTerm' => 'required',
+            'inputCurrentClass' => 'required',
+            'inputPurpose' => 'required',
             'inputAmount' => 'required|regex:/^\d+(\.\d{1,2})?$/',
         ];
     }

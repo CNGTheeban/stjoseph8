@@ -32,17 +32,17 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                        @if(session('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
-                </div>
-            @endif
-            
-            @if(session('error'))
-                <div class="alert alert-danger">
-                    {{ session('error') }}
-                </div>
-            @endif
+                            @if(session('success'))
+                                <div class="alert alert-success">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
+                            
+                            @if(session('error'))
+                                <div class="alert alert-danger">
+                                    {{ session('error') }}
+                                </div>
+                            @endif
                             <h1>Fee Payment</h1>
                         </div>
                         <div class="col-sm-6">
@@ -79,6 +79,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+<<<<<<< HEAD
                                     @foreach($StudentData as $ud)
                                     <tr>
                                             <td>{{ $ud->student_admissionNo }}</td>
@@ -96,6 +97,23 @@
                                     @endforeach
                                        
                                      
+=======
+                                        @foreach($studentFeeDetails as $std)
+                                            <tr>
+                                                <td>{{ $std->student_admissionNo }}</td>
+                                                <td>{{ $std->fee_created_at }}</td>
+                                                <td>{{ $std->student_firstName }} {{ $std->student_lastName }}</td>
+                                                <td>{{ $std->fee_currentClass }}</td>
+                                                <td>{{ $std->fee_purpose }}</td>
+                                                <td>{{ $std->fee_amount }}</td>
+                                                @if( $std->student_status != 1)
+                                                    <td>Unpaid</td>
+                                                @else
+                                                    <td>Paid</td>
+                                                @endif
+                                            </tr>
+                                        @endforeach
+>>>>>>> Email-Module.Theeban
                                     </tbody>
                                 </table>
                             </div>
