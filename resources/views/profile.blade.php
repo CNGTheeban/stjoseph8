@@ -180,21 +180,12 @@
                                         <tbody>                                            
                                             @foreach($students as $student)
                                                 <tr>
-<<<<<<< HEAD
-                                                    <td> {{ $ud->student_admissionNo }}</td>
-                                                    <td> {{ $ud->student_firstName }}</td>
-                                                    <td> {{ $ud->student_lastName }}</td>
-                                                    <td> {{ $ud->student_currentGrade }}</td>
-                                                    <!-- @if( $ud->status == 1)
-                                                    <td><label class="ribbon bg-success">Active</label></td>
-=======
                                                     <td> {{ $student->student_admissionNo }}</td>
                                                     <td> {{ $student->student_firstName }}</td>
                                                     <td> {{ $student->student_lastName }}</td>
                                                     <td> {{ $student->student_currentGrade }}</td>
                                                     @if( $student->student_status == 1)
                                                         <td><label class="ribbon bg-success">Active</label></td>
->>>>>>> Email-Module.Theeban
                                                     @else
                                                         <td><label class="ribbon bg-danger">Admin need to Check</label></td>
                                                     @endif

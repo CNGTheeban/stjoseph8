@@ -42,15 +42,12 @@ class LoginController extends Controller
                     auth()->logout();
                     return redirect("login")->withSuccess('You need to confirm your account. We have sent you an activation code, please check your email.');
 
-
-                  }else{
+                }else{
                     return redirect("/profile")->withSuccess('You have LoggedIn.');
 
-                  }
-            
-
+                }
             }else{
-                return redirect("/parents")->withSuccess('You have LoggedIn.');
+                return redirect("/index")->withSuccess('You have LoggedIn.');
                 return redirect("/")->withSuccess('You have LoggedIn.');
             }
            

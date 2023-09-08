@@ -42,7 +42,6 @@ Route::group(['middleware' => 'auth.check'], function () {
         });
 
         Route::group(['middleware' => 'admin'], function () {
-            Route::get('/parents', [ParentController::class, 'index']);
             Route::get('/viewStudent', [studentController::class, 'viewStudent']);
             Route::get('/enableStudents/{id}', [studentController::class, 'activateStudents']);
             Route::get('/disableStudents/{id}', [studentController::class, 'deactivateStudents']);

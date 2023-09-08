@@ -73,13 +73,8 @@
                                                 <label for="inputTerm">Student</label>
                                                 <select class="form-control" id="inputStudentId" name="inputStudentId" required focus>
                                                     <option value="" disabled selected>Please select Student</option>   
-<<<<<<< HEAD
-                                                    @foreach($StudentData as $ud)     
-                                                    <option value="{{ $ud->student_id }}">{{ $ud->student_admissionNo }} - {{ $ud->student_firstName }}</option>
-=======
                                                     @foreach($StudentData as $std)     
                                                         <option value="{{ $std->student_id }}">{{ $std->student_admissionNo }} - {{ $std->student_firstName }}{{ $std->student_lastName }}</option>
->>>>>>> Email-Module.Theeban
                                                     @endforeach
                                                 </select>
                                             </div>
