@@ -47,7 +47,7 @@ class FeesController extends Controller
     { 
         $u = Auth::user();
         $students = Student::where('student.student_userid', $u->id)
-            ->where('student.student_status',  1)->get();
+                   ->get();
 
         if($students != null){
             foreach($students as $Student)
@@ -71,6 +71,11 @@ class FeesController extends Controller
 
     public function insertFee(FeesDataRequest $request)
     {
+        // $fees = Fees::where('fee_studentid',  input('inputStudentId'))
+        //             ->where('fee_term',  input('inputTerm'))
+        //             ->exists();
+
+        
         $data = [
             'fee_studentid' => $request->input('inputStudentId'),
             'fee_term' => $request->input('inputTerm'),
@@ -91,7 +96,7 @@ class FeesController extends Controller
     {
         $u = Auth::user();
         $students = Student::join('fees','fees.fee_studentid','=','student.student_id')
-        ->where('student.student_status',  1)->get();
+        ->get();
         foreach($students as $Student)
         {
             try {

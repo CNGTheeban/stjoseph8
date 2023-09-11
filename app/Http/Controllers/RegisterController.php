@@ -34,7 +34,7 @@ class RegisterController extends Controller
     {  
         $data = $request->all();
         $data = [
-            'usertype' => base64_encode('Admin'),
+            'usertype' => base64_encode('User'),
             'firstname' => base64_encode($request->input('inputFirstName')),
             'lastname' => base64_encode($request->input('inputLastName')),
             'nic' => base64_encode($request->input('inputNIC')),

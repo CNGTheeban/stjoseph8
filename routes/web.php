@@ -46,8 +46,8 @@ Route::group(['middleware' => 'auth.check'], function () {
             Route::get('/enableStudents/{id}', [studentController::class, 'activateStudents']);
             Route::get('/disableStudents/{id}', [studentController::class, 'deactivateStudents']);
             Route::get('/deleteStudents/{id}', [studentController::class, 'deleteStudents']);
-            Route::get('/feeReport', [FeesController::class, 'adminIndex'])->name('fee.load');
-            Route::get('/donationReport', [donationController::class, 'index'])->name('donation.load');
+            Route::get('/feeReport', [FeesController::class, 'adminIndex'])->name('fees.load');
+            Route::get('/donationReport', [donationController::class, 'Adindex'])->name('donation.load');
         });
     });
 });

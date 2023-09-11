@@ -53,59 +53,47 @@
                     {{ session('error') }}
                 </div>
             @endif
-            
-            @auth
-                @if(base64_decode(auth()->user()->usertype) == 'Admin')
-                    <!-- Main content -->
-                    <section class="content">
-                        <div class="container-fluid">
-                            <!-- Info boxes -->
-                            <div class="row">
-                                <div class="col-12 col-sm-6 col-md-6">
-                                    <div class="info-box">
-                                        <span class="info-box-icon bg-info elevation-1"><i class="fas fa-donate"></i></span>
-                                        <div class="info-box-content">
-                                            <span class="info-box-text">Last Donation</span>
-                                            <span class="info-box-number">
-                                                @if($data['latestDonation'] != null)
-                                                    <?php
-                                                        $latestDonation = $data['latestDonation'];
-                                                    ?>
-                                                    {{-- {{$data['latestDonation']}} --}}
-                                                    {{-- @foreach($latestDonation as $lateDon) --}}
-                                                        {{ $latestDonation['created_at']->format('j F Y') }} - <small>LKR {{ $latestDonation['amount'] }}</small>
-                                                    {{-- @endforeach --}}
-                                                @endif
-                                            </span>
-                                        </div>
-                                    <!-- /.info-box-content -->
-                                    </div>
-                                    <!-- /.info-box -->
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <!-- Info boxes -->
+                    <div class="row">
+                        <div class="col-12 col-sm-6 col-md-6">
+                            <div class="info-box">
+                                <span class="info-box-icon bg-info elevation-1"><i class="fas fa-donate"></i></span>
+                                <div class="info-box-content">
+                                    <span class="info-box-text">Last Donation</span>
+                                    <span class="info-box-number">
+                                        @if($data['latestDonation'] != null)
+                                            <?php
+                                                $latestDonation = $data['latestDonation'];
+                                            ?>
+                                            {{-- {{$data['latestDonation']}} --}}
+                                            {{-- @foreach($latestDonation as $lateDon) --}}
+                                                {{ $latestDonation['created_at']->format('j F Y') }} - <small>LKR {{ $latestDonation['amount'] }}</small>
+                                            {{-- @endforeach --}}
+                                        @endif
+                                    </span>
                                 </div>
-                                <!-- /.col -->
-                                <div class="col-12 col-sm-6 col-md-6">
-                                    <div class="info-box mb-3">
-                                        <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-money-bill"></i></span>
-                                        <div class="info-box-content">
-                                            <span class="info-box-text">Last Fee</span>
-                                            <span class="info-box-number">
-                                                @if($data['latestFee'] != null)
-                                                    <?php
-                                                        $latestFee = $data['latestFee'];
-                                                    ?>
-                                                    {{-- {{$data['latestFee']}} --}}
-                                                    {{-- {{ $data->latestFee }} --}}
-                                                    @foreach($latestFee as $lateFee)
-                                                        {{ $latestFee['fee_created_at']->format('j F Y') }} - <small>LKR {{ $latestFee['fee_amount'] }}</small>
-                                                    @endforeach
-                                                @endif
-                                            </span>
-                                        </div>
-                                        <!-- /.info-box-content -->
-                                    </div>
-                                    <!-- /.info-box -->
+                            <!-- /.info-box-content -->
+                            </div>
+                            <!-- /.info-box -->
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-12 col-sm-6 col-md-6">
+                            <div class="info-box mb-3">
+                                <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-money-bill"></i></span>
+                                <div class="info-box-content">
+                                    <span class="info-box-text">Last Fee</span>
+                                    <span class="info-box-number">
+                                        [Date] - <small>[Amount]</small>
+                                    </span>
                                 </div>
-                                <!-- /.col -->
+                                <!-- /.info-box-content -->
+                            </div>
+                            <!-- /.info-box -->
+                        </div>
+                        <!-- /.col -->
 
                                 <!-- fix for small devices only -->
                                 <div class="clearfix hidden-md-up"></div>
@@ -165,15 +153,15 @@
                                                 <div class="col-sm-6 col-6">
                                                     <div class="description-block border-right">
                                                         {{-- <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> 17%</span> --}}
-                                                        {{-- <h5 class="description-header text-success">LKR {{ $data['overallFeeTotal'] }}</h5> --}}
-                                                        <span class="description-text">Total</span>
+                                                        <h5 class="description-header text-success">$35,210.43</h5>
+                                                        <span class="description-text">TOTAL REVENUE</span>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6 col-6">
                                                     <div class="description-block">
                                                         {{-- <span class="description-percentage text-warning"><i class="fas fa-caret-left"></i> 0%</span> --}}
-                                                        {{-- <h5 class="description-header text-success">LKR {{ $data['annualFeeTotal'] }}</h5> --}}
-                                                        <span class="description-text">Annually</span>
+                                                        <h5 class="description-header text-success">$10,390.90</h5>
+                                                        <span class="description-text">TOTAL COST</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -181,15 +169,15 @@
                                                 <div class="col-sm-6 col-6">
                                                     <div class="description-block border-right">
                                                         {{-- <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> 20%</span> --}}
-                                                        {{-- <h5 class="description-header text-success">LKR {{ $data['monthlyFeeTotal'] }}</h5> --}}
-                                                        <span class="description-text">Monthly</span>
+                                                        <h5 class="description-header text-success">$24,813.53</h5>
+                                                        <span class="description-text">TOTAL PROFIT</span>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6 col-6">
                                                     <div class="description-block">
                                                         {{-- <span class="description-percentage text-danger"><i class="fas fa-caret-down"></i> 18%</span> --}}
-                                                        {{-- <h5 class="description-header text-success">LKR {{ $data['todayFeeTotal'] }}</h5> --}}
-                                                        <span class="description-text">Today</span>
+                                                        <h5 class="description-header text-success">1200</h5>
+                                                        <span class="description-text">GOAL COMPLETIONS</span>
                                                     </div>
                                                 </div>
                                             </div>

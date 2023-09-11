@@ -3,10 +3,10 @@
 @push('styles')
    <!-- Datatable CSS -->
 <link href='https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css' rel='stylesheet' type='text/css'>
+<link href='https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css' rel='stylesheet' type='text/css'>
 
 <!-- jQuery UI CSS -->
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/datetime/1.5.1/css/dataTables.dateTime.min.css">
-<link href='https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css' rel='stylesheet' type='text/css'>
 <link href='https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css' rel='stylesheet' type='text/css'>
 
 
@@ -18,11 +18,11 @@
    <!-- jQuery Library -->
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
 <script src="https://cdn.datatables.net/datetime/1.5.1/js/dataTables.dateTime.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
 
 
 
@@ -54,6 +54,8 @@
  maxDate = new DateTime('#max', {
      format: 'MMMM Do YYYY'
  });
+
+
   
  // DataTables initialisation
  let table = $('#feePaymentTable1').DataTable( {
@@ -171,9 +173,9 @@
                                             <td>{{ $ud->created_at->format('Y-m-d') }}</td>
                                             <td>{{ $ud->student_firstName }} {{ $ud->student_lastName }}</td>
                                             <td>{{ $ud->student_currentGrade }}</td>
-                                            <td>{{ $ud->term }}</td>
-                                            <td>{{ $ud->amount }}</td>
-                                            @if( $ud->student_status !== 1)
+                                            <td>{{ $ud->fee_purpose }}</td>
+                                            <td>{{ $ud->fee_amount }}</td>
+                                            @if( $ud->fee_status !== 1)
                                             <td>Unpaid</td>
                                             @else
                                             <td>Paid</td>

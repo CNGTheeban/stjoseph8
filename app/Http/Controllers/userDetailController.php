@@ -46,7 +46,7 @@ class userDetailController extends Controller
 
         $Students = Student::join('users','users.id', '=', 'student.student_userid')
                                        ->where('student.student_userid',  $u->id)
-                                       ->where('student.student_status',  1)->get();
+                                       ->get();
         foreach($Students as $Student)
         {
             try {
