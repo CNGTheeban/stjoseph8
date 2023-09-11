@@ -50,7 +50,7 @@ class LoginController extends Controller
             
 
             }else{
-                return redirect("/parents")->withSuccess('You have LoggedIn.');
+                return redirect("/index")->withSuccess('You have LoggedIn.');
                 return redirect("/")->withSuccess('You have LoggedIn.');
             }
            

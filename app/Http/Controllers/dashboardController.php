@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Donation;
 use App\Models\Fees;
+use App\Models\User;
+use App\Models\UserVerify;
+use App\Models\Student;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
 
@@ -187,9 +190,23 @@ class dashboardController extends Controller
             $formattedMontlyfeesAmount = number_format($monthlyfeesTotal, 0, '', ',');
             $formattedTodayfeesAmount = number_format($todayfeesTotal, 0, '', ',');
             $formattedOverallfeesAmount = number_format($overallfeesTotal, 0, '', ',');
-
-
         }
+
+        //get parents count
+        
+        //get active parents list
+        $activeParents = UserVerify::get();
+
+        //get inactive parents list
+        $inActiveParents = User::get();
+
+
+        //get Students count
+        //get active students list
+        $activeStudents = Student::where('student_status', 1)->get();
+        //get inactive students list
+        $inActiveStudents = Student::where('student_status', 0)->get();
+
 
         $data = [
             'latestDonation' => $latestDonation,
@@ -202,7 +219,11 @@ class dashboardController extends Controller
             'annualFeesTotal' => $formattedAnnualfeesAmount,
             'monthlyFeesTotal' => $formattedMontlyfeesAmount,
             'todayFeesTotal' => $formattedTodayfeesAmount,
-            'overallfeesTotal' => $formattedOverallfeesAmount
+            'overallfeesTotal' => $formattedOverallfeesAmount,
+            'activeParents' => $activeParents,
+            'inActiveParents' => $inActiveParents,
+            'activeStudents' => $activeStudents,
+            'inActiveStudents' => $inActiveStudents
         ];
 
         return view('index')->with('data', $data);

@@ -47,7 +47,8 @@ class FeesController extends Controller
     { 
         $u = Auth::user();
         $students = Student::where('student.student_userid', $u->id)
-                   ->get();
+                    ->where('student.student_status', 1)
+                    ->get();
 
         if($students != null){
             foreach($students as $Student)

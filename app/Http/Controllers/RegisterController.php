@@ -57,7 +57,7 @@ class RegisterController extends Controller
         });
         //dd($data);
          
-        return redirect("login")->withSuccess('You have Registerd. Please wait till admin authenticate your account.');
+        return redirect("login")->withSuccess('You have Registerd. Please check your email inbox to verify.');
     }
 
     // public function create(array $data)

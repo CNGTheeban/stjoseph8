@@ -187,7 +187,7 @@
                                                     @if( $student->student_status == 1)
                                                         <td><label class="ribbon bg-success">Active</label></td>
                                                     @else
-                                                        <td><label class="ribbon bg-danger">Admin need to Check</label></td>
+                                                        <td><label class="ribbon bg-danger">Admin need to Verify</label></td>
                                                     @endif
                                                 </tr>                                              
                                             @endforeach 
